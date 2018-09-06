@@ -1,0 +1,6 @@
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\bin\Debug\Calculator.dll
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\bin\Debug\Calculator.pdb
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\obj\Debug\Calculator.csprojResolveAssemblyReference.cache
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\obj\Debug\Calculator.dll
+D:\AU\4Semester\SWT\ExercisesAndDemos\1_UnitTestingCalculator\Calculator\obj\Debug\Calculator.pdb

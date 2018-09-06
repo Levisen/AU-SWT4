@@ -1,0 +1,47 @@
+% !TeX root = ../../GuideUsingLatex.tex
+%*******************************************************************************
+%	Matematik
+%*******************************************************************************
+\subsection{Matematik}
+
+\subsubsection{Matematik i linje med tekst}
+\begin{verbatim}
+Der er matematik $F(x_a) = \sqrt{x} + y_a$ som en del af teksten her
+\end{verbatim}
+Der er matematik $F(x_a) = \sqrt{x} + y_a$ som en del af teksten her
+
+\subsubsection{Sætning/ligning}
+\begin{verbatim}
+\[F(x_a) = \sqrt{x} + y_a\]
+\end{verbatim}
+\[F(x_a) = \sqrt{x} + y_a\]
+
+\subsubsection{Numereret sætning/ligning}
+\begin{verbatim}
+\begin{equation} \label{eq_fractionception}
+  x = a_0 + \cfrac{1}{a_1 
+          + \cfrac{1}{a_2 
+          + \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
+\end{equation}
+\end{verbatim}
+
+\begin{equation} \label{eq_fractionception}
+  x = a_0 + \cfrac{1}{a_1 
+          + \cfrac{1}{a_2 
+          + \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
+\end{equation}
+
+\subsubsection{Reference til numereret sætning/ligning}
+\begin{verbatim}
+Ligning \ref{eq_fractionception} er en ligning
+\end{verbatim}
+
+Ligning \ref{eq_fractionception} er en ligning
+
+\[
+ \begin{matrix}
+  a & b & c \\
+  d & e & f \\
+  g & h & i
+ \end{matrix}
+\]
