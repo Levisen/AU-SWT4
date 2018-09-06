@@ -1,0 +1,56 @@
+% !TeX root = ../../GuideUsingLatex.tex
+%*******************************************************************************
+%	Figurer
+%*******************************************************************************
+\subsection{Figurer}
+\label{sec:figurer}
+Syntaks for at indsætte en figur (m. custom macro)
+\begin{verbatim}
+\insertfigure{billedenavn.png}{bredde}{fig:figurlabel}
+{Figurtekst}
+\end{verbatim}
+
+Parameter 1: Navn på billedefil. Skal ligge i kapitlets/sektionens \texttt{images/.} mappen
+
+Parameter 2: Tal mellem 0 og 1 der specificerer bredden på billedet i forhold til sidebredden
+
+Parameter 3: Label til figuren, benyttes til at referere til figuren fra tekst (skal være unikt, og helst give mening)
+
+Parameter 4: Figurteksten 
+
+\subsubsection{Figur med fuld bredde}
+\begin{verbatim}
+\insertfigure{eksempelfigur.png}{1}{fig:fuldbredde}
+{Figurtekst til figur med bredden 1}
+\end{verbatim}
+
+\insertfigure{eksempelfigur.png}{1}{fig:fuldbredde}
+{Figurtekst til figur med bredden 1}
+
+\subsubsection{Figur med 0.5 bredde}
+\begin{verbatim}
+\insertfigure{eksempelfigur.png}{0.5}{fig:halvbredde}
+{Figurtekst til figur med bredden 0.5}
+\end{verbatim}
+
+\insertfigure{eksempelfigur.png}{0.5}{fig:halvbredde}
+{Figurtekst til figur med bredden 0.5}
+
+\subsubsection{Figur med 0.25 bredde}
+\begin{verbatim}
+\insertfigure{eksempelfigur.png}{0.25}{fig:kvartbredde}
+{Figurtekst til figur med bredden 0.25}
+\end{verbatim}
+
+\insertfigure{eksempelfigur.png}{0.25}{fig:kvartbredde}
+{Figurtekst til figur med bredden 0.25}
+
+osv
+
+\subsubsection{Referencer til Figurer}
+
+\begin{verbatim}
+Figuren fra forrige afsnit med halv bredde er figur \ref{fig:halvbredde}
+\end{verbatim}
+
+Figuren fra forrige afsnit med halv bredde er figur \ref{fig:halvbredde}
