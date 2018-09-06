@@ -1,0 +1,16 @@
+%Figur makro
+\newcommand{\insertfigure}[4]{
+\begin{figure}[H]
+\centering
+  \includegraphics[width=#2\textwidth,keepaspectratio]{/images/#1}
+  \caption{#4}
+  \label{#3}
+\end{figure}
+}
+
+%Kildeliste makro
+\newcommand{\insertbibliography}[1]{
+\cleardoublepage\phantomsection
+\addcontentsline{toc}{section}{#1}
+\printbibliography \newpage
+}

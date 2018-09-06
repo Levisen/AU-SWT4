@@ -1,0 +1,113 @@
+% Generelt
+\usepackage{import}						%Importér filer
+\usepackage[hidelinks]{hyperref}		%Links
+\usepackage[table]{xcolor}				%Farver
+
+%-------------------------------------------------------------------------------
+% Marginer
+\usepackage[top=2cm,bottom=3.75cm,left=2cm,right=2cm]{geometry}
+
+%-------------------------------------------------------------------------------
+% Typografi
+% http://www.tug.dk/FontCatalogue/sansseriffonts.html
+\usepackage[danish]{babel}				%Dansk sprog
+\usepackage[utf8]{inputenc}				%Typeface encoding
+\usepackage[T1]{fontenc}				%Mere encoding
+\usepackage[scaled]{helvet}				%Helvetica
+\renewcommand\familydefault{\sfdefault}	%Default
+
+%-------------------------------------------------------------------------------
+% Flere referencer
+\makeatletter
+\let\thetitle\@title 		% Reference to title
+\let\theauthor\@author		% Reference to all authors
+\let\thedate\@date			% Reference to date
+\makeatother
+
+%-------------------------------------------------------------------------------
+% Header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage{lastpage}
+\fancyhead[L]{\lhead{\includegraphics[height=1.4cm]{aulogo.jpg}}}
+\fancyhead[c]{\chead{}}
+\fancyhead[R]{\rhead{}}
+
+\fancyfoot[L]{\lfoot{
+	Semesterprojekt 4 - Gruppe 3\\
+	\textbf{Dokumentnavn:} \thetitle
+}}
+\fancyfoot[c]{\cfoot{}}
+\fancyfoot[R]{\rfoot{
+	\textbf{Dato:}
+		\ifdefined\frontpageDate
+			\frontpageDate\\
+		\else
+			\today\\
+		\fi
+	Side \textbf{\thepage} af \textbf{\pageref{LastPage}}
+}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{2cm}
+\setlength{\footskip}{20pt}
+\setlength\arrayrulewidth{1px}
+
+%-------------------------------------------------------------------------------
+% Billeder/figurer
+\usepackage{graphicx}			%Billeder
+%\graphicspath{ {images/} }		%Billed placering(er)
+\graphicspath{{../_global/}{images/}}
+\usepackage{float}				%Bedre float placeringer
+
+
+
+%-------------------------------------------------------------------------------
+% Kode
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}	% Baggrund til kode
+\usepackage{minted}
+\usepackage{csquotes}							% Kode highlighting
+\setminted{firstnumber=1,  frame=lines, framesep=2mm, bgcolor=codebg, fontfamily=courier, breaklines} % linenos 
+\usemintedstyle{vs}							% Brug samme highlighting som visual studio
+\newenvironment{code}{\captionsetup{type=listing}}{}  %Environment til code listing
+
+%-------------------------------------------------------------------------------
+% Matematik
+\usepackage{mathtools}
+
+%-------------------------------------------------------------------------------
+% Caption setup
+\usepackage[font=small]{caption}
+\captionsetup[listing]{skip=-5pt,position=top}
+\captionsetup[table]{skip=5pt,position=top}
+\captionsetup[figure]{skip=5pt}
+
+%-------------------------------------------------------------------------------
+% Tabeller
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}p{#1}}
+\usepackage{pbox}
+
+%-------------------------------------------------------------------------------
+% Tillad brugen af subsubsubsection
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+
+%-------------------------------------------------------------------------------
+% Dato formattering
+\usepackage[useregional=numeric]{datetime2}
+
+%-------------------------------------------------------------------------------
+% Modificering automatiske lister (fx enumerate)
+\usepackage{enumitem}
+
+%-------------------------------------------------------------------------------
+% Referencer
+\usepackage[backend=biber, style=authoryear]{biblatex} %,
+\let\cite\parencite
+\setlength\bibitemsep{2\itemsep}
+
+%-------------------------------------------------------------------------------
+% Fjern automatisk indentering for nye afsnit
+\usepackage{parskip}
