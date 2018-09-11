@@ -11,12 +11,12 @@
 	\vspace{25pt}
 	
 	{\fontsize{42pt}{0}\selectfont
-		\textbf{Semesterprojekt 4\\}
+		\textbf{Software Test\\}
 	}
 	\vspace{5pt}
 	
 	{\fontsize{28pt}{0}\selectfont
-		Gruppe 3\\
+		Gruppe 15\\
 	}
 	\vspace{25pt}
 	
@@ -36,35 +36,35 @@
 	\vspace*{\fill}
 
 	%-----------------------------------------------------------------------------
-	\textbf{Vejleder:} ????\\
-	\vspace{5pt}
+	\ifdefined\frontpageSupervisor
+	\textbf{Vejleder:} \frontpageSupervisor\\
+	\fi
+	\vspace{10pt}
 	\begin{tabular}{|l|l|l|}
 		\hline
 		\rowcolor{blue!25}
 		\textbf{Studienummer} & \textbf{Navn} & \textbf{Studieretning} \\ [2pt]
 		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
+		201606374 & Jakob Levisen Kvistgaard & IKT \\
 		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
+		201607384 & Gill Lumer-Klabbers & IKT \\
 		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
-		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
-		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
-		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
-		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
-		\hline
-		Studienummer & Fornavn Efternavn & IKT \\
+		201607172 & Mohamed Musse Mohamed & IKT \\
 		\hline
 	\end{tabular}
 
 	%-----------------------------------------------------------------------------
-	{\fontsize{10pt}{0}\selectfont
-		\textbf{Dato: } \today\\
-	}
+	\ifdefined\frontPageDate
+		{
+			\fontsize{10pt}{0}\selectfont
+			\textbf{Dato: } \frontPageDate\\
+		}
+	\else
+		{
+			\fontsize{10pt}{0}\selectfont
+			\textbf{Dato: } \today\\
+		}	
+	\fi
 	\vspace{5pt}
 	
 	\ifdefined\frontpageCharacters
@@ -73,3 +73,4 @@
 	\vspace{30pt}
 
 \end{center}
+\newpage
