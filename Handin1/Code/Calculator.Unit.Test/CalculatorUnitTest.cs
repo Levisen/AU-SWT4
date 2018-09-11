@@ -10,6 +10,7 @@ namespace Calculator.Unit.Test
     [TestFixture]
     public class CalculatorUnitTest
     {
+        // Add(a, b)
         [Test]
         public void Add_2And6Returns8()
         {
@@ -35,6 +36,7 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Add(-999, -99), Is.EqualTo(-1098));
         }
 
+        // Subtract(a, b)
         [Test]
         public void Subtract_40Minus20()
         {
@@ -48,6 +50,8 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Subtract(-20, -40), Is.EqualTo(20));
         }
         [Test]
+
+        // Multiply(a, b)
         public void Multiply_40Times2()
         {
             var uut = new Calculator();
@@ -60,24 +64,30 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Multiply(-22, -3), Is.EqualTo(66));
         }
         [Test]
+
+        // Divide(a, b)
         public void Divide_40DividedBy3()
         {
             var uut = new Calculator();
             Assert.That(uut.Divide(90, 3), Is.EqualTo(30));
         }
         [Test]
+
+        // Power(a, b)
         public void Power_3RaisedToTheExpOf2()
         {
             var uut = new Calculator();
             Assert.That(uut.Power(3, 2), Is.EqualTo(9));
         }
+
+        // Accumulator
         [Test]
         public void AccumulatorEqual_Power_3RaisedToTheExpOf2()
         {
             var uut = new Calculator();
             var testResult = uut.Power(3, 2);
             Assert.That(uut.Accumulator, Is.EqualTo(testResult));
-            var testResult1 = uut.Power(3, 2);
+            var testResult1 = uut.Power(5, 6);
             Assert.That(uut.Accumulator, Is.EqualTo(testResult1));
         }
         [Test]
@@ -88,6 +98,8 @@ namespace Calculator.Unit.Test
             uut.Clear();
             Assert.That(uut.Accumulator, Is.EqualTo(0));
         }
+
+        // Add(a)
         [Test]
         public void Add_2And2()
         {
@@ -101,6 +113,8 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Add(-3), Is.EqualTo(-6));
         }
         [Test]
+
+        // Subtract(a)
         public void Subtract_3Minus3()
         {
             var uut = new Calculator();
@@ -112,6 +126,8 @@ namespace Calculator.Unit.Test
             var uut = new Calculator();
             Assert.That(uut.Subtract(10), Is.EqualTo(0));
         }
+
+        // Multiply(a)
         [Test]
         public void Multiply_33Times33()
         {
@@ -125,6 +141,8 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Multiply(1), Is.EqualTo(1));
         }
         [Test]
+
+        // Divide(a)
         public void Divide_3DividedBy3()
         {
             var uut = new Calculator();
@@ -137,6 +155,8 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Divide(63163766123963), Is.EqualTo(1));
         }
         [Test]
+
+        // Power(a)
         public void Power_2RaisedToTheExpOf2()
         {
             var uut = new Calculator();
