@@ -29,6 +29,13 @@ namespace Calculator.Unit.Test
             Assert.That(uut.Add(-52, 99), Is.EqualTo(47));
         }
         [Test]
+        public void Add_Minus999AndMinus99ReturnsMinus1098()
+        {
+            var uut = new Calculator();
+            Assert.That(uut.Add(-999, -99), Is.EqualTo(-1098));
+        }
+
+        [Test]
         public void Subtract_40Minus20()
         {
             var uut = new Calculator();
