@@ -10,19 +10,19 @@ namespace Calculator
     {
         public double Add(double a, double b)
         {
-            return a + b;
+            return Accumulator = a + b;
         }
         public double Subtract(double a, double b)
         {
-            return a - b;
+            return Accumulator = a - b;
         }
         public double Multiply(double a, double b)
         {
-            return a * b;
+            return Accumulator = a * b;
         }
         public double Divide(double a, double b)
         {
-            return a / b;
+            return Accumulator = a / b;
         }
         public double Power(double x, double exp)
         {
@@ -36,19 +36,19 @@ namespace Calculator
         }
         public double Add(double a)
         {
-            return a + a;
+            return Accumulator = a + a;
         }
         public double Subtract(double a)
         {
-            return a - a;
+            return Accumulator = a - a;
         }
         public double Multiply(double a)
         {
-            return a * a;
+            return Accumulator = a * a;
         }
         public double Divide(double a)
         {
-            return a / a;
+            return Accumulator = a / a;
         }
         public double Power(double exp)
         {
