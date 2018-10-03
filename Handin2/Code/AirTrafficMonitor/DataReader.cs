@@ -21,7 +21,6 @@ namespace AirTrafficMonitor
         private void UpdateDataReceived(object o, RawTransponderDataEventArgs args) //3 trigger use update from list
         {
             _dataTrack.Clear();
-            args.TransponderData.ElementAt(1);
             foreach(var data in args.TransponderData)
             {
                 var d = DataReaderSplit(data); //4. run data splitter for each in list
