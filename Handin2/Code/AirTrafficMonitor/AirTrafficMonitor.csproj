@@ -53,7 +53,7 @@
     <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bin\Debug\TransponderReceiver.dll" />
+    <None Include="bin\Debug\TransponderReceiver.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
