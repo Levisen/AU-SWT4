@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReader.cs" />
+    <Compile Include="Events\FlightTrackDataEventArgs.cs" />
     <Compile Include="Flight.cs" />
+    <Compile Include="FlightController.cs" />
+    <Compile Include="Interfaces\IFlightTrackDataSource.cs" />
     <Compile Include="Interfaces\ITransponderDataBundleReader.cs" />
     <Compile Include="Interfaces\ITransponderDataParser.cs" />
     <Compile Include="Monitor.cs" />
