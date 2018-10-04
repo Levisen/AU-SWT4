@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class TestClass
+    class Monitor
     {
-        public string testConnect;
-        public TestClass()
-        {
-            testConnect = "tjek";
-        }
+        
     }
 }

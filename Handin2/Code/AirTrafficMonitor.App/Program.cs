@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TransponderReceiver;
 using System.Threading;
 using AirTrafficMonitor.Interfaces;
+using System.Diagnostics;
 
 namespace AirTrafficMonitor.App
 {
@@ -13,8 +14,12 @@ namespace AirTrafficMonitor.App
     {
         static void Main(string[] args)
         {
-            var transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            var dataReader = new DataReader(transponderReceiver);
+            #if DEBUG
+
+            #endif
+            ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+            IFlightTrackDataSource dataReader = new DataReader(transponderReceiver);
+            var flightController = new FlightManager(dataReader);
 
             //testprint
             while (true)

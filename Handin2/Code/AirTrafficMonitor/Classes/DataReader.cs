@@ -21,33 +21,42 @@ namespace AirTrafficMonitor
 
         private void TransponderDataReady(object o, RawTransponderDataEventArgs args) //3 trigger use update from list
         {
-            List<FTDataPoint> NewFTDataPoints = DecodeRawTransponderData(args);
+            Debug.Log("DataReader: Handling TransponderDataReady Event");
 
-            if (NewFTDataPoints.Count > 0)
+            List<FTDataPoint> newFTDataPoints = DecodeRawTransponderData(args);
+
+            if (newFTDataPoints.Count > 0)
             {
-                Monitor m = new Monitor();
-                foreach (var dp in NewFTDataPoints)
+                Debug.Log("DataReader: Invoking FlightTrackDataReady, sending " + newFTDataPoints.Count + " DataPoints:");
+                foreach (var dp in newFTDataPoints)
                 {
-                    m.OutputFTDataPoint(dp);
+                    Debug.Log("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp);
                 }
-            }                                                              
+
+                FlightTrackDataReady?.Invoke(this, new FlightTrackDataEventArgs(newFTDataPoints));
+            }
+            else
+            {
+                Debug.Log("DataReader: No data to send");
+            }
         }
 
         public List<FTDataPoint> DecodeRawTransponderData(RawTransponderDataEventArgs args)
         {
             var DpList = new List<FTDataPoint>();
-
+            
             foreach (var rawdatastring in args.TransponderData)
             {
                 FTDataPoint dp = ParseTransponderDataString(rawdatastring);
                 DpList.Add(dp);
             }
-
+            Debug.Log("DataReader: Parsed " + DpList.Count + " strings");
             return DpList;
         }
 
         public FTDataPoint ParseTransponderDataString(string rawdata)
         {
+            
             var dp = new FTDataPoint();
             string[] splitdata = rawdata.Split(';');
             
