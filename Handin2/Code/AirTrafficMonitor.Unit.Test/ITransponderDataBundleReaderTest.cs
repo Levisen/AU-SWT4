@@ -26,7 +26,6 @@ namespace AirTrafficMonitor.Unit.Test
         [Test]
         public void ITransponderDataBundleReader_DecodeRawTransponderData_FTDATAPointsContains()
         {
-            //add raw data as list<string> raise event, tjek
             var args = new RawTransponderDataEventArgs(_transponderData);
             _transponderReceiver.TransponderDataReady += Raise.EventWith(args);
             Assert.That(args.TransponderData[0], Is.EqualTo(_transponderData));
