@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface ITransponderDataParser
+    public interface IFlightTrackDataSource
     {
-        FTDataPoint ParseTransponderDataString(string rawdata);
+        event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
     }
 }
