@@ -28,6 +28,8 @@ namespace AirTrafficMonitor.Unit.Test
             uut = new DataReader(transponderReceiver);
             _transponderData = "UAR043;75823;25472;9000;20181004154857789";
             _newTransponderData = "KIP632;39245;13132;9000;20181004154857789";
+
+            uut.
         }
         [Test]
         public void DataReader_test()
@@ -36,6 +38,7 @@ namespace AirTrafficMonitor.Unit.Test
             var args = new RawTransponderDataEventArgs(transponderDataRawData);
             transponderReceiver.TransponderDataReady += Raise.EventWith(args);
             string[] seperatedData = _transponderData.Split(';');
+            Assert.That();
         }
         [Test]
         public void DataReader_ParseTransponderDataString_CorrectTag()
