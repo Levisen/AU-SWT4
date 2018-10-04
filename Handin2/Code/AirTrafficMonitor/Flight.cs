@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class FlightTrack
+    public class Flight
     {
         public string Tag { get; set; }
         public Vector2 CurrentPosition { get; set; }
@@ -15,7 +15,7 @@ namespace AirTrafficMonitor
         public DateTime LastUpdated { get; set; }
         public float CurrentVelocity { get; set; }
         public float CurrentCourse { get; set; }
-        public List<DataEntry> TrackDataHistory { get; set; }
+        public List<FTDataPoint> TrackDataHistory { get; set; }
         public int CurrentDataEntryTracks { get; set; }
 
 
