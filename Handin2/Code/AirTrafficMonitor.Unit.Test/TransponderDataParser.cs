@@ -41,7 +41,6 @@ namespace AirTrafficMonitor.Unit.Test
             var args = new RawTransponderDataEventArgs(transponderDataRawData);
             transponderReceiver.TransponderDataReady += Raise.EventWith(args);
             string[] seperatedData = _transponderData.Split(';');
-            Assert.That(_):
         }
         
     }
