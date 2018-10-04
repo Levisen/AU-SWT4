@@ -30,9 +30,18 @@ namespace AirTrafficMonitor.Unit.Test
             _newTransponderData = "KIP632;39245;13132;9000;20181004154857789";
         }
         [Test]
-        public void ParseFTDataPoint_CorrectTag()
+        public void DataReader_ParseTransponderDataString_CorrectTag()
         {
             Assert.That(uut.ParseTransponderDataString(_transponderData).Tag, Is.EqualTo("UAR043"));
+        }
+        [Test]
+        public void DataReader_()
+        {
+            var transponderDataRawData = new List<string> { _transponderData };
+            var args = new RawTransponderDataEventArgs(transponderDataRawData);
+            transponderReceiver.TransponderDataReady += Raise.EventWith(args);
+            string[] seperatedData = _transponderData.Split(';');
+            Assert.That(_):
         }
         
     }
