@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitor.Interfaces;
+using AirTrafficMonitor.Events;
 using System.Globalization;
 using TransponderReceiver;
 
 namespace AirTrafficMonitor
 {
-    public class DataReader: ITransponderDataParser, ITransponderDataBundleReader
+    public class DataReader: ITransponderDataParser, ITransponderDataBundleReader, IFlightTrackDataSource
     {
-        //public event EventHandler<DataReaderChangedEventArgs> EventDataTrackChanged;  //eventhandler
+        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;  //eventhandler
+
         public DataReader(ITransponderReceiver transponderReceiver) // 1. create datareader from main
         {
             transponderReceiver.TransponderDataReady += TransponderDataReady; // 2. void func to use when trigger
