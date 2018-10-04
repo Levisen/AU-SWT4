@@ -10,20 +10,23 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitor
 {
-    public class DataReader: ITransponderDataParser, ITransponderDataBundleReader, IFlightTrackDataSource
+    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource
     {
-        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;  //eventhandler
+        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
+        ITransponderReceiver transponderReceiver;
 
-        public DataReader(ITransponderReceiver transponderReceiver) // 1. create datareader from main
+
+        public DataConverter(ITransponderReceiver tr)
         {
-            transponderReceiver.TransponderDataReady += TransponderDataReady; // 2. void func to use when trigger
+            transponderReceiver = tr;
+            transponderReceiver.TransponderDataReady += TransponderDataReady;
         }
 
-        private void TransponderDataReady(object o, RawTransponderDataEventArgs args) //3 trigger use update from list
+        private void TransponderDataReady(object o, RawTransponderDataEventArgs args)
         {
             Debug.Log("DataReader: Handling TransponderDataReady Event");
 
-            List<FTDataPoint> newFTDataPoints = DecodeRawTransponderData(args);
+            List<FTDataPoint> newFTDataPoints = ConvertTransponderData(args);
 
             if (newFTDataPoints.Count > 0)
             {
@@ -41,20 +44,20 @@ namespace AirTrafficMonitor
             }
         }
 
-        public List<FTDataPoint> DecodeRawTransponderData(RawTransponderDataEventArgs args)
+        public List<FTDataPoint> ConvertTransponderData(RawTransponderDataEventArgs args)
         {
             var DpList = new List<FTDataPoint>();
             
             foreach (var rawdatastring in args.TransponderData)
             {
-                FTDataPoint dp = ParseTransponderDataString(rawdatastring);
+                FTDataPoint dp = ConvertTransponderString(rawdatastring);
                 DpList.Add(dp);
             }
-            Debug.Log("DataReader: Parsed " + DpList.Count + " strings");
+            Debug.Log("DataReader: Converted " + DpList.Count + " strings");
             return DpList;
         }
 
-        public FTDataPoint ParseTransponderDataString(string rawdata)
+        public FTDataPoint ConvertTransponderString(string rawdata)
         {
             
             var dp = new FTDataPoint();
@@ -69,6 +72,18 @@ namespace AirTrafficMonitor
             return dp;
         }
 
+        public ITransponderStringConverter GetStringConverter()
+        {
+            return this as ITransponderStringConverter;
+        }
 
+        public IFlightTrackDataSource GetFlightTrackDataSource()
+        {
+            return this as IFlightTrackDataSource;
+        }
+        public ITransponderReceiver GetTransponderReceiver()
+        {
+            return this as ITransponderReceiver;
+        }
     }
 }

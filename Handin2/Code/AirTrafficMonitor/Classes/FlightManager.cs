@@ -7,32 +7,47 @@ using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 namespace AirTrafficMonitor
 {
-    public class FlightManager
+    public class FlightManager : IFlightTrackerMultiple
     {
-        List<Flight> Flights;
-        public FlightManager(IFlightTrackDataSource transponderReceiver) // 1. create datareader from main
+        List<IFlightTrackerSingle> Flights;
+        IFlightTrackDataSource DataSource;
+
+        public event EventHandler<MultipleFlightTracksUpdatedEventArgs> FlightTracksUpdated;
+        public FlightManager(IFlightTrackDataSource datasource)
         {
-            transponderReceiver.FlightTrackDataReady += FlightTrackDataReady; // 2. void func to use when trigger
-            Flights = new List<Flight>();
+            DataSource = datasource;
+            DataSource.FlightTrackDataReady += FlightTrackDataReady; 
+            Flights = new List<IFlightTrackerSingle>();
         }
 
-        private void FlightTrackDataReady(object o, FlightTrackDataEventArgs args) //3 trigger use update from list
+        private void FlightTrackDataReady(object o, FlightTrackDataEventArgs args)
         {
             Debug.Log("FlightManager: Handling FlightTrackDataReady event, recieved " + args.FTDataPoints.Count + " Datapoints");
             List<FTDataPoint> recievedDataPoints = args.FTDataPoints;
-            
+            List<IFlightTrackerSingle> updatedflights = new List<IFlightTrackerSingle>();
+
             foreach (var dp in args.FTDataPoints)
             {
-                if (!Flights.Exists(x => x.Tag == dp.Tag))
+                if (!Flights.Exists(x => x.GetTag() == dp.Tag))
                 {
                     Debug.Log("FlightManager: New flight entered sensor range with tag '" + dp.Tag + "'");
                     Flights.Add(new Flight(dp.Tag));
                 }
 
-                Flight f = Flights.Find(x => x.Tag == dp.Tag);
+                Debug.Log("FlightManager: Adding datapoint to flight with tag '" + dp.Tag + "'");
+                IFlightTrackerSingle f = Flights.Find(x => x.GetTag() == dp.Tag);
                 f.AddDataPoint(dp);
+
+                updatedflights.Add(f);
             }
+
+            Debug.Log("FlightManager: Invoking FlightTracksUpdated, sending list of " + updatedflights.Count + " updated flights");
+            FlightTracksUpdated?.Invoke(this, new MultipleFlightTracksUpdatedEventArgs(updatedflights));
         }
 
+        public IFlightTrackDataSource GetDataSource()
+        {
+            return DataSource;
+        }
     }
 }

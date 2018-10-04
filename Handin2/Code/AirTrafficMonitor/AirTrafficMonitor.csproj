@@ -45,26 +45,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DataReader.cs" />
-    <Compile Include="Classes\FlightCourseCalculator.cs" />
+    <Compile Include="Classes\Airspace\AirspaceArea.cs" />
+    <Compile Include="Classes\Airspace\Airspace.cs" />
+    <Compile Include="Classes\DataConversion\DataConverter.cs" />
+    <Compile Include="Classes\Flight\FlightCourseCalculator.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Events\MultipleFlightTracksUpdatedEventArgs.cs" />
     <Compile Include="Events\FlightTrackDataEventArgs.cs" />
-    <Compile Include="Classes\Flight.cs" />
+    <Compile Include="Classes\Flight\Flight.cs" />
     <Compile Include="Classes\FlightManager.cs" />
-    <Compile Include="Classes\FlightVelocityCalculator.cs" />
-    <Compile Include="Interfaces\DataReader\IFlightTrackDataSource.cs" />
-    <Compile Include="Interfaces\Flight\IFlightCourseCalculator.cs" />
-    <Compile Include="Interfaces\Flight\IFlightTrackerSingle.cs" />
-    <Compile Include="Interfaces\DataReader\ITransponderDataBundleReader.cs" />
-    <Compile Include="Interfaces\DataReader\ITransponderDataParser.cs" />
-    <Compile Include="Interfaces\Flight\IFlightVelocityCalculator.cs" />
+    <Compile Include="Classes\Flight\FlightVelocityCalculator.cs" />
+    <Compile Include="Events\FlightTrackUpdatedEventArgs.cs" />
+    <Compile Include="Interfaces\Airspace\IAirspace.cs" />
+    <Compile Include="Interfaces\Output\IAirspaceDisplayer.cs" />
+    <Compile Include="Interfaces\Airspace\IAirspaceAreaFilter.cs" />
+    <Compile Include="Interfaces\DataConversion\IFlightTrackDataSource.cs" />
+    <Compile Include="Interfaces\Calculator\IFlightCourseCalculator.cs" />
+    <Compile Include="Interfaces\FlightTracker\IFlightTrackerSingle.cs" />
+    <Compile Include="Interfaces\DataConversion\ITransponderStringConverter.cs" />
+    <Compile Include="Interfaces\Calculator\IFlightVelocityCalculator.cs" />
     <Compile Include="Classes\Monitor.cs" />
+    <Compile Include="Interfaces\FlightTracker\IFlightTrackerMultiple.cs" />
+    <Compile Include="Interfaces\DataConversion\ITransponderDataConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Classes\FTDataPoint.cs" />
+    <Compile Include="Classes\DataConversion\FTDataPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\TransponderReceiver.dll" />
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,19 +20,9 @@ namespace AirTrafficMonitor
             return 0;
         }
 
-        public void AddDataPoint(FTDataPoint dp)
+        public IFlightTrackerSingle GetFlightTracker()
         {
-            flightTracker.AddDataPoint(dp);
-        }
-
-        public ICollection<FTDataPoint> GetFullDataLog()
-        {
-            return flightTracker.GetFullDataLog();
-        }
-
-        public FTDataPoint GetNewestDataPoint()
-        {
-            return flightTracker.GetNewestDataPoint();
+            return flightTracker;
         }
     }
 }

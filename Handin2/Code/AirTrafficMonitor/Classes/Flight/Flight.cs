@@ -5,12 +5,28 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitor.Events;
 using AirTrafficMonitor.Interfaces;
 
 namespace AirTrafficMonitor
 {
     public class Flight : IFlightTrackerSingle
     {
+        string Tag;
+        Vector2 CurrentPosition;
+        float CurrentAltitude;
+        
+        float CurrentVelocity;
+        float CurrentCourse;
+        DateTime LastUpdated;
+
+        SortedList<DateTime, FTDataPoint> TrackDataLog;
+
+        public IFlightVelocityCalculator VelocityCalculator;
+        public IFlightCourseCalculator CourseCalculator;
+
+        public event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
+
         public Flight(string tag)
         {
             Tag = tag;
@@ -18,19 +34,11 @@ namespace AirTrafficMonitor
             VelocityCalculator = new FlightVelocityCalculator(this);
             CourseCalculator = new FlightCourseCalculator(this);
         }
-
-        public string Tag { get; set; }
-        public Vector2 CurrentPosition { get; set; }
-        public float CurrentAltitude { get; set; }
-        public DateTime LastUpdated { get; set; }
-        public float CurrentVelocity { get; set; }
-        public float CurrentCourse { get; set; }
-        public SortedList<DateTime, FTDataPoint> TrackDataLog { get; set; }
-        public int CurrentDataEntryTracks { get; set; }
-
-        public IFlightVelocityCalculator VelocityCalculator;
-        public IFlightCourseCalculator CourseCalculator;
-
+        
+        public string GetTag()
+        {
+            return Tag;
+        }
         public void AddDataPoint(FTDataPoint dp)
         {
             TrackDataLog.Add(dp.TimeStamp, dp);

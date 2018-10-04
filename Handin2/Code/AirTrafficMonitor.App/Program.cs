@@ -14,19 +14,14 @@ namespace AirTrafficMonitor.App
     {
         static void Main(string[] args)
         {
-            #if DEBUG
-
-            #endif
             ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
-            IFlightTrackDataSource dataReader = new DataReader(transponderReceiver);
-            var flightController = new FlightManager(dataReader);
+            IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
+            IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
 
-            //testprint
+
             while (true)
             {
                 Thread.Sleep(500);
-
-                //transponderDataSplitterToTrackData.
             };
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface IFlightVelocityCalculator : IFlightTrackerSingle
+    public interface IFlightVelocityCalculator
     {
         float GetCurrentVelocity();
     }

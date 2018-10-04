@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface ITransponderDataParser
+    public interface ITransponderStringConverter
     {
-        FTDataPoint ParseTransponderDataString(string rawdata);
+        FTDataPoint ConvertTransponderString(string rawdata);
     }
 }
