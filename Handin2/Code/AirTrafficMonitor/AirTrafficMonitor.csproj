@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReader.cs" />
-    <Compile Include="FlightTrack.cs" />
+    <Compile Include="Flight.cs" />
     <Compile Include="Interfaces\ITransponderDataBundleReader.cs" />
     <Compile Include="Interfaces\ITransponderDataParser.cs" />
     <Compile Include="Monitor.cs" />
@@ -55,11 +55,8 @@
     <Compile Include="TestClass.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <None Include="bin\Debug\TransponderReceiver.dll" />
-=======
     <WCFMetadata Include="Connected Services\" />
->>>>>>> Gill
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

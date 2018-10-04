@@ -19,14 +19,9 @@ namespace AirTrafficMonitor
 
         private void TransponderDataReady(object o, RawTransponderDataEventArgs args) //3 trigger use update from list
         {
-<<<<<<< HEAD
-            _dataTrack.Clear();
-            foreach(var data in args.TransponderData)
-=======
             List<FTDataPoint> NewFTDataPoints = DecodeRawTransponderData(args);
 
             if (NewFTDataPoints.Count > 0)
->>>>>>> Gill
             {
                 Monitor m = new Monitor();
                 foreach (var dp in NewFTDataPoints)
