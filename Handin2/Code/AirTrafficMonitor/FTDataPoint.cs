@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class DataEntry
+    public class FTDataPoint
     {
         public string Tag { get; set; }
         public int X { get; set; }
