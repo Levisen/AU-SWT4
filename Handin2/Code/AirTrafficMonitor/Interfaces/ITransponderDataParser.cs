@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    interface ITransponderDataParser
+    public interface ITransponderDataParser
     {
         FTDataPoint ParseTransponderDataString(string rawdata);
     }

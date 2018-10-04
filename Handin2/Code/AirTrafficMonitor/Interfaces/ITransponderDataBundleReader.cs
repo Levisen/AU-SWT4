@@ -7,7 +7,7 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    interface ITransponderDataBundleReader
+    public interface ITransponderDataBundleReader
     {
         //List<FTDataPoint> DecodeRawTransponderDataBundle(List<string> rawdatabundle);
         List<FTDataPoint> DecodeRawTransponderData(RawTransponderDataEventArgs args);
