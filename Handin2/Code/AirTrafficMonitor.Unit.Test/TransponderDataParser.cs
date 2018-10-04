@@ -30,44 +30,6 @@ namespace AirTrafficMonitor.Unit.Test
             _newTransponderData = "KIP632;39245;13132;9000;20181004154857789";
         }
         [Test]
-        public void DataReader_ParseTransponderDataString_CorrectTag()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).Tag, Is.EqualTo("UAR043"));
-        }
-        [Test]
-        public void DataReader_ParseTransponderDataString_CorrectX()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).X, Is.EqualTo("75823"));
-        }
-        [Test]
-        public void DataReader_ParseTransponderDataString_CorrectY()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).Y, Is.EqualTo("25472"));
-        }
-        [Test]
-        public void DataReader_ParseTransponderDataString_CorrectAltitude()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).Y, Is.EqualTo("9000"));
-        }
-        [Test]
-        public void DataReader_ParseTransponderDataString_CorrectYear()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Year, Is.EqualTo("2018"));
-        }
-        public void DataReader_ParseTransponderDataString_CorrectMonth()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Year, Is.EqualTo("10"));
-        }
-        public void DataReader_ParseTransponderDataString_CorrectDay()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Year, Is.EqualTo("04"));
-        }
-        public void DataReader_ParseTransponderDataString_CorrectHour()
-        {
-            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Year, Is.EqualTo("15"));
-        }
-
-        [Test]
         public void DataReader_test()
         {
             var transponderDataRawData = new List<string> { _transponderData };
@@ -75,6 +37,61 @@ namespace AirTrafficMonitor.Unit.Test
             transponderReceiver.TransponderDataReady += Raise.EventWith(args);
             string[] seperatedData = _transponderData.Split(';');
         }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectTag()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).Tag, Is.EqualTo("UAR043"));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectX()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).X, Is.EqualTo(75823));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectY()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).Y, Is.EqualTo(25472));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectAltitude()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).Altitude, Is.EqualTo(9000));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectYear()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Year, Is.EqualTo(2018));
+        }
+        public void DataReader_ParseTransponderDataString_CorrectMonth()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Month, Is.EqualTo(10));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectDay()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Day, Is.EqualTo(04));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectHour()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Hour, Is.EqualTo(15));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectMinute()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Minute, Is.EqualTo(48));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectSecond()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Second, Is.EqualTo(57));
+        }
+        [Test]
+        public void DataReader_ParseTransponderDataString_CorrectMillisecond()
+        {
+            Assert.That(uut.ParseTransponderDataString(_transponderData).TimeStamp.Millisecond, Is.EqualTo(57));
+        }
+
         
     }
 }
