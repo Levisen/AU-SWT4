@@ -16,11 +16,11 @@ namespace AirTrafficMonitor
         public FlightManager(IFlightTrackDataSource datasource)
         {
             DataSource = datasource;
-            DataSource.FlightTrackDataReady += FlightTrackDataReady; 
+            DataSource.FlightTrackDataReady += OnFlightTrackDataReady; 
             Flights = new List<IFlightTrackerSingle>();
         }
 
-        private void FlightTrackDataReady(object o, FlightTrackDataEventArgs args)
+        private void OnFlightTrackDataReady(object o, FlightTrackDataEventArgs args)
         {
             Debug.Log("FlightManager: Handling FlightTrackDataReady event, recieved " + args.FTDataPoints.Count + " Datapoints");
             List<FTDataPoint> recievedDataPoints = args.FTDataPoints;

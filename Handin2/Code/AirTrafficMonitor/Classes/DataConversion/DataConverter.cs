@@ -19,10 +19,10 @@ namespace AirTrafficMonitor
         public DataConverter(ITransponderReceiver tr)
         {
             transponderReceiver = tr;
-            transponderReceiver.TransponderDataReady += TransponderDataReady;
+            transponderReceiver.TransponderDataReady += OnTransponderDataReady;
         }
 
-        private void TransponderDataReady(object o, RawTransponderDataEventArgs args)
+        private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
         {
             Debug.Log("DataReader: Handling TransponderDataReady Event");
 

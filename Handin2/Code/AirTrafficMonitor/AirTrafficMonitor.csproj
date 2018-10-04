@@ -50,6 +50,7 @@
     <Compile Include="Classes\DataConversion\DataConverter.cs" />
     <Compile Include="Classes\Flight\FlightCourseCalculator.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Events\AirspaceContentEventArgs.cs" />
     <Compile Include="Events\MultipleFlightTracksUpdatedEventArgs.cs" />
     <Compile Include="Events\FlightTrackDataEventArgs.cs" />
     <Compile Include="Classes\Flight\Flight.cs" />

@@ -14,11 +14,14 @@ namespace AirTrafficMonitor.App
     {
         static void Main(string[] args)
         {
+            AirspaceArea area = new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000);
+
             ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
+            IAirspace airspace = new Airspace(flightManager, area);
 
-
+            Monitor monitor = new Monitor(airspace);
             while (true)
             {
                 Thread.Sleep(500);

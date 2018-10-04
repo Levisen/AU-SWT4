@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class FTDataPoint
+    public class FTDataPoint : IComparable<FTDataPoint>
     {
         public string Tag { get; set; }
         public int X { get; set; }
@@ -14,5 +14,11 @@ namespace AirTrafficMonitor
         public int Altitude { get; set; }
         public DateTime TimeStamp { get; set; }
 
+        public int CompareTo(FTDataPoint other)
+        {
+            if (this.TimeStamp > other.TimeStamp) return 1;
+            else if (this.TimeStamp < other.TimeStamp) return -1;
+            else return 0;
+        }
     }
 }

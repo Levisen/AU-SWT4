@@ -8,6 +8,6 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IAirspaceAreaFilter
     {
-        bool IsInsideAirspace(AirspaceArea area, FTDataPoint datapoint);
+        bool IsInsideAirspace(FTDataPoint datapoint, AirspaceArea area);
     }
 }

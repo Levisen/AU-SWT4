@@ -20,8 +20,8 @@ namespace AirTrafficMonitor
         float CurrentCourse;
         DateTime LastUpdated;
 
-        SortedList<DateTime, FTDataPoint> TrackDataLog;
-
+        //SortedList<DateTime, FTDataPoint> TrackDataLog;
+        List<FTDataPoint> TrackDataLog;
         public IFlightVelocityCalculator VelocityCalculator;
         public IFlightCourseCalculator CourseCalculator;
 
@@ -30,7 +30,8 @@ namespace AirTrafficMonitor
         public Flight(string tag)
         {
             Tag = tag;
-            TrackDataLog = new SortedList<DateTime, FTDataPoint>();
+            //TrackDataLog = new SortedList<DateTime, FTDataPoint>();
+            TrackDataLog = new List<FTDataPoint>();
             VelocityCalculator = new FlightVelocityCalculator(this);
             CourseCalculator = new FlightCourseCalculator(this);
         }
@@ -41,32 +42,21 @@ namespace AirTrafficMonitor
         }
         public void AddDataPoint(FTDataPoint dp)
         {
-            TrackDataLog.Add(dp.TimeStamp, dp);
+            //TrackDataLog.Add(dp.TimeStamp, dp);
+            TrackDataLog.Add(dp);
             CurrentVelocity = VelocityCalculator.GetCurrentVelocity();
             CurrentCourse = CourseCalculator.GetCurrentCourse();
 
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {
-            return TrackDataLog.Values;
+            return TrackDataLog;//.Values;
         }
 
         public FTDataPoint GetNewestDataPoint()
         {
-            FTDataPoint newest = TrackDataLog.Max().Value;
+            FTDataPoint newest = TrackDataLog.Max();//.Value;
             return newest;
-        }
-        public float GetCurrentCourse()
-        {
-            //Check if ehough entries exist in log to calculate
-            //Get required instances from log
-
-            throw new NotImplementedException();
-        }
-
-        public float GetCurrentVelocity()
-        {
-            throw new NotImplementedException();
         }
     }
 }
