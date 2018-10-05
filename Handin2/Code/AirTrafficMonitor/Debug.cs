@@ -11,13 +11,21 @@ namespace AirTrafficMonitor
     class Debug
     {
         public static bool debug = true;
+        public static int debugdetail = 3; //1 = Only Important, 3 = Very Specific
         public static void Log(string s)
         {
             if (debug)
             {
+                Log(s, 3);
+            }
+        }
+        public static void Log(string s, int d)
+        {
+            if (debug && (d >= debugdetail))
+            {
                 Console.WriteLine(s);
             }
-            
+
         }
         public void LogDataPoint(FTDataPoint dp)
         {

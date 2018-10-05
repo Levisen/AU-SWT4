@@ -27,17 +27,25 @@ namespace AirTrafficMonitor
             List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
             for (int i = 0; i < allUpdatedFlights.Count; i++)
             {
-                IFlightTrackerSingle f1 = allUpdatedFlights[i];
                 for (int j = i + 1; j < allUpdatedFlights.Count; j++)
                 {
+                    IFlightTrackerSingle f1 = allUpdatedFlights[i];
                     IFlightTrackerSingle f2 = allUpdatedFlights[j];
 
                     SeperationEventArgs detectedSeperation = CheckForSeperationEvent(f1, f2);
-                    if (detectedSeperation != null && !ActiveSeperations.Contains(detectedSeperation))
+                    if (detectedSeperation != null)
                     {
-                        ActiveSeperations.Add(detectedSeperation);
-                        SeperationIdentified?.Invoke(this, detectedSeperation);
-
+                        Debug.Log("SeperationController: SeperationEvent", 3);
+                        if (!ActiveSeperations.Exists(x => x.HasSameTagsAs(detectedSeperation)))
+                        {
+                            Debug.Log("SeperationController: SeperationEvent has just been identified!", 1);
+                            ActiveSeperations.Add(detectedSeperation);
+                            SeperationIdentified?.Invoke(this, detectedSeperation);
+                        }
+                        else
+                        {
+                            Debug.Log("SeperationController: SeperationEvent still going on, somebody do something!", 1);
+                        }
                     }
                 }
             }
@@ -58,6 +66,11 @@ namespace AirTrafficMonitor
             {
                 return null;
             }
+        }
+
+        public List<SeperationEventArgs> GetActiveSeperations()
+        {
+            return ActiveSeperations;
         }
     }
 }
