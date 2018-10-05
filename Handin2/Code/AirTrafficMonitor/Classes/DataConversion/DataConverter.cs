@@ -24,23 +24,23 @@ namespace AirTrafficMonitor
 
         private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
         {
-            Debug.Log("DataReader: Handling TransponderDataReady Event");
+            Debug.Log("DataReader: Handling TransponderDataReady Event", 3);
 
             List<FTDataPoint> newFTDataPoints = ConvertTransponderData(args);
 
             if (newFTDataPoints.Count > 0)
             {
-                Debug.Log("DataReader: Invoking FlightTrackDataReady, sending " + newFTDataPoints.Count + " DataPoints:");
+                Debug.Log("DataReader: Invoking FlightTrackDataReady, sending " + newFTDataPoints.Count + " DataPoints:", 2);
                 foreach (var dp in newFTDataPoints)
                 {
-                    Debug.Log("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp);
+                    Debug.Log("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp, 3);
                 }
 
                 FlightTrackDataReady?.Invoke(this, new FlightTrackDataEventArgs(newFTDataPoints));
             }
             else
             {
-                Debug.Log("DataReader: No data to send");
+                Debug.Log("DataReader: No data to send", 1);
             }
         }
 
@@ -53,7 +53,7 @@ namespace AirTrafficMonitor
                 FTDataPoint dp = ConvertTransponderString(rawdatastring);
                 DpList.Add(dp);
             }
-            Debug.Log("DataReader: Converted " + DpList.Count + " strings");
+            Debug.Log("DataReader: Converted " + DpList.Count + " strings", 2);
             return DpList;
         }
 

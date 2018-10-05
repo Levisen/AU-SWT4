@@ -10,5 +10,9 @@ namespace AirTrafficMonitor.Interfaces
     public interface ISeperationDetector
     {
         SeperationEventArgs CheckForSeperationEvent(IFlightTrackerSingle f1, IFlightTrackerSingle f2);
+
+        event EventHandler<SeperationEventArgs> SeperationIdentified;
+
+        List<SeperationEventArgs> GetActiveSeperations();
     }
 }
