@@ -1,0 +1,56 @@
+% !TeX root = ../Handin2.tex
+\section{Beskrivelse}
+\subsection{Krav til systemet}
+Kraven til ATM opgaven som vi blev stillet overfor skal først og fremmst overvåge 1 luftrum. systemet skal kunne gengive alle de spor der i øjeblikket bliver overvågede i luftrummet. 
+Spor skal gengives hvergang transponderdata bliver modtaget og ved hver spor skal det vises på display med følgende data: 
+\begin{itemize}
+    \item Tag
+    \item Nuværende position
+    \item Nuværende højde
+    \item Nuværende horisontal 
+    \item Nuværende kompas kursus
+\end{itemize}
+Det er vigtigt her at afstanden mellem flyvmaskinerne ikke må være mindre ende 300 meter og horisontalen må ikke være mindre ende 5.000 meter imellem dem. Hvis det er tilfældet skal 
+seperation ske.
+
+
+\newpage
+
+\section{System oversigt}
+
+\subsection{Diagrammer}
+Vi har lavet flere forskellige diagrammer for at illustrere hvordan vi har tænkt os og udføre denne opgave. Vi har diskuteret hvilke muligheder vi har og 
+hvordan vi kan løse denne opgave. Vores ide var og lave diagrammerne så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven.  
+
+\subsubsection{Data flow}
+Her ser vi hvordan vores data flow ser ud og hvordan de forskellige klasser hænger sammen. Her ser vi hvordan flowet er fra transponder driver liste til selve monitor skærmen. 
+
+\subsubsection{Klassediagrammer}
+
+\subsubsection{Sekvensdiagrammer}
+Vi har lavet vores sekvensdiagram i fem dele:
+\begin{enumerate}
+    \item Transponder data reception og decoding
+    \item Updating fight tracks
+    \item Updating air space
+    \item Seperation detection
+    \item Seperation handling
+\end{enumerate} 
+ Vi har delt det op idet vil være nemmere og danne overblik over systemet og kommunikation imellem klasserne.  
+
+ \newpage
+
+ \section{}
+ 
+ \newpage
+
+ \section{Resultat}
+
+ \subsection{Diagrammer}
+
+ \subsection{Implementering}
+
+ \subsection{Test}
+
+ \subsection{Github og Jenkins} 
+
