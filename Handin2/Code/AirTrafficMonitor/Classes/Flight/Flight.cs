@@ -51,16 +51,11 @@ namespace AirTrafficMonitor
             CurrentAltitude = dp.Altitude;
             LastUpdated = dp.TimeStamp;
 
-<<<<<<< HEAD
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.AddFirst(dp);
             CurrentVelocity = VelocityCalculator.GetCurrentVelocity(TrackDataLog);
             CurrentCourse = CourseCalculator.GetCurrentCourse(TrackDataLog);
-=======
-            TrackDataLog.Add(dp);
-            CurrentVelocity = VelocityCalculator.GetCurrentVelocity();
-            CurrentCourse = CourseCalculator.GetCurrentCourse();
->>>>>>> a8cc0c8728d10a7da3258e64ef96684cc7b31eac
+
 
         }
         public ICollection<FTDataPoint> GetFullDataLog()
