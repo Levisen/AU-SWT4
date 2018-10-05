@@ -12,7 +12,6 @@ namespace AirTrafficMonitor.Unit.Test
         private ITransponderDataParser _uut;
         private string _transponderData;
         private ITransponderReceiver _transponderReceiver;
-        private List<FTDataPoint> _FTDataPoints;
 
         [SetUp]
         public void Setup()
@@ -74,7 +73,7 @@ namespace AirTrafficMonitor.Unit.Test
         [Test]
         public void ITransponderDataParser_ParseTransponderDataString_CorrectMillisecond()
         {
-            Assert.That(_uut.ParseTransponderDataString(_transponderData).TimeStamp.Millisecond, Is.EqualTo(57));
+            Assert.That(_uut.ParseTransponderDataString(_transponderData).TimeStamp.Millisecond, Is.EqualTo(789));
         }
     }
 }

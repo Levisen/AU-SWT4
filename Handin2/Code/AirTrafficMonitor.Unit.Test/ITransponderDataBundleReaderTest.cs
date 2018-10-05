@@ -3,6 +3,8 @@ using NUnit.Framework;
 using NSubstitute;
 using TransponderReceiver;
 using AirTrafficMonitor.Interfaces;
+using System;
+using System.Globalization;
 
 namespace AirTrafficMonitor.Unit.Test
 {
@@ -11,25 +13,28 @@ namespace AirTrafficMonitor.Unit.Test
     {
         private ITransponderDataBundleReader _uut;
         private ITransponderReceiver _transponderReceiver;
-        private List<string> _transponderData;
-        private List<FTDataPoint> _FTDataPoints;
-        private List<string> _newTransponderData;
+        private List<string> _transponderData = new List<string>();
+        private List<FTDataPoint> _FTDataPoints = new List<FTDataPoint>();
         
         [SetUp]
         public void SetUp()
         {
             _transponderReceiver = Substitute.For<ITransponderReceiver>();
-            _transponderData.Add("UAR043;75823;25472;9000;20181004154857789");
-            _newTransponderData.Add("KIP632; 39245; 13132; 9000; 20181004154857789");
             _uut = new DataReader(_transponderReceiver);
+
+            _transponderData.Add("UAR043; 75823; 25472; 9000; 20181004154857789");
+            DateTime _stamp = DateTime.ParseExact("20181004154857789", "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
+
+            _FTDataPoints.Add(new FTDataPoint("UAR043", 75823, 25472, 9000, _stamp));
         }
-        [Test]
-        public void ITransponderDataBundleReader_DecodeRawTransponderData_FTDATAPointsContains()
-        {
-            var args = new RawTransponderDataEventArgs(_transponderData);
-            _transponderReceiver.TransponderDataReady += Raise.EventWith(args);
-            Assert.That(args.TransponderData[0], Is.EqualTo(_transponderData));
-        }
+
+        //[Test]
+        //public void ITransponderDataBundleReader_DecodeRawTransponderData_FTDATAPointsContains()
+        //{
+        //    var a = new RawTransponderDataEventArgs(_transponderData);
+        //    List<FTDataPoint> t = _uut.DecodeRawTransponderData(a);
+        //    CollectionAssert.AreEqual(_FTDataPoints,t);
+        //}
             
 
     }
