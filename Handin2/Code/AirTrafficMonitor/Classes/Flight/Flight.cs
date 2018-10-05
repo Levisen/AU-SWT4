@@ -27,9 +27,12 @@ namespace AirTrafficMonitor
 
         public event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
 
-        public Flight(string tag)
+        public Flight(FTDataPoint first)
         {
-            Tag = tag;
+            Tag = first.Tag;
+            CurrentPosition = new Vector2(first.X, first.Y);
+            CurrentAltitude = first.Altitude;
+            LastUpdated = first.TimeStamp;
             //TrackDataLog = new SortedList<DateTime, FTDataPoint>();
             TrackDataLog = new List<FTDataPoint>();
             VelocityCalculator = new FlightVelocityCalculator(this);
@@ -42,6 +45,7 @@ namespace AirTrafficMonitor
         }
         public void AddDataPoint(FTDataPoint dp)
         {
+
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.Add(dp);
             CurrentVelocity = VelocityCalculator.GetCurrentVelocity();
@@ -57,6 +61,16 @@ namespace AirTrafficMonitor
         {
             FTDataPoint newest = TrackDataLog.Max();//.Value;
             return newest;
+        }
+
+        public float GetCurrentAltitude()
+        {
+            return CurrentAltitude;
+        }
+
+        public Vector2 GetCurrentPosition()
+        {
+            return CurrentPosition;
         }
     }
 }

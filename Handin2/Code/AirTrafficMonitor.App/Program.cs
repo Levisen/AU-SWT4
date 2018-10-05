@@ -19,12 +19,14 @@ namespace AirTrafficMonitor.App
             ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
+
+            ISeperationDetector seperationController = new SeperationController(flightManager);
             IAirspace airspace = new Airspace(flightManager, area);
 
             Monitor monitor = new Monitor(airspace);
             while (true)
             {
-                Thread.Sleep(500);
+                Thread.Sleep(150);
             };
         }
     }

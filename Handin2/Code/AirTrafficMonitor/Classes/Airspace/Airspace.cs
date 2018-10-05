@@ -13,8 +13,8 @@ namespace AirTrafficMonitor
         AirspaceArea AirspaceArea;
         List<IFlightTrackerSingle> Content;
         IFlightTrackerMultiple FlightTracker;
-
         public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
+
         public Airspace(IFlightTrackerMultiple flightTracker, AirspaceArea airspaceArea)
         {
             AirspaceArea = airspaceArea;
@@ -23,7 +23,6 @@ namespace AirTrafficMonitor
             FlightTracker.FlightTracksUpdated += OnFlightTracksUpdated;
         }
 
-        public event EventHandler<MultipleFlightTracksUpdatedEventArgs> FlightTracksUpdated;
         private void OnFlightTracksUpdated(object o, MultipleFlightTracksUpdatedEventArgs args)
         {
             List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
@@ -52,10 +51,19 @@ namespace AirTrafficMonitor
             return FlightTracker;
         }
 
-        public bool IsInsideAirspace(FTDataPoint datapoint, AirspaceArea area)
+        public bool IsInsideAirspace(FTDataPoint dp, AirspaceArea area)
         {
-            //throw new NotImplementedException();
-            return true;
+            if (dp.Altitude > area.AltitudeBoundaryLower && dp.Altitude < area.AltitudeBoundaryUpper
+                && dp.X > area.SouthWestCornerX && dp.X < area.NorthEastCornerX
+                && dp.Y > area.SouthWestCornerY && dp.Y < area.NorthEastCornerY)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
     }
 }
