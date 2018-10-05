@@ -8,6 +8,6 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightCourseCalculator
     {
-        float GetCurrentCourse();
+        float GetCurrentCourse(LinkedList<FTDataPoint> data);
     }
 }

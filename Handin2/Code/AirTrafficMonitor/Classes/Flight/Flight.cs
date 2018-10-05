@@ -21,7 +21,7 @@ namespace AirTrafficMonitor
         DateTime LastUpdated;
 
         //SortedList<DateTime, FTDataPoint> TrackDataLog;
-        List<FTDataPoint> TrackDataLog;
+        LinkedList<FTDataPoint> TrackDataLog;
         public IFlightVelocityCalculator VelocityCalculator;
         public IFlightCourseCalculator CourseCalculator;
 
@@ -34,7 +34,7 @@ namespace AirTrafficMonitor
             CurrentAltitude = first.Altitude;
             LastUpdated = first.TimeStamp;
             //TrackDataLog = new SortedList<DateTime, FTDataPoint>();
-            TrackDataLog = new List<FTDataPoint>();
+            TrackDataLog = new LinkedList<FTDataPoint>();
             VelocityCalculator = new FlightVelocityCalculator(this);
             CourseCalculator = new FlightCourseCalculator(this);
         }
@@ -47,9 +47,9 @@ namespace AirTrafficMonitor
         {
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
-            TrackDataLog.Add(dp);
-            CurrentVelocity = VelocityCalculator.GetCurrentVelocity();
-            CurrentCourse = CourseCalculator.GetCurrentCourse();
+            TrackDataLog.AddFirst(dp);
+            CurrentVelocity = VelocityCalculator.GetCurrentVelocity(TrackDataLog);
+            CurrentCourse = CourseCalculator.GetCurrentCourse(TrackDataLog);
 
         }
         public ICollection<FTDataPoint> GetFullDataLog()
@@ -59,7 +59,7 @@ namespace AirTrafficMonitor
 
         public FTDataPoint GetNewestDataPoint()
         {
-            FTDataPoint newest = TrackDataLog.Max();//.Value;
+            FTDataPoint newest = TrackDataLog.First();//.Value;
             return newest;
         }
 

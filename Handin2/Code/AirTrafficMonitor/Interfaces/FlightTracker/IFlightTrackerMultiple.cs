@@ -13,7 +13,7 @@ namespace AirTrafficMonitor.Interfaces
         IFlightTrackDataSource GetDataSource();
         //FTDataPoint GetNewestDataPoint();
         //FTDataPoint GetNewestDataPoint(string tag);
-        //ICollection<FTDataPoint> GetAllFlights();
-        //ICollection<FTDataPoint> GetAllFlights(string tag);
+        //Stack<FTDataPoint> GetAllFlights();
+        //Stack<FTDataPoint> GetAllFlights(string tag);
     }
 }

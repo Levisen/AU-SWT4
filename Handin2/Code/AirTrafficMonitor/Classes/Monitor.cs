@@ -23,7 +23,7 @@ namespace AirTrafficMonitor
             foreach (var f in args.UpdatedFlights)
             {
                 FTDataPoint dp = f.GetNewestDataPoint();
-                Console.WriteLine("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp);
+                Console.WriteLine("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp + " Velocity: ");
             }
         }
     }

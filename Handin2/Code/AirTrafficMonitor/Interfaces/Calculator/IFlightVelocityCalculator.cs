@@ -8,6 +8,6 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightVelocityCalculator
     {
-        float GetCurrentVelocity();
+        float GetCurrentVelocity(LinkedList<FTDataPoint> data);
     }
 }
