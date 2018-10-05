@@ -11,7 +11,7 @@ namespace AirTrafficMonitor.Unit.Test
     [TestFixture]
     public class ITransponderDataBundleReaderTest
     {
-        private ITransponderDataBundleReader _uut;
+        private readonly ITransponderStringConverter _uut;
         private ITransponderReceiver _transponderReceiver;
         private List<string> _transponderData = new List<string>();
         private List<FTDataPoint> _FTDataPoints = new List<FTDataPoint>();
@@ -20,7 +20,6 @@ namespace AirTrafficMonitor.Unit.Test
         public void SetUp()
         {
             _transponderReceiver = Substitute.For<ITransponderReceiver>();
-            _uut = new DataReader(_transponderReceiver);
 
             _transponderData.Add("UAR043; 75823; 25472; 9000; 20181004154857789");
             DateTime _stamp = DateTime.ParseExact("20181004154857789", "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
