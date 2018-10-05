@@ -51,6 +51,7 @@ namespace AirTrafficMonitor
             CurrentAltitude = dp.Altitude;
             LastUpdated = dp.TimeStamp;
 
+<<<<<<< HEAD
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.AddFirst(dp);
             CurrentVelocity = VelocityCalculator.GetCurrentVelocity(TrackDataLog);
