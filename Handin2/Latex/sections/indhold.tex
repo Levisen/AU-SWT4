@@ -18,6 +18,7 @@ Derudover skal der applikationen implementere en måde at identificere et "Seper
 Hvis det er tilfældet skal applikationen informere om hvilke fly der er involveret, samt hvornår rutekonflikten fandt sted.
 
 \subsubsection{Data flow}
+Ud fra ovetrstående krav og rapporten, har vi lavet et flow diagram som vi har arbejde ud fra i forbindelse med udarbejdelsen af løsningen. Flowdiagrammet har vi brugt, som samling på projeket, da vi undervejs har ændret klassediagrammer flere gange. 
 
 
 
@@ -91,13 +92,31 @@ Klassen der implementerer dette interface skal være i stand til at vurdere om e
 {Interfaces til identificering og håndtering af seperation}
 
 \subsubsection{Klassediagram}
+Ud fra overstående interfaces er der sammenholdigt med vores klasser implementeret et klassediagram
 
 
 \subsubsection{Continuous Integration og Versionstyring}
 
+Vi har i forbindelse med projektet udnyttet Continiuous Integration, 
+der bygger på at udnytte mulighedden for at teste systemet undervejs, 
+mens løsningen til projektet implementeres. 
+I den forbindelse har vi udnyttet Jenkins serveren fra sidst samt inkluderet 
+et NUnit.Testaadaptor framework, til at teste nogle metoder direkte i VS2017. 
+I forbindelse med implementeringen, havde vi udfordringer med projektet 
+og gentagende ændringer for strukturen, inden implementeringen blev færdig. 
+Desværre medførte det også at vi ikke fortsatte med udnytte teorien bag Continues 
+Integration. I forbindelse med test af projektet oplevede vi at data ikke blev 
+behandlet korrekt, men godt kunne kompilere, hvilket er en af årsagerne til 
+at vi fremadrettet bør implementere unit tests undervejs.
 Vi har benyttet git til versionstyring, 
 
-Det testcentriske design har også vist sig at have en fordel når det kom til at arbejde flere på samme projekt, i og med at grænsefladerne er mere veldefinerede end
+Det testcentriske design har også vist sig at have en fordel når det kom til at arbejde 
+flere på samme projekt, i og med at grænsefladerne er mere veldefinerede. 
+Vi har derfor nemmere ved at definere de Unit test som er nødvendige, 
+for at vi for implementeret de tests som er nødvendige.
+Som ugangspunkt, har vi derfor udnyttet Vores interfaces og events til 
+at oprette vores unit tests ud fra. På den måde vil det fremadrettet være mere 
+gennemskueligt når vi skal test projekter.
 
 
 
@@ -110,7 +129,7 @@ Dette er oftest gået hurtigere end at implementere unit tests, men kan på inge
 
 Dertil kommer kommunikationen mellem de funktioner hvert interface definerer, som i vores design i høj grad foregår via events.
 
-lave diagrammerne først så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven. 
+Lave diagrammerne først så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven. 
 
  
 
