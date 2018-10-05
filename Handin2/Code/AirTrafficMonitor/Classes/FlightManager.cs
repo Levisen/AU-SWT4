@@ -34,7 +34,7 @@ namespace AirTrafficMonitor
                     Flights.Add(new Flight(dp.Tag));
                 }
 
-                Debug.Log("FlightManager: Adding datapoint to flight with tag '" + dp.Tag + "'");
+                //Debug.Log("FlightManager: Adding datapoint to flight with tag '" + dp.Tag + "'");
                 IFlightTrackerSingle f = Flights.Find(x => x.GetTag() == dp.Tag);
                 f.AddDataPoint(dp);
 
