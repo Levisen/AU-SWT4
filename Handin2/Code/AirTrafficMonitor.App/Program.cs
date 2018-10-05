@@ -21,6 +21,7 @@ namespace AirTrafficMonitor.App
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
 
             ISeperationDetector seperationController = new SeperationController(flightManager);
+            SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
             IAirspace airspace = new Airspace(flightManager, area);
 
             Monitor monitor = new Monitor(airspace);

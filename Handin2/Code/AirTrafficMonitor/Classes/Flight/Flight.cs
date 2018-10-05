@@ -45,11 +45,21 @@ namespace AirTrafficMonitor
         }
         public void AddDataPoint(FTDataPoint dp)
         {
+            Tag = dp.Tag;
+            CurrentPosition.X = dp.X;
+            CurrentPosition.Y = dp.Y;
+            CurrentAltitude = dp.Altitude;
+            LastUpdated = dp.TimeStamp;
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.AddFirst(dp);
             CurrentVelocity = VelocityCalculator.GetCurrentVelocity(TrackDataLog);
             CurrentCourse = CourseCalculator.GetCurrentCourse(TrackDataLog);
+=======
+            TrackDataLog.Add(dp);
+            CurrentVelocity = VelocityCalculator.GetCurrentVelocity();
+            CurrentCourse = CourseCalculator.GetCurrentCourse();
+>>>>>>> a8cc0c8728d10a7da3258e64ef96684cc7b31eac
 
         }
         public ICollection<FTDataPoint> GetFullDataLog()
