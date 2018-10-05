@@ -12,7 +12,6 @@ namespace AirTrafficMonitor.Interfaces
         SeperationEventArgs CheckForSeperationEvent(IFlightTrackerSingle f1, IFlightTrackerSingle f2);
 
         event EventHandler<SeperationEventArgs> SeperationIdentified;
-
-        List<SeperationEventArgs> GetActiveSeperations();
+        //List<SeperationEventArgs> GetActiveSeperations();
     }
 }

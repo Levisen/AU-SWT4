@@ -55,11 +55,14 @@
     <Compile Include="Events\MultipleFlightTracksUpdatedEventArgs.cs" />
     <Compile Include="Events\FlightTrackDataEventArgs.cs" />
     <Compile Include="Classes\Flight\Flight.cs" />
-    <Compile Include="Classes\FlightManager.cs" />
+    <Compile Include="Classes\Flight\FlightManager.cs" />
     <Compile Include="Classes\Flight\FlightVelocityCalculator.cs" />
     <Compile Include="Events\FlightTrackUpdatedEventArgs.cs" />
     <Compile Include="Events\SeperationEventArgs.cs" />
+    <Compile Include="Events\SeperationsUpdatedEventArgs.cs" />
     <Compile Include="Interfaces\Airspace\IAirspace.cs" />
+    <Compile Include="Interfaces\Seperation\ISeperationManager.cs" />
+    <Compile Include="Interfaces\Output\ISeperationDisplayer.cs" />
     <Compile Include="Interfaces\Output\IAirspaceDisplayer.cs" />
     <Compile Include="Interfaces\Airspace\IAirspaceAreaFilter.cs" />
     <Compile Include="Interfaces\DataConversion\IFlightTrackDataSource.cs" />

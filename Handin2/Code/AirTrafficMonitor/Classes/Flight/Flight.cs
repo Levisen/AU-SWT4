@@ -78,5 +78,15 @@ namespace AirTrafficMonitor
         {
             return CurrentPosition;
         }
+
+        public float GetCurrentVelocity()
+        {
+            return CurrentVelocity;
+        }
+
+        public float GetCurrentCourse()
+        {
+            return CurrentCourse;
+        }
     }
 }

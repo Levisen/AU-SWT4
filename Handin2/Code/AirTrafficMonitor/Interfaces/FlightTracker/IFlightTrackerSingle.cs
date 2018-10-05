@@ -13,6 +13,8 @@ namespace AirTrafficMonitor.Interfaces
         event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
         string GetTag();
         float GetCurrentAltitude();
+        float GetCurrentVelocity();
+        float GetCurrentCourse();
         Vector2 GetCurrentPosition();
         void AddDataPoint(FTDataPoint dp);
         FTDataPoint GetNewestDataPoint();

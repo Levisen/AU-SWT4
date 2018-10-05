@@ -10,12 +10,15 @@ namespace AirTrafficMonitor
 {
     public class Monitor
     {
-        IAirspace DataSource;
+        IAirspace AirspaceDataSource;
+        ISeperationManager SeperationEventDataSource;
 
-        public Monitor(IAirspace dataSource)
+        public Monitor(IAirspace airspaceDataSource, ISeperationManager seperationEventDataSource)
         {
-            DataSource = dataSource;
-            DataSource.AirspaceContentUpdated += OnAirspaceContentUpdated;
+            AirspaceDataSource = airspaceDataSource;
+            AirspaceDataSource.AirspaceContentUpdated += OnAirspaceContentUpdated;
+            SeperationEventDataSource = seperationEventDataSource;
+            SeperationEventDataSource.SeperationEventsUpdated += OnSeperationEventsUpdated;
         }
         private void OnAirspaceContentUpdated(object o, AirspaceContentEventArgs args)
         {
@@ -23,7 +26,16 @@ namespace AirTrafficMonitor
             foreach (var f in args.UpdatedFlights)
             {
                 FTDataPoint dp = f.GetNewestDataPoint();
-                Console.WriteLine("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp + " Velocity: ");
+                Console.WriteLine("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp + " Velocity: " + f.GetCurrentVelocity() );
+            }
+        }
+
+        private void OnSeperationEventsUpdated(object o, SeperationsUpdatedEventArgs args)
+        {
+            Debug.Log("Monitor: Handling TransponderDataReady Event");
+            foreach (var f in args.ActiveSeperations)
+            {
+                Console.WriteLine("Active SeperationEvent between " + f.FlightA.GetTag() + " and " + f.FlightB.GetTag() + "started at time: " + f.TimeOfOccurance);
             }
         }
     }

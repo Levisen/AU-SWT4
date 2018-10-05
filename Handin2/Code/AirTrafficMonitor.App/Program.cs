@@ -20,11 +20,12 @@ namespace AirTrafficMonitor.App
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
 
-            ISeperationDetector seperationController = new SeperationController(flightManager);
-            SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
+            ISeperationManager seperationController = new SeperationController(flightManager);
+            //SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
+
             IAirspace airspace = new Airspace(flightManager, area);
 
-            Monitor monitor = new Monitor(airspace);
+            //Monitor monitor = new Monitor(airspace, seperationController);
             while (true)
             {
                 Thread.Sleep(150);
