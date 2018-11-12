@@ -7,15 +7,15 @@
 \title{Air Traffic Monitor}
 
 %#################################################################
-\usepackage{../../_global/globalPreamble} % Inkluder preambles		%#
-\usepackage{../../_global/macros}									%#
+\usepackage{../../_global/globalPreamble} % Inkluder preambles	%#
+\usepackage{../../_global/macros}								%#
 \usepackage{LocalPreamble}										%#
 %#################################################################
 
 %-----------------------------------------------------------------
 % Sæt data til forside. Kan kommenteres ind efter behov.
 %\newcommand{\frontpageDate}{31/8-2018}
-%\newcommand{\frontpageImage}{customfrontpageimage.png}
+\newcommand{\frontpageImage}{sections/images/frontPage.PNG}
 %\newcommand{\frontpageCharacters}{1234567}
 
 %#################################################################
@@ -34,21 +34,9 @@
 	% Selve indholdet
 	\import{sections/}{indhold}
 
-	\newpage
-	\import{sections/01_EksempelAfsnit/}{01_EksempelAfsnit} \newpage
-	\import{sections/02_Tekst/}{02_Tekst} 
-		\import{sections/02_Tekst/}{02-1_TekstFormatering}
-		\import{sections/02_Tekst/}{02-2_Lister}
-		\import{sections/02_Tekst/}{02-3_Henvisninger} \newpage
-	\import{sections/03_Elementer/}{03_Elementer}
-		\import{sections/03_Elementer/}{03-1_Figurer}
-		\import{sections/03_Elementer/}{03-2_Tabeller}
-		\import{sections/03_Elementer/}{03-3_Kode}
-		\import{sections/03_Elementer/}{03-4_Matematik} \newpage
-
 	%-------------------------------------------------------------
 	% Kildeliste - Kan udkommenteres efter behov
-	\insertbibliography{Kildeliste}
+	%\insertbibliography{Kildeliste}
 
 %#################################################################
 \end{document}													%#

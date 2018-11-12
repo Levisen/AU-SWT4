@@ -36,8 +36,25 @@ namespace AirTrafficMonitor
                     Content.Add(f);
                 }
             }
+
+            if (Content.Count == 0)//Should be in monitor
+            {
+
+            }
+            else
+            {
+                Console.WriteLine("-------------------Airspace Currently Contains:------------------ ");
+                foreach (var f in Content)
+                {
+                    FTDataPoint dp = f.GetNewestDataPoint();
+                    Console.WriteLine("Flight - Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + Environment.NewLine + "         Altitude: " + dp.Altitude + " Velocity: " + f.GetCurrentVelocity() + " Course: " + f.GetCurrentCourse());
+                }
+            }
             
+
             AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(Content));
+
+
         }
 
 

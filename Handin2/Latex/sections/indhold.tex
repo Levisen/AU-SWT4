@@ -1,56 +1,137 @@
 % !TeX root = ../Handin2.tex
 \section{Beskrivelse}
 \subsection{Krav til systemet}
-Kraven til ATM opgaven som vi blev stillet overfor skal først og fremmst overvåge 1 luftrum. systemet skal kunne gengive alle de spor der i øjeblikket bliver overvågede i luftrummet. 
-Spor skal gengives hvergang transponderdata bliver modtaget og ved hver spor skal det vises på display med følgende data: 
-\begin{itemize}
-    \item Tag
-    \item Nuværende position
-    \item Nuværende højde
-    \item Nuværende horisontal 
-    \item Nuværende kompas kursus
-\end{itemize}
-Det er vigtigt her at afstanden mellem flyvmaskinerne ikke må være mindre ende 300 meter og horisontalen må ikke være mindre ende 5.000 meter imellem dem. Hvis det er tilfældet skal 
-seperation ske.
+Denne opgave omhandler design og test af en applikation, der overvåger fly i et luftrum, baseret på information fra en transponder-receiver. 
+Systemet skal kunne gengive alle flyruter der findes i et luftrum og flyene skal opdateres hvergang ny transponderdata bliver modtaget. Hvert spor skal vises på display med følgende data: 
 
+- Tag
 
-\newpage
+- Nuværende position
 
-\section{System oversigt}
+- Nuværende højde
 
-\subsection{Diagrammer}
-Vi har lavet flere forskellige diagrammer for at illustrere hvordan vi har tænkt os og udføre denne opgave. Vi har diskuteret hvilke muligheder vi har og 
-hvordan vi kan løse denne opgave. Vores ide var og lave diagrammerne så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven.  
+- Nuværende horisontal
+
+- Nuværende kompas kursus
+
+Derudover skal der applikationen implementere en måde at identificere et "Seperation Event", som opstår når den vertikale afstanden mellem flyvemaskiner bliver mindre ende 300 meter mens den horisontale er under 5.000 meter. 
+Hvis det er tilfældet skal applikationen informere om hvilke fly der er involveret, samt hvornår rutekonflikten fandt sted.
 
 \subsubsection{Data flow}
-Her ser vi hvordan vores data flow ser ud og hvordan de forskellige klasser hænger sammen. Her ser vi hvordan flowet er fra transponder driver liste til selve monitor skærmen. 
+Ud fra ovetrstående krav og rapporten, har vi lavet et flow diagram som vi har arbejde ud fra i forbindelse med udarbejdelsen af løsningen. Flowdiagrammet har vi brugt, som samling på projeket, da vi undervejs har ændret klassediagrammer flere gange. 
 
-\subsubsection{Klassediagrammer}
+\insertfigure{DataFlow.png}{0.7}{}
+{Dataflow Diagram af system}
 
-\subsubsection{Sekvensdiagrammer}
-Vi har lavet vores sekvensdiagram i fem dele:
-\begin{enumerate}
-    \item Transponder data reception og decoding
-    \item Updating fight tracks
-    \item Updating air space
-    \item Seperation detection
-    \item Seperation handling
-\end{enumerate} 
- Vi har delt det op idet vil være nemmere og danne overblik over systemet og kommunikation imellem klasserne.  
+\newpage
+\section{Tilgang til Testbart Design}
 
- \newpage
+Systemdesignet gør meget brug af interfaces til at indkapsle de delelige aspekter af systemets funktioneliteter. 
+Udover at seperere funktionaliteterne og løsne koblingen mellem softwarekomponenter, er mange af systemets interfaces designet specifikt for at kunne teste en vis funktionalitet uafhængigt af hvordan denne funktionalitet forventes implementeret.
+Vi er endt med en meget modular tilgang til systemets komponenter, som har gjort det muligt at isolere mindre dele af systemet med så få dependecies som muligt, hvilket gør det særligt egnet til unittest.
 
- \section{}
+\subsection{Interfaces}
+For at løsne koblingen mellem systemets komponenter, har vi gjort meget brug af interfaces. 
+De forskellige interfaces er designet med henblik på at indkapsle delelementer af systemets krav, uafhængigt af hvilke klasser der ender med at implementerer dem.
+Unit-tests til disse interfaces vil i derfor høj grad kunne indikere hvor mange af systemets krav der er opfyldt. Vores overordnede strategi ift design af systemet har været, at tage udgangspunkt i testbare interfaces, og bygge restene af systemet op omkring det.
+\subsubsection{Konvertering af Rådata fra Transponder}
+\insertfigure{DataConversionInterfaces.png}{0.9}{}
+{Interfaces til konvertering af data fra transponder}
+\subsubsubsection{ITransponderDataConverter}
+Dette interface repræsenterer hele datakonverteringsprocessen, fra rådata til en liste af strukturede informationer om flysignalerne.
+Implementeringen af dette interface bør:
+
+- Reagere på signaler fra transponderdriveren
+
+- Konvertere signalerne til et format resten af applikationen forstår (List<FTDataPoint>)
+
+- Videregive de korrekt konverterede oplysninger til den/de softwareklasser der skal bruge den (Gennem en eventhandler)
+
+Den klasse der implementerer
+\subsubsubsection{ITransponderStringConverter}
+Implementeringen af dette interface bør kunne konvertere en streng af rådata til en liste af FTDataPoint korrekt
+\subsubsubsection{IFlightDataSource}
+Implementeringen af dette interface bør regelmæssigt afsende information fra flysignaler som en liste af FTDataPoints gennem sit event. Skal kunne bruges af klasser der kræver en kilde til strukturerede datapunkter af flysignaler
+\subsubsection{Sporing af Fly}
+
+\insertfigure{FlightInterfaces.png}{0.75}{}
+{Interfaces til sporing af fly}
+
+\subsubsubsection{IFlightTrackerSingle}
+Implementeringen af dette interface bør kunne:
+
+- Modtage datapunkter fra en IFlightDataSource, og opdatere flyets attributer ud fra disse
+
+- Give adgang til den nuværende tilstand af et fly's relevante attributter
+
+- Have en log af flyets historik, som kan bruges til f.eks at udregne flyets fart og kurs
+\subsubsubsection{IFlightVelocityCalculator og IFlightCourseCalculator}
+Disse interfaces er afhængige af at have adgang til et de de FTDataPoints systemet har om flyet gennem en IFlightTrackerSingle, og bruger dens historik til at udlede brugbare værdier.
+Implementeringen af disse interfaces bør:
+
+- Kunne udregne hastigheden af et fly ud fra en samling tidligere datapunkter
+
+- Kunne udregne kursen af et fly ud fra en samling tidligere datapunkter
+\subsubsubsection{IFlightTrackerMultiple}
+Implementeringen af dette interface bør:
+
+- Vedligholde en samling af IFlightTrackerSingle, og opdatere denne på baggrund af information fra en IFlightDataSource.
+
+- Give besked når et eller flere af flyene er blevet opdateret
+\newpage
+\subsubsection{Luftrum}
+
+\insertfigure{AirspaceInterfaces.png}{0.5}{}
+{Interfaces til luftrum}
+\subsubsubsection{IAirspace}
+Repræsenterer et luftrum, og vedligholder en samling af fly der befinder sig heri
+\subsubsubsection{IAirspaceFilter}
+Klassen der implementerer dette interface skal være i stand til at vurdere om et givent fly er inden for et luftrumsareal
+\subsubsection{Håndtering af seperation}
+\insertfigure{SeperationInterfaces.png}{0.5}{}
+{Interfaces til identificering og håndtering af seperation}
+\newpage
+\subsubsection{Klassediagram}
+Ud fra overstående interfaces er der sammenholdigt med vores klasser implementeret et klassediagram
+
+\insertfigure{ClassDiagram.png}{0.9}{}
+{Klassediagram af system}
+
+\subsubsection{Continuous Integration og Versionstyring}
+
+Vi har i forbindelse med projektet udnyttet Continiuous Integration, 
+der bygger på at udnytte mulighedden for at teste systemet undervejs, 
+mens løsningen til projektet implementeres. 
+I den forbindelse har vi udnyttet Jenkins serveren fra sidst samt inkluderet 
+et NUnit.Testaadaptor framework, til at teste nogle metoder direkte i VS2017. 
+I forbindelse med implementeringen, havde vi udfordringer med projektet 
+og gentagende ændringer for strukturen, inden implementeringen blev færdig. 
+Desværre medførte det også at vi ikke fortsatte med udnytte teorien bag Continues 
+Integration. I forbindelse med test af projektet oplevede vi at data ikke blev 
+behandlet korrekt, men godt kunne kompilere, hvilket er en af årsagerne til 
+at vi fremadrettet bør implementere unit tests undervejs.
+Vi har benyttet git til versionstyring, 
+
+Det testcentriske design har også vist sig at have en fordel når det kom til at arbejde 
+flere på samme projekt, i og med at grænsefladerne er mere veldefinerede. 
+Vi har derfor nemmere ved at definere de Unit test som er nødvendige, 
+for at vi for implementeret de tests som er nødvendige.
+Som ugangspunkt, har vi derfor udnyttet Vores interfaces og events til 
+at oprette vores unit tests ud fra. På den måde vil det fremadrettet være mere 
+gennemskueligt når vi skal test projekter.
+
+
+
+\subsection{Reflektion og Diskussion}
+Vi er som udgangpunkt tilfredse med vores tilgang til at lave et testbart design, men det har nok taget for meget af vores fokus, da vi undervurderede opgavens omfang. 
+Det har været lærerigt at udvikle et system med en test-fokuseret
+
+Vi har stadig gjort brug af mere familære testmetoder som konsoludskrifter mv for at teste diverse aspekter af applikationen undervejs. 
+Dette er oftest gået hurtigere end at implementere unit tests, men kan på ingen måde hamle op med unit tests ift skalérbarhed
+
+Dertil kommer kommunikationen mellem de funktioner hvert interface definerer, som i vores design i høj grad foregår via events.
+
+Lave diagrammerne først så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven. 
+
  
- \newpage
-
- \section{Resultat}
-
- \subsection{Diagrammer}
-
- \subsection{Implementering}
-
- \subsection{Test}
-
- \subsection{Github og Jenkins} 
 
