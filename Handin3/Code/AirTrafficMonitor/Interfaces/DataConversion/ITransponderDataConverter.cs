@@ -14,7 +14,6 @@ namespace AirTrafficMonitor.Interfaces
         List<FTDataPoint> ConvertTransponderData(RawTransponderDataEventArgs args);
         ITransponderStringConverter GetStringConverter();
         IFlightTrackDataSource GetFlightTrackDataSource();
-        ITransponderReceiver GetTransponderReceiver();
-
+        ITransponderReceiver GetTransponderReceiver(); //GetTransGirlsFromGermany
     }
 }
