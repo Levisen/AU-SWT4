@@ -78,7 +78,7 @@ namespace AirTrafficMonitor
             }
             else
             {
-                return false;
+                return false; // Done
             }
             
         }
