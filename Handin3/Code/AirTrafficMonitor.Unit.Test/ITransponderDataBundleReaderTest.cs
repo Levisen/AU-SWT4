@@ -8,7 +8,9 @@ using System.Globalization;
 
 namespace AirTrafficMonitor.Unit.Test
 {
-    [TestFixture]
+
+
+        //[Test]    [TestFixture]
     public class ITransponderDataBundleReaderTest
     {
         private readonly ITransponderStringConverter _uut;
@@ -26,8 +28,6 @@ namespace AirTrafficMonitor.Unit.Test
 
             _FTDataPoints.Add(new FTDataPoint("UAR043", 75823, 25472, 9000, _stamp));
         }
-
-        //[Test]
         //public void ITransponderDataBundleReader_DecodeRawTransponderData_FTDATAPointsContains()
         //{
         //    var a = new RawTransponderDataEventArgs(_transponderData);
