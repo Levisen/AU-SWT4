@@ -20,7 +20,7 @@ namespace AirTrafficMonitor
         float CurrentCourse;
         DateTime LastUpdated;
 
-        //SortedList<DateTime, FTDataPoint> TrackDataLog;
+        //SortedList<DateTime, FTDataPoint> TrackDataLog; //in case of non-chronological input?
         LinkedList<FTDataPoint> TrackDataLog;
         public IFlightVelocityCalculator VelocityCalculator;
         public IFlightCourseCalculator CourseCalculator;
@@ -35,8 +35,8 @@ namespace AirTrafficMonitor
             LastUpdated = first.TimeStamp;
             //TrackDataLog = new SortedList<DateTime, FTDataPoint>();
             TrackDataLog = new LinkedList<FTDataPoint>();
-            VelocityCalculator = new FlightVelocityCalculator(this);
-            CourseCalculator = new FlightCourseCalculator(this);
+            VelocityCalculator = new FlightVelocityCalculator();
+            CourseCalculator = new FlightCourseCalculator();
         }
         
         public string GetTag()
@@ -53,10 +53,8 @@ namespace AirTrafficMonitor
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.AddFirst(dp);
-            CurrentVelocity = VelocityCalculator.GetCurrentVelocity(TrackDataLog);
-            CurrentCourse = CourseCalculator.GetCurrentCourse(TrackDataLog);
-
-
+            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(TrackDataLog);
+            CurrentCourse = CourseCalculator.CalculateCurrentCourse(TrackDataLog);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {
