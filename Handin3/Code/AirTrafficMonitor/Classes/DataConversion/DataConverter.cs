@@ -14,8 +14,7 @@ namespace AirTrafficMonitor
     {
         public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
         ITransponderReceiver transponderReceiver;
-
-
+        
         public DataConverter(ITransponderReceiver tr)
         {
             transponderReceiver = tr;
@@ -26,7 +25,8 @@ namespace AirTrafficMonitor
         {
             Debug.Log("DataReader: Handling TransponderDataReady Event");
 
-            List<FTDataPoint> newFTDataPoints = ConvertTransponderData(args);
+            FlightTrackDataEventArgs flightTrackData = ConvertTransponderData(args);
+            List<FTDataPoint> newFTDataPoints = flightTrackData.FTDataPoints;
 
             if (newFTDataPoints.Count > 0)
             {
@@ -36,7 +36,7 @@ namespace AirTrafficMonitor
                     Debug.Log("Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + " Altitude: " + dp.Altitude + " Time: " + dp.TimeStamp);
                 }
 
-                FlightTrackDataReady?.Invoke(this, new FlightTrackDataEventArgs(newFTDataPoints));
+                FlightTrackDataReady?.Invoke(this, flightTrackData);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace AirTrafficMonitor
             }
         }
 
-        public List<FTDataPoint> ConvertTransponderData(RawTransponderDataEventArgs args)
+        public FlightTrackDataEventArgs ConvertTransponderData(RawTransponderDataEventArgs args)
         {
             var DpList = new List<FTDataPoint>();
             
@@ -54,7 +54,8 @@ namespace AirTrafficMonitor
                 DpList.Add(dp);
             }
             Debug.Log("DataReader: Converted " + DpList.Count + " strings");
-            return DpList;
+
+            return new FlightTrackDataEventArgs(DpList);
         }
 
         public FTDataPoint ConvertTransponderString(string rawdata)

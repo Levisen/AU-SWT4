@@ -81,7 +81,6 @@
     <Compile Include="Classes\Seperation\SeperationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\TransponderReceiver.dll" />
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
