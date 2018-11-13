@@ -10,7 +10,7 @@ namespace AirTrafficMonitor
 {
     class Debug
     {
-        public static bool debug = false;
+        public static bool debug = true;
         public static void Log(string s)
         {
             if (debug)
