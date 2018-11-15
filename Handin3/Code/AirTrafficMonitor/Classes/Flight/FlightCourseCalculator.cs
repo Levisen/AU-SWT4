@@ -11,16 +11,16 @@ namespace AirTrafficMonitor
 {
     public class FlightCourseCalculator : IFlightCourseCalculator
     {
-        public float CalculateCurrentCourse(Vector2 previous_position, Vector2 current_position)
+        public double CalculateCurrentCourse(Vector2 previous, Vector2 current)
         {
-            float course = 0.0f;
+            double X = Math.Abs(previous.X - current.X);
+            double Y = Math.Abs(previous.Y - current.Y);
+            double course = Math.Atan2(X, Y) * (180 / Math.PI);
 
-            //double X = Math.Abs(data.First.Value.X - data.Last.Value.X);
-            //double Y = Math.Abs(data.First.Value.Y - data.Last.Value.Y);
-            //double course = Math.Atan2(X, Y) * (180 / Math.PI);
-            //if(data.First.Value.X > data.Last.Value.X && data.First.Value.Y <= data.Last.Value.Y) { course += 90; }
-            //else if(data.First.Value.X <= data.Last.Value.X && data.First.Value.Y < data.Last.Value.Y) { course += 180; }
-            //else if(data.First.Value.X < data.Last.Value.X && data.First.Value.Y > data.Last.Value.Y) { course += 270; }
+            if(previous.X > current.X && previous.Y <= current.Y) { course += 90; }
+            else if(previous.X <= current.X && previous.Y < current.Y) { course += 180; }
+            else if(previous.X < current.X && previous.Y > current.Y) { course += 270; }
+            
 
             return course;
         }

@@ -15,26 +15,50 @@ namespace AirTrafficMonitor.Unit.Test
     {
         private IFlightCourseCalculator _uut;
 
-        private Vector2 test1_previous_position1;
-        private Vector2 test1_current_position1;
-        private float test1_result;
-
+        //private Vector2 test1_previous_position1;
+        //private Vector2 test1_current_position1;
+        //private float test1_result;
 
         [SetUp]
         public void SetUp()
         {
             _uut = new FlightCourseCalculator();
-
-            //En test case består af
-            test1_previous_position1 = new Vector2(1, 2);
-            test1_current_position1 = new Vector2(2, 2);
-            test1_result = 90;
         }
 
         [Test]
-        public void FlightCourseCalculatorTest_East()
+        //[TestCase(Vector1 X, Vector1 Y, Vector2 X, Vector2 Y, Vinkel)]
+
+        [TestCase(1,2,2,2,90)]
+        
+        [TestCase(2 ,2, 4, 4, 225)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        //[TestCase(x,x,x,x,xxx)]
+
+        public void FlightCourseCalculatorTest_East(int Vector1x, int Vector1y, int Vector2x, int Vector2y, decimal angleCourse)
         {
-            Assert.That(_uut.CalculateCurrentCourse(test1_previous_position1, test1_current_position1), Is.EqualTo(test1_result));
+            var vector1 = new Vector2(Vector1x,Vector1y);
+            var vector2 = new Vector2(Vector2x, Vector2y);
+            var result = _uut.CalculateCurrentCourse(vector1, vector2);
+
+            Assert.That(result, Is.EqualTo(angleCourse));
         }
     }
 }

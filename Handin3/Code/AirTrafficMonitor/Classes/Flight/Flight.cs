@@ -53,8 +53,8 @@ namespace AirTrafficMonitor
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
             TrackDataLog.AddFirst(dp);
-            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(TrackDataLog);
-            CurrentCourse = CourseCalculator.CalculateCurrentCourse(TrackDataLog);
+            //CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(TrackDataLog);
+            //CurrentCourse = CourseCalculator.CalculateCurrentCourse(TrackDataLog);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {
