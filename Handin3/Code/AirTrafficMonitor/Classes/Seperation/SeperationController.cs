@@ -98,8 +98,8 @@ namespace AirTrafficMonitor
         }
         public SeperationEventArgs CheckForSeperationEvent(IFlightTrackerSingle f1, IFlightTrackerSingle f2)
         {
-            float f1alt = f1.GetCurrentAltitude();
-            float f2alt = f2.GetCurrentAltitude();
+            double f1alt = f1.GetCurrentAltitude();
+            double f2alt = f2.GetCurrentAltitude();
             Vector2 f1pos = f1.GetCurrentPosition();
             Vector2 f2pos = f2.GetCurrentPosition();
 

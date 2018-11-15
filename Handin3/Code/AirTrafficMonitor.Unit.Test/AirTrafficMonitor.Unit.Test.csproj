@@ -70,9 +70,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculators\FlightCalculatorsTestCaseData.cs" />
     <Compile Include="ITransponderStringConverterTest.cs" />
-    <Compile Include="FlightCourseCalculatorTest.cs" />
-    <Compile Include="FlightVelocityCalculatorTest.cs" />
+    <Compile Include="Calculators\FlightCourseCalculatorTest.cs" />
+    <Compile Include="Calculators\FlightVelocityCalculatorTest.cs" />
     <Compile Include="ITransponderDataBundleReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITransponderDataParserTest.cs" />

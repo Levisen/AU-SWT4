@@ -14,10 +14,10 @@ namespace AirTrafficMonitor
     {
         string Tag;
         Vector2 CurrentPosition;
-        float CurrentAltitude;
+        double CurrentAltitude;
         
-        float CurrentVelocity;
-        float CurrentCourse;
+        double CurrentVelocity;
+        double CurrentCourse;
         DateTime LastUpdated;
 
         //SortedList<DateTime, FTDataPoint> TrackDataLog; //in case of non-chronological input?
@@ -52,13 +52,18 @@ namespace AirTrafficMonitor
             LastUpdated = new_dp.TimeStamp;
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
-            FTDataPoint previous_dp = TrackDataLog.First();
+            FTDataPoint previous_dp = TrackDataLog.Count != 0 ? TrackDataLog.First() : null;
             TrackDataLog.AddFirst(new_dp);
 
-            Vector2 previous_position = new Vector2(previous_dp.X, previous_dp.Y);
+            Vector2 previous_position = previous_dp != null ? new Vector2(previous_dp.X, previous_dp.Y) : Vector2.Zero;
             Vector2 current_position = new Vector2(new_dp.X, new_dp.Y);
 
-            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(previous_position, previous_dp.TimeStamp, current_position, new_dp.TimeStamp);
+            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(
+                previous_position, 
+                previous_dp?.TimeStamp, 
+                current_position, 
+                new_dp.TimeStamp
+             );
             CurrentCourse = CourseCalculator.CalculateCurrentCourse(previous_position, current_position);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
@@ -72,7 +77,7 @@ namespace AirTrafficMonitor
             return newest;
         }
 
-        public float GetCurrentAltitude()
+        public double GetCurrentAltitude()
         {
             return CurrentAltitude;
         }
@@ -82,12 +87,12 @@ namespace AirTrafficMonitor
             return CurrentPosition;
         }
 
-        public float GetCurrentVelocity()
+        public double GetCurrentVelocity()
         {
             return CurrentVelocity;
         }
 
-        public float GetCurrentCourse()
+        public double GetCurrentCourse()
         {
             return CurrentCourse;
         }

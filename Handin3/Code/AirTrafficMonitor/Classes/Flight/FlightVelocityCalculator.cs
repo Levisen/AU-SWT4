@@ -10,9 +10,9 @@ namespace AirTrafficMonitor
 {
     public class FlightVelocityCalculator : IFlightVelocityCalculator
     {
-        public float CalculateCurrentVelocity(Vector2 previous_position, DateTime previous_timestamp, Vector2 current_position, DateTime current_timestamp)
+        public double CalculateCurrentVelocity(Vector2 previous_position, DateTime? previous_timestamp, Vector2 current_position, DateTime current_timestamp)
         {
-            float result = 0.0f;
+            double result = 0;
 
             //var t = new LinkedList<FTDataPoint>(data);
             //var xPos = new LinkedList<int>(); var yPos = new LinkedList<int>();
