@@ -22,7 +22,7 @@ namespace AirTrafficMonitor
             transponderReceiver.TransponderDataReady += OnTransponderDataReady;
         }
 
-        private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
+        public void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
         {
             Debug.Log("DataReader: Handling TransponderDataReady Event");
 
