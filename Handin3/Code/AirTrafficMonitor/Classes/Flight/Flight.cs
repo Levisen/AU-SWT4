@@ -43,18 +43,23 @@ namespace AirTrafficMonitor
         {
             return Tag;
         }
-        public void AddDataPoint(FTDataPoint dp)
+        public void AddDataPoint(FTDataPoint new_dp)
         {
-            Tag = dp.Tag;
-            CurrentPosition.X = dp.X;
-            CurrentPosition.Y = dp.Y;
-            CurrentAltitude = dp.Altitude;
-            LastUpdated = dp.TimeStamp;
+            Tag = new_dp.Tag;
+            CurrentPosition.X = new_dp.X;
+            CurrentPosition.Y = new_dp.Y;
+            CurrentAltitude = new_dp.Altitude;
+            LastUpdated = new_dp.TimeStamp;
 
             //TrackDataLog.Add(dp.TimeStamp, dp);
-            TrackDataLog.AddFirst(dp);
-            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(TrackDataLog);
-            CurrentCourse = CourseCalculator.CalculateCurrentCourse(TrackDataLog);
+            FTDataPoint previous_dp = TrackDataLog.First();
+            TrackDataLog.AddFirst(new_dp);
+
+            Vector2 previous_position = new Vector2(previous_dp.X, previous_dp.Y);
+            Vector2 current_position = new Vector2(new_dp.X, new_dp.Y);
+
+            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(previous_position, previous_dp.TimeStamp, current_position, new_dp.TimeStamp);
+            CurrentCourse = CourseCalculator.CalculateCurrentCourse(previous_position, current_position);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {

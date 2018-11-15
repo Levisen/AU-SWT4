@@ -42,7 +42,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="TransponderReceiver">
-      <HintPath>..\TransponderReceiver.dll</HintPath>
+      <HintPath>..\TransponderReciever\TransponderReceiver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +81,7 @@
     <Compile Include="Classes\Seperation\SeperationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\TransponderReceiver.dll" />
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
