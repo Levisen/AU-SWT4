@@ -12,7 +12,6 @@ namespace AirTrafficMonitor
     public class SeperationEventController : ISeperationEventController
     {
         ISeperationEventDetector _detector;
-
         List<SeperationEvent> ActiveSeperations;
 
         public event EventHandler<SeperationEventsUpdatedEventArgs> SeperationEventsUpdated;
@@ -24,10 +23,28 @@ namespace AirTrafficMonitor
             _detector.SeperationEventDetected += OnSeperationEventDetected;
         }
 
-        private void OnSeperationEventDetected(object sender, EventArgs e)
+        private void OnSeperationEventDetected(object sender, SeperationDetectedEventArgs e)
         {
-            
-        }
+            var detectedSeperation = e.DetectedEvent;
+            //Debug.Log("Current SeperationEvent between " + detectedSeperation.Flight_A.GetTag() + " and " + detectedSeperation.Flight_B.GetTag() + "started at time: " + detectedSeperation.ActivationTime);
+            if (!ActiveSeperations.Exists(x => x.HasSameTagsAs(detectedSeperation)))
+            {
+                ActiveSeperations.Add(detectedSeperation);
+            }
+            //if (!ActiveSeperations.Exists(x => x.HasSameTagsAs(detectedSeperation)))
+            //{
+            //    Console.WriteLine("A SeperationEvent has just been identified" + detectedSeperation.FlightA.GetTag() + " and " + detectedSeperation.FlightB.GetTag() + "started at time: " + detectedSeperation.TimeOfOccurance);
+            //    ActiveSeperations.Add(detectedSeperation);
+            //    //SeperationIdentified?.Invoke(this, detectedSeperation);
+            //    SeperationsUpdatedEventArgs a = new SeperationsUpdatedEventArgs(ActiveSeperations);
+            //    SeperationEventsUpdated?.Invoke(this, a);
+            //}
+            //else
+            //{
+            //    //Debug.Log("SeperationController: SeperationEvent still going on, somebody do something!");
+            //}
+            SeperationEventsUpdated?.Invoke(this, new SeperationEventsUpdatedEventArgs(ActiveSeperations));
+            }
 
         private void OnFlightTracksUpdated(object o, FlightTracksUpdatedEventArgs args)
         {

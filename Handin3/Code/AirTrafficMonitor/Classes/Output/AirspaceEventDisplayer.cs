@@ -39,7 +39,7 @@ namespace AirTrafficMonitor
             {
                 foreach (var e in events)
                 {
-                    eventliststring += "[" + e.Description + "\n";
+                    eventliststring += " " + e.Description + "\n";
                 }
             }
             
