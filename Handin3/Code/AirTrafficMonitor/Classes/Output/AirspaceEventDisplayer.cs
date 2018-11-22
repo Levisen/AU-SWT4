@@ -24,18 +24,25 @@ namespace AirTrafficMonitor
         private void OnAirspaceEventsUpdated(object sender, AirspaceEventsUpdatedEventArgs e)
         {
             List<AirspaceEvent> events = e.ActiveEvents;
-
             string flighteventstring = GenerateFlightEventList(events);
             _monitor.UpdateDisplaySection("AirspaceEventList", flighteventstring);
         }
 
         private string GenerateFlightEventList(List<AirspaceEvent> events)
         {
-            string eventliststring = "-ACTIVE-AIRSPACE-EVENTS-";
-            foreach (var e in events)
+            string eventliststring = "";
+            if (events.Count == 0)
             {
-                eventliststring += e.Description + "\n";
+                eventliststring += "    (no active events)\n";
             }
+            else
+            {
+                foreach (var e in events)
+                {
+                    eventliststring += " " + e.Description + "\n";
+                }
+            }
+            
             return eventliststring;
         }
     }

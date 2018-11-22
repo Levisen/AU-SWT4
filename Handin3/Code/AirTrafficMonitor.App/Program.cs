@@ -24,17 +24,18 @@ namespace AirTrafficMonitor.App
             IAirspaceEventDetector airspaceEventDetector = new AirspaceEventDetector(airspace);
             IAirspaceEventController airspaceEventCtrl = new AirspaceEventController(airspaceEventDetector);
 
-            ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager);
+            ISeperationEventDetector seperationDetector = new SeperationEventDetector(airspace, 300, 5000);
+            //ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager, 5000, 10000);
             ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
 
             IMonitor monitor = new Monitor();
-            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace);
+            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace, 40, 20);
             var aispaceEventDisplayer = new AirspaceEventDisplayer(monitor, airspaceEventCtrl);
             var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
 
             while (true)
             {
-                Thread.Sleep(150);
+                Thread.Sleep(250);
             };
         }
     }

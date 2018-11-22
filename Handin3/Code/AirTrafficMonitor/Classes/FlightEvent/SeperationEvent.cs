@@ -18,5 +18,18 @@ namespace AirTrafficMonitor
             Flight_A = flight_A;
             Flight_B = flight_B;
         }
+
+        public bool HasSameTagsAs(SeperationEvent other)
+        {
+            if ((Flight_A.GetTag() == other.Flight_A.GetTag() && Flight_B.GetTag() == other.Flight_B.GetTag())
+                || (Flight_A.GetTag() == other.Flight_B.GetTag() && Flight_B.GetTag() == other.Flight_A.GetTag()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
