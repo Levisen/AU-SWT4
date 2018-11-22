@@ -33,20 +33,20 @@ namespace AirTrafficMonitor
         public void Draw()
         {
             Console.Clear();
-            Console.WriteLine("-AIRSPACE-GRID-");
+            Console.WriteLine("[-AIRSPACE-GRID-]");
             RenderSection("AirspaceGrid");
-            Console.WriteLine("-FLIGHTS-IN-AIRSPACE-");
+            Console.WriteLine("[-FLIGHTS-IN-AIRSPACE-]");
             RenderSection("AirspaceFlightList");
-            Console.WriteLine("-ENTER/EXIT-AIRSPACE-EVENTS-");
+            Console.WriteLine("[-ENTER/EXIT-AIRSPACE-EVENTS-]");
             RenderSection("AirspaceEventList");
-            Console.WriteLine("-SEPERATION-EVENTS-");
+            Console.WriteLine("[-SEPERATION-EVENTS-]");
             RenderSection("SeperationEventList");
         }
 
         private void RenderSection(string name)
         {
             if (Sections.ContainsKey(name)) Console.Write(Sections[name]);
-            else Console.WriteLine("Nothing to display");
+            else Console.WriteLine(" nothing to display yet");
         }
     }
 }

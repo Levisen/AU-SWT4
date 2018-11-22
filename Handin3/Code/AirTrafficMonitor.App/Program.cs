@@ -24,7 +24,8 @@ namespace AirTrafficMonitor.App
             IAirspaceEventDetector airspaceEventDetector = new AirspaceEventDetector(airspace);
             IAirspaceEventController airspaceEventCtrl = new AirspaceEventController(airspaceEventDetector);
 
-            ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager);
+            ISeperationEventDetector seperationDetector = new SeperationEventDetector(airspace, 300, 5000);
+            //ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager, 5000, 10000);
             ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
 
             IMonitor monitor = new Monitor();

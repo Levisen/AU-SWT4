@@ -31,7 +31,6 @@ namespace AirTrafficMonitor
         {
             var detected_event = e.Event;
             ActiveEvents.Add(detected_event);
-            //SetDeavtivationTimer(detected_event.Flight.GetTag());
             AirspaceEventsUpdated?.Invoke(this, new AirspaceEventsUpdatedEventArgs(ActiveEvents));
         }
 
@@ -48,9 +47,6 @@ namespace AirTrafficMonitor
             bool anythingchanged = false;
             foreach (var ev in ActiveEvents.ToList())
             {
-                //DateTime deactivatetime = ev.ActivationTime;
-                //deactivatetime.AddSeconds(5);
-                
                 if ((DateTime.Now - ev.ActivationTime).TotalSeconds > 5)
                 {
                     ActiveEvents.Remove(ev);

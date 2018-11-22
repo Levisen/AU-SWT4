@@ -30,7 +30,7 @@ namespace AirTrafficMonitor
             {
                 if (!Flights.Exists(x => x.GetTag() == dp.Tag))
                 {
-                    Console.WriteLine("New flight entered sensor range with tag '" + dp.Tag + "'");
+                    Debug.Log("New flight entered sensor range with tag '" + dp.Tag + "'");
                     Flights.Add(new Flight(dp));
                 }
 

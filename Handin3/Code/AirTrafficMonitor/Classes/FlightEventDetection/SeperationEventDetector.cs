@@ -14,44 +14,52 @@ namespace AirTrafficMonitor
         public event EventHandler<SeperationDetectedEventArgs> SeperationEventDetected;
 
         IFlightTrackerMultiple _datasource;
-        public SeperationEventDetector(IFlightTrackerMultiple flighttracker)
+        IAirspace _airspace;
+        int _altitude;
+        int _distance;
+        public SeperationEventDetector(IFlightTrackerMultiple flighttracker, int altitude = 300, int distance = 5000)
         {
             _datasource = flighttracker;
             _datasource.FlightTracksUpdated += OnFlightTracksUpdated;
+            _altitude = altitude;
+            _distance = distance;
+        }
+
+        public SeperationEventDetector(IAirspace airspace, int altitude = 300, int distance = 5000)
+        {
+            _airspace = airspace;
+            _airspace.AirspaceContentUpdated += OnAirspaceContentUpdated;
+            _altitude = altitude;
+            _distance = distance;
+        }
+
+        private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
+        {
+            List<IFlightTrackerSingle> airspaceflights = e.AirspaceContent;
+            CheckForSeperationEvents(airspaceflights);
         }
 
         private void OnFlightTracksUpdated(object sender, FlightTracksUpdatedEventArgs e)
         {
             List<IFlightTrackerSingle> allUpdatedFlights = e.UpdatedFlights;
-            for (int i = 0; i < allUpdatedFlights.Count; i++)
+            CheckForSeperationEvents(allUpdatedFlights);
+        }
+
+        private void CheckForSeperationEvents(List<IFlightTrackerSingle> flights)
+        {
+            for (int i = 0; i < flights.Count; i++)
             {
-                for (int j = i + 1; j < allUpdatedFlights.Count; j++)
+                for (int j = i + 1; j < flights.Count; j++)
                 {
-                    IFlightTrackerSingle f1 = allUpdatedFlights[i];
-                    IFlightTrackerSingle f2 = allUpdatedFlights[j];
+                    IFlightTrackerSingle f1 = flights[i];
+                    IFlightTrackerSingle f2 = flights[j];
                     if (TracksConflicting(f1, f2))
                     {
                         SeperationEvent detectedSeperation = new SeperationEvent(f1, f2);
-
-                        //Debug.Log("Current SeperationEvent between " + detectedSeperation.FlightA.GetTag() + " and " + detectedSeperation.FlightB.GetTag() + "started at time: " + detectedSeperation.TimeOfOccurance);
-
-                        //if (!ActiveSeperations.Exists(x => x.HasSameTagsAs(detectedSeperation)))
-                        //{
-                        //    Console.WriteLine("A SeperationEvent has just been identified" + detectedSeperation.FlightA.GetTag() + " and " + detectedSeperation.FlightB.GetTag() + "started at time: " + detectedSeperation.TimeOfOccurance);
-                        //    ActiveSeperations.Add(detectedSeperation);
-                        //    //SeperationIdentified?.Invoke(this, detectedSeperation);
-                        //    SeperationsUpdatedEventArgs a = new SeperationsUpdatedEventArgs(ActiveSeperations);
-                        //    SeperationEventsUpdated?.Invoke(this, a);
-                        //}
-                        //else
-                        //{
-                        //    //Debug.Log("SeperationController: SeperationEvent still going on, somebody do something!");
-                        //}
+                        SeperationEventDetected?.Invoke(this, new SeperationDetectedEventArgs(detectedSeperation));
                     }
                 }
             }
-
-
         }
 
         public bool TracksConflicting(IFlightTrackerSingle f1, IFlightTrackerSingle f2)
@@ -61,7 +69,7 @@ namespace AirTrafficMonitor
             Vector2 f1pos = f1.GetCurrentPosition();
             Vector2 f2pos = f2.GetCurrentPosition();
 
-            if ((Math.Abs(f1alt - f2alt) < 3000) && Vector2.Distance(f1pos, f2pos) < 15000)
+            if ((Math.Abs(f1alt - f2alt) < _altitude) && Vector2.Distance(f1pos, f2pos) < _distance)
             {
                 return true;
             }
