@@ -60,7 +60,6 @@ namespace AirTrafficMonitor
 
         public FTDataPoint ConvertTransponderString(string rawdata)
         {
-            Console.WriteLine("RAWDATA: " + rawdata);
             //Todo: tilføj data validation (antal semikoloner, længde på elementer, allowed characters etc)
             var dp = new FTDataPoint();
             string[] splitdata = rawdata.Split(';');
