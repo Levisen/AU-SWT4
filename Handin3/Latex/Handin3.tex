@@ -1,10 +1,10 @@
-% !TeX root = ./Handin2.tex
+% !TeX root = ./Handin3.tex
 \documentclass[a4paper]{article}								%#
 %#################################################################
 
 %-----------------------------------------------------------------
 % Titlen på dokumentet - vises på forsiden og i sidefoden
-\title{Air Traffic Monitor}
+\title{Air Traffic Monitor - Handin 2}
 
 %#################################################################
 \usepackage{../../_global/globalPreamble} % Inkluder preambles	%#
@@ -16,7 +16,7 @@
 % Sæt data til forside. Kan kommenteres ind efter behov.
 %\newcommand{\frontpageDate}{31/8-2018}
 \newcommand{\frontpageImage}{sections/images/frontPage.PNG}
-%\newcommand{\frontpageCharacters}{1234567}
+%\newcommand{\frontpageCharacters}{123456dawd7}
 
 %#################################################################
 \begin{document}												%#
@@ -32,7 +32,26 @@
 	
 	%-------------------------------------------------------------
 	% Selve indholdet
-	\import{sections/}{indhold}
+	
+	\import{sections/}{introbeskrivelse}
+	\import{sections/projektbeskrivelser/}{krav}
+
+	\import{sections/}{arbejdsmetoder}
+
+	\import{sections/}{systemarkitektur}
+	\import{sections/systemarkitektur/}{dataflow}
+	\import{sections/systemarkitektur/}{dependencytree}
+	\import{sections/systemarkitektur/}{klasser}
+	\import{sections/systemarkitektur/}{interfaces}
+
+	\import{sections/}{testing}
+	\import{sections/testing/}{unittest}
+	\import{sections/testing/}{integrationstest}
+
+	\import{sections/}{diskussion}
+	\import{sections/}{konklusion}
+	
+
 
 	%-------------------------------------------------------------
 	% Kildeliste - Kan udkommenteres efter behov
