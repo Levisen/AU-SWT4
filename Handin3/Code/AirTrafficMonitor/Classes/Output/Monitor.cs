@@ -29,6 +29,7 @@ namespace AirTrafficMonitor
 
             RenderSection("AirspaceGrid");
             RenderSection("AirspaceFlightList");
+            RenderSection("AirspaceEventList");
         }
 
         private void RenderSection(string name)

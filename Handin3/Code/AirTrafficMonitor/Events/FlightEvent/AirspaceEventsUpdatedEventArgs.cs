@@ -9,8 +9,8 @@ namespace AirTrafficMonitor.Events
 {
     public class AirspaceEventsUpdatedEventArgs : EventArgs
     {
-        public List<IAirspaceEvent> ActiveEvents { get; }
-        public AirspaceEventsUpdatedEventArgs(List<IAirspaceEvent> events)
+        public List<AirspaceEvent> ActiveEvents { get; }
+        public AirspaceEventsUpdatedEventArgs(List<AirspaceEvent> events)
         {
             ActiveEvents = events;
         }

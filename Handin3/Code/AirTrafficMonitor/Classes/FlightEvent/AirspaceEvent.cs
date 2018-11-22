@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirTrafficMonitor.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,13 @@ namespace AirTrafficMonitor
 {
     public class AirspaceEvent : FlightEvent
     {
-        public AirspaceEvent() : base("Airspace", "")
+        public IFlightTrackerSingle Flight { get; set; }
+        public bool Entered { get; set; }
+        public AirspaceEvent(IFlightTrackerSingle flight, bool entered) 
+            : base("Airspace", "Flight " + flight.GetTag() + " has " + ((entered) ? "entered" : "left") + " airspace")
         {
+            Flight = flight;
+            Entered = entered;
         }
     }
 }

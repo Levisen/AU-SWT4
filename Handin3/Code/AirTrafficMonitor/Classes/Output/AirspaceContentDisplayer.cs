@@ -29,7 +29,7 @@ namespace AirTrafficMonitor
 
         private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
         {
-            List<IFlightTrackerSingle> flights = e.UpdatedFlights;
+            List<IFlightTrackerSingle> flights = e.AirspaceContent;
 
             var gridstring = GenerateAirspaceGrid(flights);
             

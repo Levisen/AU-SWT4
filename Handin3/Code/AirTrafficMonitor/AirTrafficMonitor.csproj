@@ -68,9 +68,10 @@
     <Compile Include="Classes\Output\Monitor.cs" />
     <Compile Include="Classes\_old\SeperationHandler.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Events\FlightEvent\AirspaceEventDetectedArgs.cs" />
     <Compile Include="Events\FlightEvent\AirspaceEventsUpdatedEventArgs.cs" />
-    <Compile Include="Events\FlightEvent\SeperationDetectedEventArgs.cs" />
-    <Compile Include="Events\FlightEvent\SeperationsUpdatedEventArgs.cs" />
+    <Compile Include="Events\FlightEvent\SeperationEventDetectedEventArgs.cs" />
+    <Compile Include="Events\FlightEvent\SeperationEventsUpdatedEventArgs.cs" />
     <Compile Include="Events\AirspaceContentEventArgs.cs" />
     <Compile Include="Events\FlightEventsUpdatedEventArgs.cs" />
     <Compile Include="Events\FlightTracksUpdatedEventArgs.cs" />
