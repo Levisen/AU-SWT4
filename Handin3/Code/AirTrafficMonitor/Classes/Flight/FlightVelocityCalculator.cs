@@ -11,27 +11,28 @@ namespace AirTrafficMonitor
     public class FlightVelocityCalculator : IFlightVelocityCalculator
     {
         public double CalculateCurrentVelocity(Vector2 previous_position, DateTime? previous_timestamp, Vector2 current_position, DateTime current_timestamp)
-        {
-            double result = 0;
+        { 
 
-            //var t = new LinkedList<FTDataPoint>(data);
-            //var xPos = new LinkedList<int>(); var yPos = new LinkedList<int>();
-            //var velocityResults = new LinkedList<double>();
-            //double t1, t2, distance, result = 0, resultDouble;
-            //float finalResult;
-            //foreach(var item in t) { xPos.AddLast(item.X); yPos.AddLast(item.Y); }
-            //while (t.First != t.Last) {
-            //    distance = Math.Sqrt(Math.Pow(t.First.Value.X - t.First.Next.Value.X, 2) 
-            //             + Math.Pow(t.First.Value.Y - t.First.Next.Value.Y, 2));
-            //    t1 = t.First.Value.TimeStamp.Second; t2 = t.First.Value.TimeStamp.Second;
-            //    velocityResults.AddLast(distance / (t2 - t1));
-            //    t.RemoveFirst(); }
-            //foreach (var item in velocityResults) { result = +item; }
-            //resultDouble = result / velocityResults.Count;
-            //finalResult = (float)resultDouble;
-            //return finalResult;
+            double distance, deltaY, deltaX;
+            if (current_position.X > previous_position.X) deltaX = current_position.X - previous_position.X;
+            else deltaX = previous_position.X - current_position.X;
+            if (current_position.Y > previous_position.Y) deltaY = current_position.Y - previous_position.Y;
+            else deltaY = previous_position.Y - current_position.Y;
+            distance = Math.Sqrt(Math.Pow(deltaX, 2) + Math.Pow(deltaY, 2));
 
-            return result;
+            double timeBetweenInSeconds;
+            var DatetimeToTimeStamp = new DateTime();
+            TimeSpan current, previous, resultTimespan;
+            current = DatetimeToTimeStamp.Subtract(current_timestamp);
+            previous = DatetimeToTimeStamp.Subtract(previous_timestamp ?? DateTime.Now);
+            resultTimespan = current - previous;
+            timeBetweenInSeconds = (double)resultTimespan.TotalSeconds;
+            if (timeBetweenInSeconds < 0)
+            {
+                timeBetweenInSeconds = timeBetweenInSeconds * -1; //convert to positive
+                return timeBetweenInSeconds;
+            }
+            return timeBetweenInSeconds;
         }
     }
 }
