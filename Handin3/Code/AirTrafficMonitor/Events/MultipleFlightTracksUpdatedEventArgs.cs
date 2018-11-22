@@ -9,7 +9,7 @@ namespace AirTrafficMonitor.Events
 {
     public class MultipleFlightTracksUpdatedEventArgs
     {
-        public List<IFlightTrackerSingle> UpdatedFlights { get; }
+        public List<IFlightTrackerSingle> UpdatedFlights { get; set; }
         public MultipleFlightTracksUpdatedEventArgs(List<IFlightTrackerSingle> flights)
         {
             UpdatedFlights = flights;
