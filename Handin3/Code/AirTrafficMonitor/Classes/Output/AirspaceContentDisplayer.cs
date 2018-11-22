@@ -51,10 +51,10 @@ namespace AirTrafficMonitor
                 airspaceflightlist += dp.Tag + "\t"
                                     + dp.X + "\t"
                                     + dp.Y + "\t"
-                                    + dp.Altitude + "\t" 
-                                    + dp.TimeStamp.ToShortTimeString() + "\t" 
-                                    + flight.GetCurrentVelocity() + "\t"
-                                    + flight.GetCurrentCourse() + "\n";
+                                    + dp.Altitude + "\t"
+                                    + dp.TimeStamp.ToShortTimeString() + "\t"
+                                    + flight.GetCurrentVelocity().ToString("0.00") + "\t"
+                                    + flight.GetCurrentCourse().ToString("0.00") + "\n";
             }
 
             return airspaceflightlist;
