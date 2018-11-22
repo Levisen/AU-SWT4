@@ -68,10 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITransponderDataBundleReaderTest.cs" />
-    <Compile Include="ITransponderDataConverterTest.cs" />
+    <Compile Include="Class\ITransponderDataConverterTest.cs" />
+    <Compile Include="Event\IFlightTrackDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ITransponderDataParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -89,6 +88,7 @@
   <ItemGroup>
     <None Include="bin\Debug\TransponderReceiver.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

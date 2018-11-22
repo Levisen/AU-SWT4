@@ -68,7 +68,6 @@
     <Compile Include="Interfaces\DataConversion\IFlightTrackDataSource.cs" />
     <Compile Include="Interfaces\Calculator\IFlightCourseCalculator.cs" />
     <Compile Include="Interfaces\FlightTracker\IFlightTrackerSingle.cs" />
-    <Compile Include="Interfaces\DataConversion\ITransponderStringConverter.cs" />
     <Compile Include="Interfaces\Calculator\IFlightVelocityCalculator.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Interfaces\FlightTracker\IFlightTrackerMultiple.cs" />
