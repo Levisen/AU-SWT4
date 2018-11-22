@@ -21,7 +21,7 @@ namespace AirTrafficMonitor.Unit.Test
             
         }
 
-        [Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases")]
+        //[Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases")]
         public double CalculateCurrentVelocity_TestCases(int Vector1x, int Vector1y, int Vector2x, int Vector2y, int seconds, int milliseconds)
         {
             var vector1 = new Vector2(Vector1x, Vector1y);

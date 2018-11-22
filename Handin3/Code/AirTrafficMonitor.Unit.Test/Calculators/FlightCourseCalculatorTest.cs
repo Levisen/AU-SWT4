@@ -23,7 +23,7 @@ namespace AirTrafficMonitor.Unit.Test
             _uut = new FlightCourseCalculator();
         }
 
-        [Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "CourseTestCases")]
+        //[Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "CourseTestCases")]
         public double CalculateCurrentCourse_TestCases(int Vector1x, int Vector1y, int Vector2x, int Vector2y)
         {
             var vector1 = new Vector2(Vector1x, Vector1y);
