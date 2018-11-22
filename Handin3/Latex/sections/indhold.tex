@@ -1,4 +1,4 @@
-% !TeX root = ../Handin2.tex
+% !TeX root = ../Handin3.tex
 \section{Beskrivelse}
 \subsection{Krav til systemet}
 Denne opgave omhandler design og test af en applikation, der overvåger fly i et luftrum, baseret på information fra en transponder-receiver. 
@@ -20,11 +20,11 @@ Hvis det er tilfældet skal applikationen informere om hvilke fly der er involve
 \subsubsection{Data flow}
 Ud fra ovetrstående krav og rapporten, har vi lavet et flow diagram som vi har arbejde ud fra i forbindelse med udarbejdelsen af løsningen. Flowdiagrammet har vi brugt, som samling på projeket, da vi undervejs har ændret klassediagrammer flere gange. 
 
-\insertfigure{DataFlow.png}{0.7}{}
-{Dataflow Diagram af system}
+% \insertfigure{DataFlow.png}{0.7}{}
+% {Dataflow Diagram af system}
 
 \newpage
-\section{Tilgang til Testbart Design}
+\subsection{Tilgang til Testbart Design}
 
 Systemdesignet gør meget brug af interfaces til at indkapsle de delelige aspekter af systemets funktioneliteter. 
 Udover at seperere funktionaliteterne og løsne koblingen mellem softwarekomponenter, er mange af systemets interfaces designet specifikt for at kunne teste en vis funktionalitet uafhængigt af hvordan denne funktionalitet forventes implementeret.
@@ -34,9 +34,10 @@ Vi er endt med en meget modular tilgang til systemets komponenter, som har gjort
 For at løsne koblingen mellem systemets komponenter, har vi gjort meget brug af interfaces. 
 De forskellige interfaces er designet med henblik på at indkapsle delelementer af systemets krav, uafhængigt af hvilke klasser der ender med at implementerer dem.
 Unit-tests til disse interfaces vil i derfor høj grad kunne indikere hvor mange af systemets krav der er opfyldt. Vores overordnede strategi ift design af systemet har været, at tage udgangspunkt i testbare interfaces, og bygge restene af systemet op omkring det.
+
 \subsubsection{Konvertering af Rådata fra Transponder}
-\insertfigure{DataConversionInterfaces.png}{0.9}{}
-{Interfaces til konvertering af data fra transponder}
+% \insertfigure{DataConversionInterfaces.png}{0.9}{}
+% {Interfaces til konvertering af data fra transponder}
 \subsubsubsection{ITransponderDataConverter}
 Dette interface repræsenterer hele datakonverteringsprocessen, fra rådata til en liste af strukturede informationer om flysignalerne.
 Implementeringen af dette interface bør:
@@ -54,8 +55,8 @@ Implementeringen af dette interface bør kunne konvertere en streng af rådata t
 Implementeringen af dette interface bør regelmæssigt afsende information fra flysignaler som en liste af FTDataPoints gennem sit event. Skal kunne bruges af klasser der kræver en kilde til strukturerede datapunkter af flysignaler
 \subsubsection{Sporing af Fly}
 
-\insertfigure{FlightInterfaces.png}{0.75}{}
-{Interfaces til sporing af fly}
+% \insertfigure{FlightInterfaces.png}{0.75}{}
+% {Interfaces til sporing af fly}
 
 \subsubsubsection{IFlightTrackerSingle}
 Implementeringen af dette interface bør kunne:
@@ -81,21 +82,21 @@ Implementeringen af dette interface bør:
 \newpage
 \subsubsection{Luftrum}
 
-\insertfigure{AirspaceInterfaces.png}{0.5}{}
-{Interfaces til luftrum}
+% \insertfigure{AirspaceInterfaces.png}{0.5}{}
+% {Interfaces til luftrum}
 \subsubsubsection{IAirspace}
 Repræsenterer et luftrum, og vedligholder en samling af fly der befinder sig heri
 \subsubsubsection{IAirspaceFilter}
 Klassen der implementerer dette interface skal være i stand til at vurdere om et givent fly er inden for et luftrumsareal
 \subsubsection{Håndtering af seperation}
-\insertfigure{SeperationInterfaces.png}{0.5}{}
-{Interfaces til identificering og håndtering af seperation}
+% \insertfigure{SeperationInterfaces.png}{0.5}{}
+% {Interfaces til identificering og håndtering af seperation}
 \newpage
 \subsubsection{Klassediagram}
 Ud fra overstående interfaces er der sammenholdigt med vores klasser implementeret et klassediagram
 
-\insertfigure{ClassDiagram.png}{0.9}{}
-{Klassediagram af system}
+% \insertfigure{ClassDiagram.png}{0.9}{}
+% {Klassediagram af system}
 
 \subsubsection{Continuous Integration og Versionstyring}
 
@@ -122,7 +123,7 @@ gennemskueligt når vi skal test projekter.
 
 
 
-\subsection{Reflektion og Diskussion}
+\subsection{Diskussion}
 Vi er som udgangpunkt tilfredse med vores tilgang til at lave et testbart design, men det har nok taget for meget af vores fokus, da vi undervurderede opgavens omfang. 
 Det har været lærerigt at udvikle et system med en test-fokuseret
 
