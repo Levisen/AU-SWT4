@@ -32,7 +32,6 @@ namespace AirTrafficMonitor
             List<IFlightTrackerSingle> flights = e.AirspaceContent;
 
             var gridstring = GenerateAirspaceGrid(flights);
-            
             var flightliststring = GenerateAirspaceFlightList(flights);
 
             _monitor.UpdateDisplaySection("AirspaceGrid", gridstring);
