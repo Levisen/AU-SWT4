@@ -23,8 +23,9 @@ namespace AirTrafficMonitor.Unit.Test.TestData
         {
             get
             {
-                yield return new TestCaseData(2000, 2000, 2000, 2000, 1, 342).Returns(0);
-                yield return new TestCaseData(2000, 2000, 2000, 2100, 1, 0).Returns(100);
+                yield return new TestCaseData(2000, 2000, 2000, 2000, 0, 0).Returns(0);
+                yield return new TestCaseData(2000, 2000, 4000, 4000, 30, 0).Returns(30);
+                yield return new TestCaseData(2000, 2000, 4000, 4000, 56, 50).Returns(56.049999999999997d);
             }
         }
     }
