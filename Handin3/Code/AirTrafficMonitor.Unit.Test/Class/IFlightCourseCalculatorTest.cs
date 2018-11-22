@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Numerics;
 using TransponderReceiver;
 using System.Collections;
+using AirTrafficMonitor.Unit.Test.TestData;
 
-namespace AirTrafficMonitor.Unit.Test
+namespace AirTrafficMonitor.Unit.Test.Class
 {
     [TestFixture]
     public class FlightCourseCalculatorTest

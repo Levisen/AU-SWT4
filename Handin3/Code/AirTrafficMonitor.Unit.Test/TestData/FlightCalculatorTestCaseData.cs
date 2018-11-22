@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Unit.Test
+namespace AirTrafficMonitor.Unit.Test.TestData
 {
     public class FlightCalculatorsTestCaseData
     {
@@ -15,7 +15,7 @@ namespace AirTrafficMonitor.Unit.Test
             get
             {
                 yield return new TestCaseData(2000, 2000, 2000, 2111).Returns(0);
-                yield return new TestCaseData(2000, 2000, 2001, 2111).Returns(0.21);
+                yield return new TestCaseData(2000, 2000, 4000, 4000).Returns(45);
             }
         }
 

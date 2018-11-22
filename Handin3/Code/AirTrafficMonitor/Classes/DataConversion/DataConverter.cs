@@ -10,7 +10,7 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitor
 {
-    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource, ITransponderStringConverter
+    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource
     {
         public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
         ITransponderReceiver transponderReceiver;
@@ -72,11 +72,6 @@ namespace AirTrafficMonitor
             dp.TimeStamp = DateTime.ParseExact(splitdata[4], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
 
             return dp;
-        }
-
-        public ITransponderStringConverter GetStringConverter()
-        {
-            return this as ITransponderStringConverter;
         }
 
         public IFlightTrackDataSource GetFlightTrackDataSource()

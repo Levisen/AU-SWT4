@@ -6,8 +6,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitor.Unit.Test.TestData;
 
-namespace AirTrafficMonitor.Unit.Test
+namespace AirTrafficMonitor.Unit.Test.Class
 {
     [TestFixture]
     class FlightVelocityCalculatorTest
