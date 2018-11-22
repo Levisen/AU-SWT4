@@ -70,12 +70,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\IFlightTrackerSingleTest.cs" />
     <Compile Include="Class\ITransponderDataConverterTest.cs" />
     <Compile Include="Event\FlightTrackDataEvent.cs" />
     <Compile Include="Event\TransponderDataEvent.cs" />
-    <Compile Include="Calculators\FlightCalculatorsTestCaseData.cs" />
-    <Compile Include="Calculators\FlightCourseCalculatorTest.cs" />
-    <Compile Include="Calculators\FlightVelocityCalculatorTest.cs" />
+    <Compile Include="TestData\FlightCalculatorTestCaseData.cs" />
+    <Compile Include="Class\IFlightCourseCalculatorTest.cs" />
+    <Compile Include="Class\IFlightVelocityCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\FlightTrackDataEventTestData.cs" />
   </ItemGroup>

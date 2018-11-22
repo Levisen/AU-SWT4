@@ -6,8 +6,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using AirTrafficMonitor.Unit.Test.TestData;
 
-namespace AirTrafficMonitor.Unit.Test
+namespace AirTrafficMonitor.Unit.Test.Class
 {
     [TestFixture]
     class FlightVelocityCalculatorTest
@@ -21,7 +22,7 @@ namespace AirTrafficMonitor.Unit.Test
             
         }
 
-        //[Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases")]
+        [Test, TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases")]
         public double CalculateCurrentVelocity_TestCases(int Vector1x, int Vector1y, int Vector2x, int Vector2y, int seconds, int milliseconds)
         {
             var vector1 = new Vector2(Vector1x, Vector1y);
