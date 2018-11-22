@@ -2,7 +2,7 @@
 
 namespace AirTrafficMonitor
 {
-    public class FTDataPoint : IComparable<FTDataPoint>
+    public class FTDataPoint
     {
         public FTDataPoint() { }
         public FTDataPoint(string t,int x, int y, int a, DateTime ti)

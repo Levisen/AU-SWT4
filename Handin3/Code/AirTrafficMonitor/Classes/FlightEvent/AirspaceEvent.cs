@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public interface IAirspaceDisplayer
+    public class AirspaceEvent : FlightEvent
     {
-       
+        public AirspaceEvent() : base("Airspace", "")
+        {
+        }
     }
 }

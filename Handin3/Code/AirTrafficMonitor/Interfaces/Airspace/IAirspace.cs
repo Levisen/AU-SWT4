@@ -10,6 +10,7 @@ namespace AirTrafficMonitor.Interfaces
     public interface IAirspace
     {
         List<IFlightTrackerSingle> GetAirspaceContent();
+        IAirspaceArea GetAirspaceArea();
         IFlightTrackerMultiple GetFlightTracker();
 
         event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;

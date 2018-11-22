@@ -8,14 +8,15 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor
 {
-    public class Airspace : IAirspace, IAirspaceAreaFilter
+    public class Airspace : IAirspace
     {
-        AirspaceArea AirspaceArea;
-        List<IFlightTrackerSingle> Content;
+        IAirspaceArea AirspaceArea;
         IFlightTrackerMultiple FlightTracker;
+
+        List<IFlightTrackerSingle> Content;
         public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
 
-        public Airspace(IFlightTrackerMultiple flightTracker, AirspaceArea airspaceArea)
+        public Airspace(IFlightTrackerMultiple flightTracker, IAirspaceArea airspaceArea)
         {
             AirspaceArea = airspaceArea;
             Content = new List<IFlightTrackerSingle>();
@@ -23,7 +24,7 @@ namespace AirTrafficMonitor
             FlightTracker.FlightTracksUpdated += OnFlightTracksUpdated;
         }
 
-        private void OnFlightTracksUpdated(object o, MultipleFlightTracksUpdatedEventArgs args)
+        private void OnFlightTracksUpdated(object o, FlightTracksUpdatedEventArgs args)
         {
             List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
 
@@ -31,32 +32,14 @@ namespace AirTrafficMonitor
 
             foreach (var f in allUpdatedFlights)
             {
-                if (IsInsideAirspace(f.GetNewestDataPoint(), AirspaceArea))
+                if (AirspaceArea.IsInside(f.GetNewestDataPoint()))
                 {
                     Content.Add(f);
                 }
             }
 
-            if (Content.Count == 0)//Should be in monitor
-            {
-
-            }
-            else
-            {
-                Console.WriteLine("-------------------Airspace Currently Contains:------------------ ");
-                foreach (var f in Content)
-                {
-                    FTDataPoint dp = f.GetNewestDataPoint();
-                    Console.WriteLine("Flight - Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + Environment.NewLine + "         Altitude: " + dp.Altitude + " Velocity: " + f.GetCurrentVelocity() + " Course: " + f.GetCurrentCourse());
-                }
-            }
-            
-
             AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(Content));
-
-
         }
-
 
         public List<IFlightTrackerSingle> GetAirspaceContent()
         {
@@ -68,19 +51,11 @@ namespace AirTrafficMonitor
             return FlightTracker;
         }
 
-        public bool IsInsideAirspace(FTDataPoint dp, AirspaceArea area)
+
+
+        public IAirspaceArea GetAirspaceArea()
         {
-            if (dp.Altitude > area.AltitudeBoundaryLower && dp.Altitude < area.AltitudeBoundaryUpper
-                && dp.X > area.SouthWestCornerX && dp.X < area.NorthEastCornerX
-                && dp.Y > area.SouthWestCornerY && dp.Y < area.NorthEastCornerY)
-            {
-                return true;
-            }
-            else
-            {
-                return false; // Done
-            }
-            
+            return AirspaceArea;
         }
     }
 }

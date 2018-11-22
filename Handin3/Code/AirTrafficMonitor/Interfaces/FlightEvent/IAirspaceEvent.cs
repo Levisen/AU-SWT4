@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    interface ISeperaionHandler
+    public interface IAirspaceEvent : IFlightEvent
     {
 
     }

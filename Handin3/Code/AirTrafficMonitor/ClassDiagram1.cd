@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AirTrafficMonitor.Airspace" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="6" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgICAAAAAAAAAAACAAAAAAAAAAAACAAQBAA=</HashCode>
+      <FileName>Classes\Airspace\Airspace.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirTrafficMonitor.AirspaceArea">
+    <Position X="13.75" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAGAAAGAAAAAAg=</HashCode>
+      <FileName>Classes\Airspace\AirspaceArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirTrafficMonitor.DataConverter" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEEAACEAAAEAAAAAAQCAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DataConversion\DataConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirTrafficMonitor.FTDataPoint" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAgAAQAAAAAgAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Classes\DataConversion\FTDataPoint.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AirTrafficMonitor.Flight" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>JAAAAAAABAggAAAAAAAAIBVAAAAQAgAQQBACQAAgAAA=</HashCode>
+      <FileName>Classes\Flight\Flight.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AirTrafficMonitor.FlightCourseCalculator" BaseTypeListCollapsed="true">
+    <Position X="3" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Flight\FlightCourseCalculator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AirTrafficMonitor.FlightManager" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAACQAgAAAAAAAAAAAAAAAAAAAIAAAAQAAAA=</HashCode>
+      <FileName>Classes\Flight\FlightManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AirTrafficMonitor.FlightVelocityCalculator" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\Flight\FlightVelocityCalculator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AirTrafficMonitor.Monitor">
+    <Position X="16.75" Y="4" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAAACEAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Monitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirTrafficMonitor.SeperationController" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAKAAAAAAAAAAAAEBAAEAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Classes\Seperation\SeperationController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.262" Collapsed="true" />
+  </Class>
+  <Class Name="AirTrafficMonitor.SeperationHandler">
+    <Position X="12.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAQAAAAAAAAAAAAAAEQAAA=</HashCode>
+      <FileName>Classes\Seperation\SeperationHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="AirTrafficMonitor.Interfaces.IFlightTrackerMultiple" Collapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\FlightTracker\IFlightTrackerMultiple.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -20,10 +20,25 @@ namespace AirTrafficMonitor.App
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
 
-            ISeperationManager seperationController = new SeperationController(flightManager);
+            //ISeperationManager seperationController = new SeperationController(flightManager);
             //SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
 
             IAirspace airspace = new Airspace(flightManager, area);
+
+            ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager);
+
+            //ISeperationEventController flightEventController = new FlightEventController(flightManager);
+            IAirspaceEventController airspaceEventCtrl = new AirspaceEventController();
+            ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
+
+            var updatetriggers = new List<EventHandler>();
+            //updatetriggers.Add(airspace.AirspaceContentUpdated);
+
+            IMonitor monitor = new Monitor();
+
+            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace);
+            var aispaceEventDisplayer = new AirspaceEventDisplayer(monitor, airspaceEventCtrl);
+            var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
 
             //Monitor monitor = new Monitor(airspace, seperationController);
             while (true)
