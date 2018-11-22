@@ -10,7 +10,7 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitor
 {
-    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource, ITransponderStringConverter
+    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource
     {
         public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
         ITransponderReceiver transponderReceiver;

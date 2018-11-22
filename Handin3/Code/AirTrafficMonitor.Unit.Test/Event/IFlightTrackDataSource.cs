@@ -10,7 +10,7 @@ using TransponderReceiver;
 using AirTrafficMonitor.Events;
 using AirTrafficMonitor;
 
-namespace AirTrafficMonitor.Unit.Test
+namespace AirTrafficMonitor.Unit.Test.Event
 {
     [TestFixture]
     class IFlightTrackDataSourceTest

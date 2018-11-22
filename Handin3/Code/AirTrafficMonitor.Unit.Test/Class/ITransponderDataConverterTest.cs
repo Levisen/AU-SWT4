@@ -4,14 +4,13 @@ using NUnit.Framework;
 using TransponderReceiver;
 using NSubstitute;
 using AirTrafficMonitor.Interfaces;
+using AirTrafficMonitor.Events;
 
-namespace AirTrafficMonitor.Unit.Test.ClassTests
+namespace AirTrafficMonitor.Unit.Test.Class
 {
     class ITransponderDataConverterTest
     {
         private ITransponderDataConverter _uut;
-        private FTDataPoint _testFTDataPoint;
-        private List<FTDataPoint> _testListFTDataPoint;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +23,7 @@ namespace AirTrafficMonitor.Unit.Test.ClassTests
         public void ConvertTransponderString_StringInput_FTDataPointOut(string raw, string tag, int xC, int yC, int a, int y, int mO, int d, int ho, int min, int sec, int mSec)
         {
             // Arrange
-            _testFTDataPoint = new FTDataPoint();
+            FTDataPoint _testFTDataPoint = new FTDataPoint();
 
             // Act
             _testFTDataPoint = _uut.ConvertTransponderString(raw);
@@ -48,8 +47,9 @@ namespace AirTrafficMonitor.Unit.Test.ClassTests
         {
             // Arrange
             // - Test
-            _testFTDataPoint = new FTDataPoint() { Tag = tag };
-            _testListFTDataPoint = new List<FTDataPoint>();
+            FTDataPoint _testFTDataPoint = new FTDataPoint() { Tag = tag };
+            List<FTDataPoint> _testListFTDataPoint = new List<FTDataPoint>() { _testFTDataPoint };
+            FlightTrackDataEventArgs _testArgs = new FlightTrackDataEventArgs(_testListFTDataPoint);
 
             // - Setup Stringlist as raw transponder argument
             var _listStringTest = new List<string>();
@@ -57,7 +57,7 @@ namespace AirTrafficMonitor.Unit.Test.ClassTests
 
 
             // Act
-            _testListFTDataPoint = _uut.ConvertTransponderData(new RawTransponderDataEventArgs(_listStringTest));
+            _testArgs = _uut.ConvertTransponderData(new RawTransponderDataEventArgs(_listStringTest));
             // Assert
             Assert.That(_testListFTDataPoint.First().Tag, Is.EqualTo(_testFTDataPoint.Tag));
         }
