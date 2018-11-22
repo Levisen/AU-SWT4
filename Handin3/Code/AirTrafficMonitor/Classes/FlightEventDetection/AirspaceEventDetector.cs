@@ -26,11 +26,9 @@ namespace AirTrafficMonitor
         {
             var newflights = e.AirspaceContent;
             
-            if (newflights.Count > 0)
+            if (newflights.Count > 0 || previous.Count > 0)
             {
-                //var dps = new List<FTDataPoint>();
-                //newflights.ForEach(f => dps.Add(f.GetNewestDataPoint()));
-
+                //Check for enter events
                 foreach (var newf in newflights)
                 {
                     if (!previous.Any(x => x.GetTag() == newf.GetTag()))
@@ -39,14 +37,15 @@ namespace AirTrafficMonitor
                         AirspaceEventDetected?.Invoke(this, new AirspaceEventDetectedArgs(newevent));
                     }
                 }
-                //foreach (var oldf in previous)
-                //{
-                //    if (!newflights.Any(x => x.GetTag() == oldf.GetTag()))
-                //    {
-                //        AirspaceEvent newevent = new AirspaceEvent(oldf, false);
-                //        AirspaceEventDetected?.Invoke(this, new AirspaceEventDetectedArgs(newevent));
-                //    }
-                //} 
+                //Check for exit events
+                foreach (var oldf in previous)
+                {
+                    if (!newflights.Any(x => x.GetTag() == oldf.GetTag()))
+                    {
+                        AirspaceEvent newevent = new AirspaceEvent(oldf, false);
+                        AirspaceEventDetected?.Invoke(this, new AirspaceEventDetectedArgs(newevent));
+                    }
+                }
             }
             previous.Clear();
             previous.AddRange(newflights);

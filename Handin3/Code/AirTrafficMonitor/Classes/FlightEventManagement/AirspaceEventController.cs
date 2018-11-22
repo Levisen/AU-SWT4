@@ -27,15 +27,7 @@ namespace AirTrafficMonitor
         private void OnAirspaceEventDetected(object sender, AirspaceEventDetectedArgs e)
         {
             var detected_event = e.Event;
-            if (detected_event.Entered)
-            {
-                ActiveEvents.Add(detected_event);
-            }
-            else
-            {
-                InctiveEvents.Add(detected_event);
-                ActiveEvents.RemoveAll(x => x.Flight.GetTag() == detected_event.Flight.GetTag());
-            }
+            ActiveEvents.Add(detected_event);
             AirspaceEventsUpdated?.Invoke(this, new AirspaceEventsUpdatedEventArgs(ActiveEvents));
         }
     }

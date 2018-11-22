@@ -42,8 +42,7 @@ namespace AirTrafficMonitor
 
         public string GenerateAirspaceFlightList(List<IFlightTrackerSingle> flights)
         {
-            string airspaceflightlist = "-FLIGHTS-IN-AIRSPACE-\n";
-            airspaceflightlist += "TAG\tPOSX\tPOSY\tALT\tTIME\tVEL\tCOURSE\n";
+            string airspaceflightlist = "TAG\tPOSX\tPOSY\tALT\tTIME\tVEL\tCOURSE\n";
 
             foreach (var flight in flights)
             {
@@ -62,7 +61,7 @@ namespace AirTrafficMonitor
 
         public string GenerateAirspaceGrid(List<IFlightTrackerSingle> flights)
         {
-            string airspacegrid = "-AIRSPACE-GRID-\n";
+            string airspacegrid = "";
 
             var dps = new List<FTDataPoint>();
             flights.ForEach(f => dps.Add(f.GetNewestDataPoint()));
