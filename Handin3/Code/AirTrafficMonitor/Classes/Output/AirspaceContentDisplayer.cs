@@ -53,7 +53,8 @@ namespace AirTrafficMonitor
                                     + dp.Y + "\t"
                                     + dp.Altitude + "\t" 
                                     + dp.TimeStamp.ToShortTimeString() + "\t" 
-                                    + flight.GetCurrentVelocity() + "\n";
+                                    + flight.GetCurrentVelocity() + "\t"
+                                    + flight.GetCurrentCourse() + "\n";
             }
 
             return airspaceflightlist;
