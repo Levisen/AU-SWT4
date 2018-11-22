@@ -28,13 +28,13 @@ namespace AirTrafficMonitor.App
             ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
 
             IMonitor monitor = new Monitor();
-            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace);
+            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace, 40, 20);
             var aispaceEventDisplayer = new AirspaceEventDisplayer(monitor, airspaceEventCtrl);
             var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
 
             while (true)
             {
-                Thread.Sleep(150);
+                Thread.Sleep(250);
             };
         }
     }

@@ -31,12 +31,18 @@ namespace AirTrafficMonitor
 
         private string GenerateFlightEventList(List<SeperationEvent> events)
         {
-            string eventliststring = "-ACTIVE-SEPERATION-EVENTS-\n";
-            foreach (var item in events)
+            string eventliststring = "";
+            if (events.Count == 0)
             {
-                eventliststring += " Seperation " + "\n";
+                eventliststring += "    (no active events)\n";
             }
-
+            else
+            {
+                foreach (var e in events)
+                {
+                    eventliststring += "[" + e.Description + "\n";
+                }
+            }
             return eventliststring;
         }
     }

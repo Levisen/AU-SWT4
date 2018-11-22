@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
+using System.Timers;
 
 namespace AirTrafficMonitor
 {
@@ -15,12 +16,18 @@ namespace AirTrafficMonitor
         public Monitor()
         {
             Sections = new Dictionary<string, string>();
+
+            var timer = new System.Timers.Timer(250);
+            timer.Elapsed += CheckDeactivate;
+            timer.AutoReset = true;
+            timer.Enabled = true;
         }
+        private void CheckDeactivate(object sender, ElapsedEventArgs e) { Draw(); }
 
         public void UpdateDisplaySection(string sectionname, string content)
         {
             Sections[sectionname] = content;
-            Draw(); // Should probably redraw elsewhere
+            //Draw(); // Should probably redraw elsewhere
         }
 
         public void Draw()
