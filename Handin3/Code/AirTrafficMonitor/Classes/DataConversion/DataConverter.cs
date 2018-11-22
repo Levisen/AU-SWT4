@@ -74,11 +74,6 @@ namespace AirTrafficMonitor
             return dp;
         }
 
-        public ITransponderStringConverter GetStringConverter()
-        {
-            return this as ITransponderStringConverter;
-        }
-
         public IFlightTrackDataSource GetFlightTrackDataSource()
         {
             return this as IFlightTrackDataSource;
