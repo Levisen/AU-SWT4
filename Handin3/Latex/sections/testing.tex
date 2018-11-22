@@ -1,9 +1,13 @@
 % !TeX root = ../Handin3.tex
 
-\section{Testing}
+\section{Unit og Integrations Testing}
 For at teste systemet bedst muligt og følge ideen om Contiues Integration,
  bruges der interfaces til at tilgå de underliggende funktioner for de forskellige klasser.
  På den måde har vi kun muligheden for at tilgå de eksisterende interfaces og funktioner der skal testes. 
  
  Da vi ikke har mange underliggende private funktioner, der laver beregniner, ligger de fleste som public funktioner.
  Grunden til det er så der er adgang fra unit test klasserne, samt at de kan tilgås gennem eksisterende interfaces.
+
+ Til vores unit tests, udnyttes NUnit.Framework, der tillade mulighed for at lave tesklasser til et testing framework, der både virker som integration i Visual Studio og på jenkins test serveren.
+ Derudover bruges NSubstitue, der er et framework, som udnyttes til at lave mocks af de interfaces som test klasserne skal skal bruge når de initialiseres gennem test interfacene.
+ På den måde har vi mulighed for at teste de interfaces, 
