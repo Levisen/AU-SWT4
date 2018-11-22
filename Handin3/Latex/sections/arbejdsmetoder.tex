@@ -1,0 +1,25 @@
+
+\section{Arbejdsmetoder}
+
+\subsection{Continuous Integration og Versionstyring}
+
+Vi har i forbindelse med projektet udnyttet Continiuous Integration, 
+der bygger på at udnytte mulighedden for at teste systemet undervejs, 
+mens løsningen til projektet implementeres. 
+I den forbindelse har vi udnyttet Jenkins serveren fra sidst samt inkluderet 
+et NUnit.Testaadaptor framework, til at teste nogle metoder direkte i VS2017. 
+I forbindelse med implementeringen, havde vi udfordringer med projektet 
+og gentagende ændringer for strukturen, inden implementeringen blev færdig. 
+Desværre medførte det også at vi ikke fortsatte med udnytte teorien bag Continues 
+Integration. I forbindelse med test af projektet oplevede vi at data ikke blev 
+behandlet korrekt, men godt kunne kompilere, hvilket er en af årsagerne til 
+at vi fremadrettet bør implementere unit tests undervejs.
+Vi har benyttet git til versionstyring, 
+
+Det testcentriske design har også vist sig at have en fordel når det kom til at arbejde 
+flere på samme projekt, i og med at grænsefladerne er mere veldefinerede. 
+Vi har derfor nemmere ved at definere de Unit test som er nødvendige, 
+for at vi for implementeret de tests som er nødvendige.
+Som ugangspunkt, har vi derfor udnyttet Vores interfaces og events til 
+at oprette vores unit tests ud fra. På den måde vil det fremadrettet være mere 
+gennemskueligt når vi skal test projekter.
