@@ -48,7 +48,10 @@ namespace AirTrafficMonitor
             bool anythingchanged = false;
             foreach (var ev in ActiveEvents.ToList())
             {
-                if (ev.ActivationTime.AddSeconds(5) > DateTime.Now)
+                //DateTime deactivatetime = ev.ActivationTime;
+                //deactivatetime.AddSeconds(5);
+                
+                if ((DateTime.Now - ev.ActivationTime).TotalSeconds > 5)
                 {
                     ActiveEvents.Remove(ev);
                     anythingchanged = true;
