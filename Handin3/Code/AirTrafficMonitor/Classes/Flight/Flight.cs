@@ -12,16 +12,15 @@ namespace AirTrafficMonitor
 {
     public class Flight : IFlightTrackerSingle
     {
-        string Tag;
-        Vector2 CurrentPosition;
-        double CurrentAltitude;
-        
-        double CurrentVelocity;
-        double CurrentCourse;
-        DateTime LastUpdated;
+        string _tag;
+        Vector2 _currentPosition;
+        double _currentAltitude;
+        double _currentVelocity;
+        double _currentCourse;
+        DateTime _lastUpdated;
 
-        //SortedList<DateTime, FTDataPoint> TrackDataLog; //in case of non-chronological input?
         LinkedList<FTDataPoint> TrackDataLog;
+
         public IFlightVelocityCalculator VelocityCalculator;
         public IFlightCourseCalculator CourseCalculator;
 
@@ -29,72 +28,57 @@ namespace AirTrafficMonitor
 
         public Flight(FTDataPoint first)
         {
-            Tag = first.Tag;
-            CurrentPosition = new Vector2(first.X, first.Y);
-            CurrentAltitude = first.Altitude;
-            LastUpdated = first.TimeStamp;
-            //TrackDataLog = new SortedList<DateTime, FTDataPoint>();
+            _tag = first.Tag;
+            _currentPosition = new Vector2(first.X, first.Y);
+            _currentAltitude = first.Altitude;
+            _lastUpdated = first.TimeStamp;
+
             TrackDataLog = new LinkedList<FTDataPoint>();
             VelocityCalculator = new FlightVelocityCalculator();
             CourseCalculator = new FlightCourseCalculator();
         }
         
-        public string GetTag()
-        {
-            return Tag;
-        }
+
         public void AddDataPoint(FTDataPoint new_dp)
         {
-            Tag = new_dp.Tag;
-            CurrentPosition.X = new_dp.X;
-            CurrentPosition.Y = new_dp.Y;
-            CurrentAltitude = new_dp.Altitude;
-            LastUpdated = new_dp.TimeStamp;
+            _tag = new_dp.Tag;
+            _currentPosition.X = new_dp.X;
+            _currentPosition.Y = new_dp.Y;
+            _currentAltitude = new_dp.Altitude;
+            _lastUpdated = new_dp.TimeStamp;
 
-            //TrackDataLog.Add(dp.TimeStamp, dp);
             FTDataPoint previous_dp = TrackDataLog.Count != 0 ? TrackDataLog.First() : null;
             TrackDataLog.AddFirst(new_dp);
 
-            Vector2 previous_position = previous_dp != null ? new Vector2(previous_dp.X, previous_dp.Y) : Vector2.Zero;
+            Vector2 previous_position = (previous_dp != null) ? new Vector2(previous_dp.X, previous_dp.Y) : Vector2.Zero;
             Vector2 current_position = new Vector2(new_dp.X, new_dp.Y);
 
-            CurrentVelocity = VelocityCalculator.CalculateCurrentVelocity(
+            _currentVelocity = VelocityCalculator.CalculateCurrentVelocity(
                 previous_position, 
                 previous_dp?.TimeStamp, 
                 current_position, 
                 new_dp.TimeStamp
              );
-            CurrentCourse = CourseCalculator.CalculateCurrentCourse(previous_position, current_position);
+            _currentCourse = CourseCalculator.CalculateCurrentCourse(previous_position, current_position);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {
-            return TrackDataLog;//.Values;
+            return TrackDataLog;
         }
 
         public FTDataPoint GetNewestDataPoint()
         {
-            FTDataPoint newest = TrackDataLog.First();//.Value;
-            return newest;
+            return (TrackDataLog.Count != 0) ? TrackDataLog.First() : null;
         }
 
-        public double GetCurrentAltitude()
-        {
-            return CurrentAltitude;
-        }
+        public string GetTag() { return _tag; }
 
-        public Vector2 GetCurrentPosition()
-        {
-            return CurrentPosition;
-        }
+        public double GetCurrentAltitude() { return _currentAltitude; }
 
-        public double GetCurrentVelocity()
-        {
-            return CurrentVelocity;
-        }
+        public Vector2 GetCurrentPosition() { return _currentPosition; }
 
-        public double GetCurrentCourse()
-        {
-            return CurrentCourse;
-        }
+        public double GetCurrentVelocity() { return _currentVelocity; }
+
+        public double GetCurrentCourse() { return _currentCourse; }
     }
 }

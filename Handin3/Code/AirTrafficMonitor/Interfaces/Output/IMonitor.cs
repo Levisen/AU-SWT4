@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface IAirspaceAreaFilter
+    public interface IMonitor
     {
-        bool IsInsideAirspace(FTDataPoint datapoint, AirspaceArea area);
+        void UpdateDisplaySection(string sectionname, string content);
+        void Draw();
     }
 }

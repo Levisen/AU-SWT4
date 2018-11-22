@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Events
 {
-    public class SeperationsUpdatedEventArgs : EventArgs
+    public class SeperationEventsUpdatedEventArgs : EventArgs
     {
-        public List<SeperationEventArgs> ActiveSeperations;
+        public List<SeperationEvent> ActiveSeperations;
 
-        public SeperationsUpdatedEventArgs(List<SeperationEventArgs> activeSeperations)
+        public SeperationEventsUpdatedEventArgs(List<SeperationEvent> activeSeperations)
         {
             ActiveSeperations = activeSeperations;
         }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor
+namespace AirTrafficMonitor.Interfaces
 {
-    public interface IAirspaceDisplayer
+    public interface ISeperationEvent : IFlightEvent
     {
-       
+
     }
 }

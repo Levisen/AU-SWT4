@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    interface ISeperationDisplayer
+    interface IFlightEventsDisplayer
     {
-        void RenderActiveSeperations(Airspace airspace);
+        
     }
 }

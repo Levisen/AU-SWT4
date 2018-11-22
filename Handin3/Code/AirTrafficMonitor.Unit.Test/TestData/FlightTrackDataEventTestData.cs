@@ -28,10 +28,8 @@ namespace AirTrafficMonitor.Unit.Test.TestData
                 var data = new Flight(point);
                 trackersingle = NSubstitute.Substitute.For<List<IFlightTrackerSingle>>();
                 trackersingle.Add(data);
-                var CompareReturnData = new MultipleFlightTracksUpdatedEventArgs(trackersingle);
-
-
-
+                var CompareReturnData = new FlightTracksUpdatedEventArgs(trackersingle);
+                
                 //Send testdata
                 yield return new TestCaseData(argsData, CompareReturnData, trackersingle);
             }

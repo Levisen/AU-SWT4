@@ -30,9 +30,8 @@ namespace AirTrafficMonitor
             if (timeBetweenInSeconds < 0)
             {
                 timeBetweenInSeconds = timeBetweenInSeconds * -1; //convert to positive
-                return timeBetweenInSeconds;
             }
-            return timeBetweenInSeconds;
+            return (distance / timeBetweenInSeconds);
         }
     }
 }

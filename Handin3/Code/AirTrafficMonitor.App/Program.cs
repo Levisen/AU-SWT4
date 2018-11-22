@@ -14,18 +14,24 @@ namespace AirTrafficMonitor.App
     {
         static void Main(string[] args)
         {
-            AirspaceArea area = new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000);
-
             ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
 
-            ISeperationManager seperationController = new SeperationController(flightManager);
-            //SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
+            IAirspace airspace = new Airspace(flightManager, new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000));
+            
+            IAirspaceEventDetector airspaceEventDetector = new AirspaceEventDetector(airspace);
+            IAirspaceEventController airspaceEventCtrl = new AirspaceEventController(airspaceEventDetector);
 
-            IAirspace airspace = new Airspace(flightManager, area);
+            ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager);
+            ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
 
-            //Monitor monitor = new Monitor(airspace, seperationController);
+            IMonitor monitor = new Monitor();
+            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace);
+            var aispaceEventDisplayer = new AirspaceEventDisplayer(monitor, airspaceEventCtrl);
+            var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
+
             while (true)
             {
                 Thread.Sleep(150);

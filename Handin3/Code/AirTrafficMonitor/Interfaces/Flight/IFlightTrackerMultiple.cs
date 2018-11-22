@@ -9,11 +9,11 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightTrackerMultiple
     {
-        event EventHandler<MultipleFlightTracksUpdatedEventArgs> FlightTracksUpdated;
+        event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
         IFlightTrackDataSource GetDataSource();
         //FTDataPoint GetNewestDataPoint();
         //FTDataPoint GetNewestDataPoint(string tag);
-        //Stack<FTDataPoint> GetAllFlights();
+        //ICollection<FTDataPoint> GetAllFlights();
         //Stack<FTDataPoint> GetAllFlights(string tag);
     }
 }

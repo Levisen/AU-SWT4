@@ -12,11 +12,11 @@ namespace AirTrafficMonitor
         List<IFlightTrackerSingle> Flights;
         IFlightTrackDataSource DataSource;
 
-        public event EventHandler<MultipleFlightTracksUpdatedEventArgs> FlightTracksUpdated;
+        public event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
         public FlightManager(IFlightTrackDataSource datasource)
         {
             DataSource = datasource;
-            DataSource.FlightTrackDataReady += OnFlightTrackDataReady; 
+            DataSource.FlightTrackDataReady += OnFlightTrackDataReady;
             Flights = new List<IFlightTrackerSingle>();
         }
 
@@ -42,12 +42,17 @@ namespace AirTrafficMonitor
             }
 
             Debug.Log("FlightManager: Invoking FlightTracksUpdated, sending list of " + updatedflights.Count + " updated flights");
-            FlightTracksUpdated?.Invoke(this, new MultipleFlightTracksUpdatedEventArgs(updatedflights));
+            FlightTracksUpdated?.Invoke(this, new FlightTracksUpdatedEventArgs(updatedflights));
         }
 
         public IFlightTrackDataSource GetDataSource()
         {
             return DataSource;
+        }
+
+        public ICollection<FTDataPoint> GetAllFlights()
+        {
+            throw new NotImplementedException();
         }
     }
 }
