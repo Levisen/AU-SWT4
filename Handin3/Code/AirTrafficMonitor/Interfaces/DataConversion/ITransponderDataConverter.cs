@@ -12,7 +12,7 @@ namespace AirTrafficMonitor.Interfaces
     public interface ITransponderDataConverter
     {
         List<FTDataPoint> ConvertTransponderData(RawTransponderDataEventArgs args);
-        ITransponderStringConverter GetStringConverter();
+        FTDataPoint ConvertTransponderString(string rawdata);
         IFlightTrackDataSource GetFlightTrackDataSource();
         ITransponderReceiver GetTransponderReceiver(); //Some comment
     }

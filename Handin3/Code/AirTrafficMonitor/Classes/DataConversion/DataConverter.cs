@@ -22,7 +22,7 @@ namespace AirTrafficMonitor
             transponderReceiver.TransponderDataReady += OnTransponderDataReady;
         }
 
-        public void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
+        private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
         {
             Debug.Log("DataReader: Handling TransponderDataReady Event");
 
@@ -70,11 +70,6 @@ namespace AirTrafficMonitor
             dp.TimeStamp = DateTime.ParseExact(splitdata[4], "yyyyMMddHHmmssfff", CultureInfo.InvariantCulture);
 
             return dp;
-        }
-
-        public ITransponderStringConverter GetStringConverter()
-        {
-            return this as ITransponderStringConverter;
         }
 
         public IFlightTrackDataSource GetFlightTrackDataSource()
