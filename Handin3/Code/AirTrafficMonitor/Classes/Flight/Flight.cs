@@ -24,7 +24,7 @@ namespace AirTrafficMonitor
         public IFlightVelocityCalculator VelocityCalculator;
         public IFlightCourseCalculator CourseCalculator;
 
-        public event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
+        //public event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
 
         public Flight(FTDataPoint first)
         {

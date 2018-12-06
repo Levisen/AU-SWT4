@@ -33,11 +33,11 @@ namespace AirTrafficMonitor
             NorthEastCorner = new Vector2(northEastCornerX, northEastCornerY);
         }
         
-        public bool IsInside(FTDataPoint dp)
+        public bool IsInside(int x, int y, int alt)
         {
-            if (dp.Altitude > AltitudeBoundaryLower && dp.Altitude < AltitudeBoundaryUpper
-                && dp.X > SouthWestCornerX && dp.X < NorthEastCornerX
-                && dp.Y > SouthWestCornerY && dp.Y < NorthEastCornerY)
+            if (alt > AltitudeBoundaryLower && alt < AltitudeBoundaryUpper
+                && x > SouthWestCornerX && x < NorthEastCornerX
+                && y > SouthWestCornerY && y < NorthEastCornerY)
             {
                 return true;
             }

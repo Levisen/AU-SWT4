@@ -29,9 +29,9 @@ namespace AirTrafficMonitor.Unit.Test.Class
         {
             var vector1 = new Vector2(Vector1x, Vector1y);
             var vector2 = new Vector2(Vector2x, Vector2y);
-            return _uut.CalculateCurrentCourse(vector1, vector2);
+            
+            return Math.Round(_uut.CalculateCurrentCourse(vector1, vector2), 3);
         }
-
     }
 
 

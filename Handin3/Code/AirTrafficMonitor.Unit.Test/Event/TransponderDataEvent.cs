@@ -64,7 +64,6 @@ namespace AirTrafficMonitor.Unit.Test.Event
             // Assert
             Assert.That(_eventCounter, Is.EqualTo(1));
             Assert.That(testTag, Is.EqualTo(_testFlightTrackData.FTDataPoints.First().Tag));
-
         }
         [TestCase("ATR423;39045;12932;14000;20151006213456789", "ATR423")]
         public void OnTransponderDataReady_TransponderdataToTrackDataSource_TwoEventTwoEntry(string rawdata, string testTag)

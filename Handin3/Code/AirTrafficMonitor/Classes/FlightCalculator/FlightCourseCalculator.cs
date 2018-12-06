@@ -13,11 +13,11 @@ namespace AirTrafficMonitor
 {
     public class FlightCourseCalculator : IFlightCourseCalculator
     {
-        public double CalculateCurrentCourse(Vector2 previous, Vector2 current)
+        public float CalculateCurrentCourse(Vector2 previous, Vector2 current)
         {
 
-            double deltaX = current.X - previous.X;
-            double deltaY = current.Y - previous.Y;
+            float deltaX = current.X - previous.X;
+            float deltaY = current.Y - previous.Y;
             double courseDegree = 0;
 
             if (deltaX == 0)
@@ -32,7 +32,7 @@ namespace AirTrafficMonitor
                 courseDegree = 90 - courseDegree;
                 if (courseDegree < 0) courseDegree += 360;
             }
-            return courseDegree;
+            return (float)courseDegree;
         }
     }
 }

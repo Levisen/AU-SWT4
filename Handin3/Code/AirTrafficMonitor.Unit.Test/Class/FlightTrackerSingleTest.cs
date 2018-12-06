@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Unit.Test.Class
 {
-    class IFlightTrackerSingleTest
+    class FlightTrackerSingleTest
     {
+
     }
 }

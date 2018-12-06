@@ -7,7 +7,7 @@ using AirTrafficMonitor.Interfaces;
 
 namespace AirTrafficMonitor.Events
 {
-    public class FlightTracksUpdatedEventArgs
+    public class FlightTracksUpdatedEventArgs : EventArgs
     {
         public List<IFlightTrackerSingle> UpdatedFlights { get; set; }
         public FlightTracksUpdatedEventArgs(List<IFlightTrackerSingle> flights)
