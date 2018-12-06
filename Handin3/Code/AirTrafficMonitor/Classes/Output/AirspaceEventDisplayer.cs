@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class AirspaceEventDisplayer
+    public class EnterExitEventDisplayer
     {
-        private IAirspaceEventController _airspaceeventcontroller;
+        private IEnterExitEventController _EnterExitEventcontroller;
         private IMonitor _monitor;
 
-        public AirspaceEventDisplayer(IMonitor monitor, IAirspaceEventController airspaceeventcontroller)
+        public EnterExitEventDisplayer(IMonitor monitor, IEnterExitEventController EnterExitEventcontroller)
         {
-            _airspaceeventcontroller = airspaceeventcontroller;
+            _EnterExitEventcontroller = EnterExitEventcontroller;
             _monitor = monitor;
 
-            _airspaceeventcontroller.AirspaceEventsUpdated += OnAirspaceEventsUpdated;
+            _EnterExitEventcontroller.EnterExitEventsUpdated += OnEnterExitEventsUpdated;
         }
 
-        private void OnAirspaceEventsUpdated(object sender, AirspaceEventsUpdatedEventArgs e)
+        private void OnEnterExitEventsUpdated(object sender, EnterExitEventsUpdatedEventArgs e)
         {
-            List<AirspaceEvent> events = e.ActiveEvents;
+            List<EnterExitEvent> events = e.ActiveEvents;
             string flighteventstring = GenerateFlightEventList(events);
-            _monitor.UpdateDisplaySection("AirspaceEventList", flighteventstring);
+            _monitor.UpdateDisplaySection("EnterExitEventList", flighteventstring);
         }
 
-        private string GenerateFlightEventList(List<AirspaceEvent> events)
+        private string GenerateFlightEventList(List<EnterExitEvent> events)
         {
             string eventliststring = "";
             if (events.Count == 0)

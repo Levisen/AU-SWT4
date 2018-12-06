@@ -12,13 +12,14 @@ namespace AirTrafficMonitor
 {
     public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource
     {
-        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
-        ITransponderReceiver transponderReceiver;
+        ITransponderReceiver _transponderReceiver;
         
+        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
+
         public DataConverter(ITransponderReceiver tr)
         {
-            transponderReceiver = tr;
-            transponderReceiver.TransponderDataReady += OnTransponderDataReady;
+            _transponderReceiver = tr;
+            _transponderReceiver.TransponderDataReady += OnTransponderDataReady;
         }
 
         private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
@@ -73,13 +74,9 @@ namespace AirTrafficMonitor
             return dp;
         }
 
-        public IFlightTrackDataSource GetFlightTrackDataSource()
-        {
-            return this as IFlightTrackDataSource;
-        }
         public ITransponderReceiver GetTransponderReceiver()
         {
-            return this as ITransponderReceiver;
+            return _transponderReceiver;
         }
     }
 }

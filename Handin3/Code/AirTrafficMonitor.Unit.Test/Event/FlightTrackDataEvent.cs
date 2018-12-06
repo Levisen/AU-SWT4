@@ -16,13 +16,13 @@ namespace AirTrafficMonitor.Unit.Test.Event
     class FlightTrackDataEvent
     {
         int _eventCounter = 0;
-        private IFlightTrackerMultiple _uut;
+        private IFlightTrackManager _uut;
         private IFlightTrackDataSource _testFlightTrackDataSource;
         [SetUp]
         public void SetUp()
         {
             _testFlightTrackDataSource = Substitute.For<IFlightTrackDataSource>();
-            _uut = new FlightManager(_testFlightTrackDataSource);
+            _uut = new SensorAreaManager(_testFlightTrackDataSource);
         }
         [Test]
         public void OnFlightTrackDataReady_FlightTrackDataToFlightTrackMultiple_NoneEvent()
@@ -41,12 +41,12 @@ namespace AirTrafficMonitor.Unit.Test.Event
             Assert.That(_eventCounter, Is.EqualTo(0));
         }
         [Test, TestCaseSource(typeof(FlightTrackDataEventTestData), "OnTransponderDataReadyCases")]
-        public void OnFlightTrackDataReady_FlightTrackDataSourceToFlightTrackMultiple_OneEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrackerSingle> tracker)
+        public void OnFlightTrackDataReady_FlightTrackDataSourceToFlightTrackMultiple_OneEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrack> tracker)
         {
             _eventCounter = 0;
             // Arrange
             var _testFlightTrackDataArgs = new FlightTrackDataEventArgs(argsData);
-            var _testDataAfterEvent = new FlightTracksUpdatedEventArgs(new List<IFlightTrackerSingle>());
+            var _testDataAfterEvent = new FlightTracksUpdatedEventArgs(new List<IFlightTrack>());
 
             // Expression to set test data when event is occuring for testing data aswell as counting events.
             _uut.FlightTracksUpdated += (o, args) =>
@@ -63,12 +63,12 @@ namespace AirTrafficMonitor.Unit.Test.Event
         }
 
         [Test, TestCaseSource(typeof(FlightTrackDataEventTestData), "OnTransponderDataReadyCases")]
-        public void OnFlightTrackDataReady_FlightTrackDataSourceToFlightTrackMultiple_FiveEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrackerSingle> tracker)
+        public void OnFlightTrackDataReady_FlightTrackDataSourceToFlightTrackMultiple_FiveEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrack> tracker)
         {
             _eventCounter = 0;
             // Arrange
             var _testFlightTrackDataArgs = new FlightTrackDataEventArgs(argsData);
-            var _testDataAfterEvent = new FlightTracksUpdatedEventArgs(new List<IFlightTrackerSingle>());
+            var _testDataAfterEvent = new FlightTracksUpdatedEventArgs(new List<IFlightTrack>());
 
             // Expression to set test data when event is occuring for testing data aswell as counting events.
             _uut.FlightTracksUpdated += (o, args) =>

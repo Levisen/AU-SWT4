@@ -8,55 +8,60 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor
 {
-    public class Airspace : IAirspace
+    public class Airspace : IAirspace, IFlightTrackManager
     {
-        IAirspaceArea AirspaceArea;
-        IFlightTrackerMultiple FlightTracker;
+        private IAirspaceArea _airspaceArea;
+        private IFlightTrackManager _dataSource;
+        private List<IFlightTrack> _content;
 
-        List<IFlightTrackerSingle> Content;
         public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
+        public event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
 
-        public Airspace(IFlightTrackerMultiple flightTracker, IAirspaceArea airspaceArea)
+        public Airspace(IFlightTrackManager datasource, IAirspaceArea airspaceArea)
         {
-            AirspaceArea = airspaceArea;
-            Content = new List<IFlightTrackerSingle>();
-            FlightTracker = flightTracker;
-            FlightTracker.FlightTracksUpdated += OnFlightTracksUpdated;
+            _airspaceArea = airspaceArea;
+            _content = new List<IFlightTrack>();
+            _dataSource = datasource;
+            _dataSource.FlightTracksUpdated += OnFlightTracksUpdated;
         }
 
         private void OnFlightTracksUpdated(object o, FlightTracksUpdatedEventArgs args)
         {
-            List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
+            List<IFlightTrack> allUpdatedFlights = args.UpdatedFlights;
 
-            Content.Clear();
+            _content.Clear();
 
             foreach (var f in allUpdatedFlights)
             {
                 var pos = f.GetCurrentPosition();
-                if (AirspaceArea.IsInside((int)pos.X, (int)pos.Y, (int)f.GetCurrentAltitude()))
+                if (_airspaceArea.IsInside((int)pos.X, (int)pos.Y, (int)f.GetCurrentAltitude()))
                 {
-                    Content.Add(f);
+                    _content.Add(f);
                 }
             }
 
-            AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(Content));
+            FlightTracksUpdated?.Invoke(this, new FlightTracksUpdatedEventArgs(_content));
+            AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(_content));
         }
 
-        public List<IFlightTrackerSingle> GetAirspaceContent()
+        public List<IFlightTrack> GetAirspaceContent()
         {
-            return Content;
+            return _content;
         }
 
-        public IFlightTrackerMultiple GetFlightTracker()
+        public IFlightTrackManager GetDataSource()
         {
-            return FlightTracker;
+            return _dataSource;
         }
-
-
 
         public IAirspaceArea GetAirspaceArea()
         {
-            return AirspaceArea;
+            return _airspaceArea;
+        }
+
+        public List<IFlightTrack> GetFlights()
+        {
+            return _content;
         }
     }
 }

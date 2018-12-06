@@ -9,10 +9,10 @@ namespace AirTrafficMonitor
 {
     public class SeperationEvent : FlightEvent
     {
-        public IFlightTrackerSingle Flight_A { get; set; }
-        public IFlightTrackerSingle Flight_B { get; set; }
+        public IFlightTrack Flight_A { get; set; }
+        public IFlightTrack Flight_B { get; set; }
 
-        public SeperationEvent(IFlightTrackerSingle flight_A, IFlightTrackerSingle flight_B) 
+        public SeperationEvent(IFlightTrack flight_A, IFlightTrack flight_B) 
             : base ("Seperation", flight_A.GetTag() + " and " + flight_B.GetTag())
         {
             Flight_A = flight_A;

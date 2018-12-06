@@ -16,7 +16,7 @@ namespace AirTrafficMonitor
 
         public bool IsActive { get; set; }
 
-        public List<IFlightTrackerSingle> InvolvedFlights { get; set; }
+        public List<IFlightTrack> InvolvedFlights { get; set; }
 
         public DateTime ActivationTime { get; set; }
 

@@ -10,6 +10,6 @@ namespace AirTrafficMonitor.Interfaces
     public interface ISeperationEventDetector
     {
         event EventHandler<SeperationDetectedEventArgs> SeperationEventDetected;
-        bool TracksConflicting(IFlightTrackerSingle f1, IFlightTrackerSingle f2);
+        bool TracksConflicting(IFlightTrack f1, IFlightTrack f2);
     }
 }

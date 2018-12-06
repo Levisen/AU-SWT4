@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class AirspaceEventDetectedArgs
+    public class EnterExitEventDetectedArgs
     {
-        public AirspaceEvent Event { get; }
-        public AirspaceEventDetectedArgs(AirspaceEvent e)
+        public EnterExitEvent Event { get; }
+        public EnterExitEventDetectedArgs(EnterExitEvent e)
         {
             Event = e;
         }

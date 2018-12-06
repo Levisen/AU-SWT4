@@ -5,6 +5,12 @@ namespace AirTrafficMonitor
     public class FTDataPoint
     {
         public FTDataPoint() { }
+        public string Tag { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Altitude { get; set; }
+        public DateTime TimeStamp { get; set; }
+
         public FTDataPoint(string t,int x, int y, int a, DateTime ti)
         {
             Tag = t;
@@ -13,11 +19,6 @@ namespace AirTrafficMonitor
             Altitude = a;
             TimeStamp = ti;
         }
-        public string Tag { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Altitude { get; set; }
-        public DateTime TimeStamp { get; set; }
 
         public int CompareTo(FTDataPoint other)
         {

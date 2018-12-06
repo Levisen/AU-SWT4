@@ -48,13 +48,13 @@ namespace AirTrafficMonitor
 
         private void OnFlightTracksUpdated(object o, FlightTracksUpdatedEventArgs args)
         {
-            //List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
+            //List<IFlightTrack> allUpdatedFlights = args.UpdatedFlights;
             //for (int i = 0; i < allUpdatedFlights.Count; i++)
             //{
             //    for (int j = i + 1; j < allUpdatedFlights.Count; j++)
             //    {
-            //        IFlightTrackerSingle f1 = allUpdatedFlights[i];
-            //        IFlightTrackerSingle f2 = allUpdatedFlights[j];
+            //        IFlightTrack f1 = allUpdatedFlights[i];
+            //        IFlightTrack f2 = allUpdatedFlights[j];
             //        if (TracksConflicting(f1, f2))
             //        {
             //            SeperationEvent detectedSeperation
@@ -86,8 +86,8 @@ namespace AirTrafficMonitor
             //        {
             //            for (int j = i + 1; j < allUpdatedFlights.Count; j++)
             //            {
-            //                IFlightTrackerSingle f1 = allUpdatedFlights[i];
-            //                IFlightTrackerSingle f2 = allUpdatedFlights[j];
+            //                IFlightTrack f1 = allUpdatedFlights[i];
+            //                IFlightTrack f2 = allUpdatedFlights[j];
             //                if (sepEvent.HasSameTagsAs(f1, f2))
             //                {
             //                    if (CheckForSeperationEvent(f1, f2) == null)

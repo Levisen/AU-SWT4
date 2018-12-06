@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class AirspaceEvent : FlightEvent
+    public class EnterExitEvent : FlightEvent
     {
-        public IFlightTrackerSingle Flight { get; set; }
+        public IFlightTrack Flight { get; set; }
         public bool Entered { get; set; }
-        public AirspaceEvent(IFlightTrackerSingle flight, bool entered) 
+        public EnterExitEvent(IFlightTrack flight, bool entered) 
             : base("Airspace", "Flight " + flight.GetTag() + " has " + ((entered) ? "entered" : "left") + " airspace at " + flight.GetNewestDataPoint().TimeStamp.ToLongTimeString())
         {
             Flight = flight;
