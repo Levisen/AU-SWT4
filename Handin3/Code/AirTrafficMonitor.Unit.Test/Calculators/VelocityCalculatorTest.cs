@@ -24,6 +24,9 @@ namespace AirTrafficMonitor.Test.Unit.Calculators
         [Test]
         [TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases_1s_0ms")]
         [TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases_0s_999ms")]
+        [TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases_1s_001ms")]
+        [TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases_1s_378ms")]
+        [TestCaseSource(typeof(FlightCalculatorsTestCaseData), "VelocityTestCases_0s_579ms")]
         public double CalculateCurrentVelocity_TestCases(int Vector1x, int Vector1y, int Vector2x, int Vector2y, int seconds, int milliseconds)
         {
             var vector1 = new Vector2(Vector1x, Vector1y);

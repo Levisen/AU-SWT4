@@ -89,5 +89,86 @@ namespace AirTrafficMonitor.Test.Unit.Calculators.TestData
                 yield return new TestCaseData(2000, 2000, 1902, 2142, 0, 999).Returns(172.707).SetName("Northwest 2, 0s 999ms");
             }
         }
+
+        public static IEnumerable VelocityTestCases_1s_001ms
+        {
+            get
+            {
+                yield return new TestCaseData(2000, 2000, 1999, 2111, 1, 001).Returns(110.894).SetName("North 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2000, 2111, 1, 001).Returns(110.889).SetName("North 2 (straight), 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2001, 2111, 1, 001).Returns(110.894).SetName("North 3, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2050, 1, 001).Returns(70.640).SetName("Northeast 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2111, 1, 001).Returns(121.620).SetName("Northeast 2, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2101, 2001, 1, 001).Returns(100.904).SetName("East 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2111, 2000, 1, 001).Returns(110.889).SetName("East 2 (straight), 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2101, 1999, 1, 001).Returns(100.904).SetName("East 3, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2050, 1950, 1, 001).Returns(70.640).SetName("Southeast 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2051, 1990, 1, 001).Returns(51.919).SetName("Southeast 2, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2002, 1899, 1, 001).Returns(100.919).SetName("South 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 2000, 1877, 1, 001).Returns(122.877).SetName("South 2 (straight), 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1997, 1899, 1, 001).Returns(100.944).SetName("South 3, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1951, 1951, 1, 001).Returns(69.227).SetName("Southwest 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1879, 1961, 1, 001).Returns(127.003).SetName("Southwest 2, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1824, 1993, 1, 001).Returns(175.963).SetName("West 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1844, 2000, 1, 001).Returns(155.844).SetName("West 2 (straight), 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1924, 2004, 1, 001).Returns(76.029).SetName("West 3, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1925, 2075, 1, 001).Returns(105.960).SetName("Northwest 1, 1s 001ms");
+                yield return new TestCaseData(2000, 2000, 1902, 2142, 1, 001).Returns(172.362).SetName("Northwest 2, 1s 001ms");
+            }
+        }
+
+        public static IEnumerable VelocityTestCases_1s_378ms
+        {
+            get
+            {
+                yield return new TestCaseData(2000, 2000, 1999, 2111, 1, 378).Returns(80.555).SetName("North 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2000, 2111, 1, 378).Returns(80.552).SetName("North 2 (straight), 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2001, 2111, 1, 378).Returns(80.555).SetName("North 3, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2050, 1, 378).Returns(51.314).SetName("Northeast 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2111, 1, 378).Returns(88.347).SetName("Northeast 2, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2101, 2001, 1, 378).Returns(73.298).SetName("East 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2111, 2000, 1, 378).Returns(80.552).SetName("East 2 (straight), 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2101, 1999, 1, 378).Returns(73.298).SetName("East 3, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2050, 1950, 1, 378).Returns(51.314).SetName("Southeast 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2051, 1990, 1, 378).Returns(37.715).SetName("Southeast 2, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2002, 1899, 1, 378).Returns(73.309).SetName("South 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 2000, 1877, 1, 378).Returns(89.260).SetName("South 2 (straight), 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1997, 1899, 1, 378).Returns(73.327).SetName("South 3, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1951, 1951, 1, 378).Returns(50.288).SetName("Southwest 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1879, 1961, 1, 378).Returns(92.257).SetName("Southwest 2, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1824, 1993, 1, 378).Returns(127.822).SetName("West 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1844, 2000, 1, 378).Returns(113.208).SetName("West 2 (straight), 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1924, 2004, 1, 378).Returns(55.229).SetName("West 3, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1925, 2075, 1, 378).Returns(76.971).SetName("Northwest 1, 1s 378ms");
+                yield return new TestCaseData(2000, 2000, 1902, 2142, 1, 378).Returns(125.206).SetName("Northwest 2, 1s 378ms");
+            }
+        }
+
+        public static IEnumerable VelocityTestCases_0s_579ms
+        {
+            get
+            {
+                yield return new TestCaseData(2000, 2000, 1999, 2111, 0, 579).Returns(191.718).SetName("North 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2000, 2111, 0, 579).Returns(191.710).SetName("North 2 (straight), 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2001, 2111, 0, 579).Returns(191.718).SetName("North 3, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2050, 0, 579).Returns(122.126).SetName("Northeast 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2050, 2111, 0, 579).Returns(210.262).SetName("Northeast 2, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2101, 2001, 0, 579).Returns(174.447).SetName("East 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2111, 2000, 0, 579).Returns(191.710).SetName("East 2 (straight), 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2101, 1999, 0, 579).Returns(174.447).SetName("East 3, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2050, 1950, 0, 579).Returns(122.126).SetName("Southeast 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2051, 1990, 0, 579).Returns(89.760).SetName("Southeast 2, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2002, 1899, 0, 579).Returns(174.473).SetName("South 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 2000, 1877, 0, 579).Returns(212.435).SetName("South 2 (straight), 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1997, 1899, 0, 579).Returns(174.516).SetName("South 3, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1951, 1951, 0, 579).Returns(119.683).SetName("Southwest 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1879, 1961, 0, 579).Returns(219.568).SetName("Southwest 2, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1824, 1993, 0, 579).Returns(304.213).SetName("West 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1844, 2000, 0, 579).Returns(269.430).SetName("West 2 (straight), 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1924, 2004, 0, 579).Returns(131.442).SetName("West 3, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1925, 2075, 0, 579).Returns(183.188).SetName("Northwest 1, 0s 579ms");
+                yield return new TestCaseData(2000, 2000, 1902, 2142, 0, 579).Returns(297.986).SetName("Northwest 2, 0s 579ms");
+            }
+        }
     }
 }
