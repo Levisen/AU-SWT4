@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Test.Integration
 {
-    public class IntergationTest_1
+    public class IntergationTest_1 //Webhook test
     {
     }
 }
