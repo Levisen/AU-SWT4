@@ -11,7 +11,7 @@ namespace AirTrafficMonitor
             X = x;
             Y = y;
             Altitude = a;
-            ti = TimeStamp;
+            TimeStamp = ti;
         }
         public string Tag { get; set; }
         public int X { get; set; }
