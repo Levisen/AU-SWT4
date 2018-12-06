@@ -10,12 +10,17 @@ namespace AirTrafficMonitor.Test.Unit.DataConversion
 {
     class DataConverterTest
     {
+        //Unit under test
         private ITransponderDataConverter _uut;
+
+        //Dependencies
+        private ITransponderReceiver _transponderReceiver;
 
         [SetUp]
         public void SetUp()
         {
-            _uut = new DataConverter(Substitute.For<ITransponderReceiver>());
+            _transponderReceiver = Substitute.For<ITransponderReceiver>();
+            _uut = new DataConverter(_transponderReceiver);
         }
 
         [TestCase("ATR423", "ATR423;39045;12932;14000;20151006213456789")]
@@ -30,8 +35,7 @@ namespace AirTrafficMonitor.Test.Unit.DataConversion
             // - Setup Stringlist as raw transponder argument
             var _listStringTest = new List<string>();
             _listStringTest.Add(raw);
-
-
+            
             // Act
             _testArgs = _uut.ConvertTransponderData(new RawTransponderDataEventArgs(_listStringTest));
             // Assert
@@ -42,7 +46,7 @@ namespace AirTrafficMonitor.Test.Unit.DataConversion
             "ATR423", 39045, 12932, 14000, 2015, 10, 06, 21, 34, 56, 789)]
         [TestCase("KUN123;18756;26584;12323;20181022070621359", 
             "KUN123", 18756, 26584, 12323, 2018, 10, 22, 07, 06, 21, 359)]
-        public void ConvertTransponderString_StringInput_FTDataPointOut(string raw, 
+        public void ConvertTransponderString_ValidStringInputs_CorrectFTDataPointPropertiesOut(string raw, 
             string tag, int xC, int yC, int a, int y, int mO, int d, int ho, int min, int sec, int mSec)
         {
             // Arrange
