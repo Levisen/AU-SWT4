@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AirspaceAreaTest.cs" />
+    <Compile Include="FlightEvent\SeperationEventDetectorTest.cs" />
     <Compile Include="FlightManagement\AirspaceManagerTest.cs" />
     <Compile Include="FlightEvent\EnterExitEventDetectionTest.cs" />
     <Compile Include="FlightTrack\FlightTrackTest.cs" />
