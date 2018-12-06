@@ -1,0 +1,9 @@
+% !TeX root = ../Handin3.tex
+\section{Systemarkitektur}
+
+
+\subsection{Tilgang til Testbart Design}
+
+Systemdesignet gør meget brug af interfaces til at indkapsle de delelige aspekter af systemets funktioneliteter. 
+Udover at seperere funktionaliteterne og løsne koblingen mellem softwarekomponenter, er mange af systemets interfaces designet specifikt for at kunne teste en vis funktionalitet uafhængigt af hvordan denne funktionalitet forventes implementeret.
+Vi er endt med en meget modular tilgang til systemets komponenter, som har gjort det muligt at isolere mindre dele af systemet med så få dependecies som muligt, hvilket gør det særligt egnet til unittest.

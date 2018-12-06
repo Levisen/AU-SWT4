@@ -1,0 +1,66 @@
+% !TeX root = ../../Handin3.tex
+
+\newpage
+
+\subsection{Interfaces}
+For at løsne koblingen mellem systemets komponenter, har vi gjort meget brug af interfaces. 
+De forskellige interfaces er designet med henblik på at indkapsle delelementer af systemets krav, uafhængigt af hvilke klasser der ender med at implementerer dem.
+Unit-tests til disse interfaces vil i derfor høj grad kunne indikere hvor mange af systemets krav der er opfyldt. Vores overordnede strategi ift design af systemet har været, at tage udgangspunkt i testbare interfaces, og bygge restene af systemet op omkring det.
+
+\insertfigure{interfaces.png}{0.9}{} {Diagram over Infaces i systemet}
+
+\subsubsection{Konvertering af Rådata fra Transponder}
+
+\subsubsubsection{ITransponderDataConverter}
+Dette interface repræsenterer hele datakonverteringsprocessen, fra rådata til en liste af strukturede informationer om flysignalerne.
+Implementeringen af dette interface bør:
+
+- Reagere på signaler fra transponderdriveren
+
+- Konvertere signalerne til et format resten af applikationen forstår (List<FTDataPoint>)
+
+- Videregive de korrekt konverterede oplysninger til den/de softwareklasser der skal bruge den (Gennem en eventhandler)
+
+Den klasse der implementerer
+\subsubsubsection{ITransponderStringConverter}
+Implementeringen af dette interface bør kunne konvertere en streng af rådata til en liste af FTDataPoint korrekt
+\subsubsubsection{IFlightDataSource}
+Implementeringen af dette interface bør regelmæssigt afsende information fra flysignaler som en liste af FTDataPoints gennem sit event. Skal kunne bruges af klasser der kræver en kilde til strukturerede datapunkter af flysignaler
+\subsubsection{Sporing af Fly}
+
+% \insertfigure{FlightInterfaces.png}{0.75}{}
+% {Interfaces til sporing af fly}
+
+\subsubsubsection{IFlightTrackerSingle}
+Implementeringen af dette interface bør kunne:
+
+- Modtage datapunkter fra en IFlightDataSource, og opdatere flyets attributer ud fra disse
+
+- Give adgang til den nuværende tilstand af et fly's relevante attributter
+
+- Have en log af flyets historik, som kan bruges til f.eks at udregne flyets fart og kurs
+\subsubsubsection{IFlightVelocityCalculator og IFlightCourseCalculator}
+Disse interfaces er afhængige af at have adgang til et de de FTDataPoints systemet har om flyet gennem en IFlightTrackerSingle, og bruger dens historik til at udlede brugbare værdier.
+Implementeringen af disse interfaces bør:
+
+- Kunne udregne hastigheden af et fly ud fra en samling tidligere datapunkter
+
+- Kunne udregne kursen af et fly ud fra en samling tidligere datapunkter
+\subsubsubsection{IFlightTrackerMultiple}
+Implementeringen af dette interface bør:
+
+- Vedligholde en samling af IFlightTrackerSingle, og opdatere denne på baggrund af information fra en IFlightDataSource.
+
+- Give besked når et eller flere af flyene er blevet opdateret
+\newpage
+\subsubsection{Luftrum}
+
+% \insertfigure{AirspaceInterfaces.png}{0.5}{}
+% {Interfaces til luftrum}
+\subsubsubsection{IAirspace}
+Repræsenterer et luftrum, og vedligholder en samling af fly der befinder sig heri
+\subsubsubsection{IAirspaceFilter}
+Klassen der implementerer dette interface skal være i stand til at vurdere om et givent fly er inden for et luftrumsareal
+\subsubsection{Håndtering af seperation}
+% \insertfigure{SeperationInterfaces.png}{0.5}{}
+% {Interfaces til identificering og håndtering af seperation}

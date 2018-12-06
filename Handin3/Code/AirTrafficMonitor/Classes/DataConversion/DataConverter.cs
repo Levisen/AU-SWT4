@@ -10,15 +10,16 @@ using TransponderReceiver;
 
 namespace AirTrafficMonitor
 {
-    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource, ITransponderStringConverter
+    public class DataConverter: ITransponderDataConverter, IFlightTrackDataSource
     {
-        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
-        ITransponderReceiver transponderReceiver;
+        ITransponderReceiver _transponderReceiver;
         
+        public event EventHandler<FlightTrackDataEventArgs> FlightTrackDataReady;
+
         public DataConverter(ITransponderReceiver tr)
         {
-            transponderReceiver = tr;
-            transponderReceiver.TransponderDataReady += OnTransponderDataReady;
+            _transponderReceiver = tr;
+            _transponderReceiver.TransponderDataReady += OnTransponderDataReady;
         }
 
         private void OnTransponderDataReady(object o, RawTransponderDataEventArgs args)
@@ -60,7 +61,6 @@ namespace AirTrafficMonitor
 
         public FTDataPoint ConvertTransponderString(string rawdata)
         {
-            Console.WriteLine("RAWDATA: " + rawdata);
             //Todo: tilføj data validation (antal semikoloner, længde på elementer, allowed characters etc)
             var dp = new FTDataPoint();
             string[] splitdata = rawdata.Split(';');
@@ -74,18 +74,9 @@ namespace AirTrafficMonitor
             return dp;
         }
 
-        public ITransponderStringConverter GetStringConverter()
-        {
-            return this as ITransponderStringConverter;
-        }
-
-        public IFlightTrackDataSource GetFlightTrackDataSource()
-        {
-            return this as IFlightTrackDataSource;
-        }
         public ITransponderReceiver GetTransponderReceiver()
         {
-            return this as ITransponderReceiver;
+            return _transponderReceiver;
         }
     }
 }

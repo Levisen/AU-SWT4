@@ -1,0 +1,20 @@
+% !TeX root = ../../Handin3.tex
+\subsection{Krav}
+Denne opgave omhandler design og test af en applikation, der overvåger fly i et luftrum, baseret på information fra en transponder-receiver. 
+Systemet skal kunne gengive alle flyruter der findes i et luftrum og flyene skal opdateres hvergang ny transponderdata bliver modtaget. Hvert spor skal vises på display med følgende data: 
+
+- Tag
+
+- Nuværende position
+
+- Nuværende højde
+
+- Nuværende horisontal
+
+- Nuværende kompas kursus
+
+Derudover skal der applikationen implementere en måde at identificere et "Seperation Event", som opstår når den vertikale afstanden mellem flyvemaskiner bliver mindre ende 300 meter mens den horisontale er under 5.000 meter. 
+Hvis det er tilfældet skal applikationen informere om hvilke fly der er involveret, samt hvornår rutekonflikten fandt sted.
+
+Som noget nyt skal der genereres envents, når fly kommer ind i det pågældende overvågede område, samt når de flyver ud af området igen.
+

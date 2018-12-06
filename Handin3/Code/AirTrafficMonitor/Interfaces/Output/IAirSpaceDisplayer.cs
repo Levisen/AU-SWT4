@@ -8,6 +8,6 @@ namespace AirTrafficMonitor
 {
     public interface IAirspaceDisplayer
     {
-        void RenderAirspaceContent(Airspace airspace);
+       
     }
 }

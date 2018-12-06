@@ -8,79 +8,60 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor
 {
-    public class Airspace : IAirspace, IAirspaceAreaFilter
+    public class Airspace : IAirspace, IFlightTrackManager
     {
-        AirspaceArea AirspaceArea;
-        List<IFlightTrackerSingle> Content;
-        IFlightTrackerMultiple FlightTracker;
-        public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
+        private IAirspaceArea _airspaceArea;
+        private IFlightTrackManager _dataSource;
+        private List<IFlightTrack> _content;
 
-        public Airspace(IFlightTrackerMultiple flightTracker, AirspaceArea airspaceArea)
+        public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
+        public event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
+
+        public Airspace(IFlightTrackManager datasource, IAirspaceArea airspaceArea)
         {
-            AirspaceArea = airspaceArea;
-            Content = new List<IFlightTrackerSingle>();
-            FlightTracker = flightTracker;
-            FlightTracker.FlightTracksUpdated += OnFlightTracksUpdated;
+            _airspaceArea = airspaceArea;
+            _content = new List<IFlightTrack>();
+            _dataSource = datasource;
+            _dataSource.FlightTracksUpdated += OnFlightTracksUpdated;
         }
 
-        private void OnFlightTracksUpdated(object o, MultipleFlightTracksUpdatedEventArgs args)
+        private void OnFlightTracksUpdated(object o, FlightTracksUpdatedEventArgs args)
         {
-            List<IFlightTrackerSingle> allUpdatedFlights = args.UpdatedFlights;
+            List<IFlightTrack> allUpdatedFlights = args.UpdatedFlights;
 
-            Content.Clear();
+            _content.Clear();
 
             foreach (var f in allUpdatedFlights)
             {
-                if (IsInsideAirspace(f.GetNewestDataPoint(), AirspaceArea))
+                var pos = f.GetCurrentPosition();
+                if (_airspaceArea.IsInside((int)pos.X, (int)pos.Y, (int)f.GetCurrentAltitude()))
                 {
-                    Content.Add(f);
+                    _content.Add(f);
                 }
             }
 
-            if (Content.Count == 0)//Should be in monitor
-            {
-
-            }
-            else
-            {
-                Console.WriteLine("-------------------Airspace Currently Contains:------------------ ");
-                foreach (var f in Content)
-                {
-                    FTDataPoint dp = f.GetNewestDataPoint();
-                    Console.WriteLine("Flight - Tag: " + dp.Tag + " Pos: " + dp.X + "," + dp.Y + Environment.NewLine + "         Altitude: " + dp.Altitude + " Velocity: " + f.GetCurrentVelocity() + " Course: " + f.GetCurrentCourse());
-                }
-            }
-            
-
-            AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(Content));
-
-
+            FlightTracksUpdated?.Invoke(this, new FlightTracksUpdatedEventArgs(_content));
+            AirspaceContentUpdated?.Invoke(this, new AirspaceContentEventArgs(_content));
         }
 
-
-        public List<IFlightTrackerSingle> GetAirspaceContent()
+        public List<IFlightTrack> GetAirspaceContent()
         {
-            return Content;
+            return _content;
         }
 
-        public IFlightTrackerMultiple GetFlightTracker()
+        public IFlightTrackManager GetDataSource()
         {
-            return FlightTracker;
+            return _dataSource;
         }
 
-        public bool IsInsideAirspace(FTDataPoint dp, AirspaceArea area)
+        public IAirspaceArea GetAirspaceArea()
         {
-            if (dp.Altitude > area.AltitudeBoundaryLower && dp.Altitude < area.AltitudeBoundaryUpper
-                && dp.X > area.SouthWestCornerX && dp.X < area.NorthEastCornerX
-                && dp.Y > area.SouthWestCornerY && dp.Y < area.NorthEastCornerY)
-            {
-                return true;
-            }
-            else
-            {
-                return false; // Done
-            }
-            
+            return _airspaceArea;
+        }
+
+        public List<IFlightTrack> GetFlights()
+        {
+            return _content;
         }
     }
 }

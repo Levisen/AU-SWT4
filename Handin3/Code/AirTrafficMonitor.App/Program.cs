@@ -14,21 +14,28 @@ namespace AirTrafficMonitor.App
     {
         static void Main(string[] args)
         {
-            AirspaceArea area = new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000);
-
             ITransponderReceiver transponderReceiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
+
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
-            IFlightTrackerMultiple flightManager = new FlightManager(dataConverter);
+            IFlightTrackManager flightManager = new SensorAreaManager(dataConverter);
 
-            ISeperationManager seperationController = new SeperationController(flightManager);
-            //SeperationHandler sepHandl = new SeperationHandler(seperationController, flightManager);
+            var airspace = new Airspace(flightManager, new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000));
+            
+            IEnterExitEventDetector EnterExitEventDetector = new EnterExitEventDetector(airspace);
+            IEnterExitEventController EnterExitEventCtrl = new EnterExitEventController(EnterExitEventDetector);
 
-            IAirspace airspace = new Airspace(flightManager, area);
+            ISeperationEventDetector seperationDetector = new SeperationEventDetector(airspace, 300, 5000);
+            //ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager, 5000, 10000);
+            ISeperationEventController seperationEventCtrl = new SeperationEventController(seperationDetector);
 
-            //Monitor monitor = new Monitor(airspace, seperationController);
+            IMonitor monitor = new Monitor();
+            var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace, 40, 20);
+            var aispaceEventDisplayer = new EnterExitEventDisplayer(monitor, EnterExitEventCtrl);
+            var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
+
             while (true)
             {
-                Thread.Sleep(150);
+                Thread.Sleep(250);
             };
         }
     }
