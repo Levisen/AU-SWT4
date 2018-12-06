@@ -25,13 +25,6 @@ namespace AirTrafficMonitor
             _distance = distance;
         }
 
-
-        private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
-        {
-            List<IFlightTrack> airspaceflights = e.AirspaceContent;
-            CheckForSeperationEvents(airspaceflights);
-        }
-
         private void OnFlightTracksUpdated(object sender, FlightTracksUpdatedEventArgs e)
         {
             List<IFlightTrack> allUpdatedFlights = e.UpdatedFlights;

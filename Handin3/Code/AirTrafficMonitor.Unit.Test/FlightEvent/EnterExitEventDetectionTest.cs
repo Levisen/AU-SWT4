@@ -14,11 +14,8 @@ namespace AirTrafficMonitor.Test.Unit.FlightEvents
     class EnterExitEventDetectionTest
     {
         private IEnterExitEventDetector _uut;
-
         private IFlightTrackManager _datasource;
-
-        
-        private IFlightTrack _flight1, _flight2, _flight3;
+        private IFlightTrack _flight1, _flight2;
 
         private int _flightTracksUpdatedCounter;
         private int _enterExitEventDetectedCounter;

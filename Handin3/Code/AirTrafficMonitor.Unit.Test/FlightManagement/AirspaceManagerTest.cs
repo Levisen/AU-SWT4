@@ -19,7 +19,7 @@ namespace AirTrafficMonitor.Test.Unit.FlightManagement
         private IFlightTrackManager _datasource;
         private IAirspaceArea _area;
 
-        private IFlightTrack _flight1, _flight2, _flight3;
+        private IFlightTrack _flight1, _flight2;
 
         private int _flightTracksUpdatedEventCount;
         private int _airspaceUpdatedEventCount;
