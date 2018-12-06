@@ -6,9 +6,9 @@ using NSubstitute;
 using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 
-namespace AirTrafficMonitor.Unit.Test.Class
+namespace AirTrafficMonitor.Test.Unit
 {
-    class ITransponderDataConverterTest
+    class DataConverterTest
     {
         private ITransponderDataConverter _uut;
 

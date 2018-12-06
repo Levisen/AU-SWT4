@@ -7,7 +7,7 @@ using NSubstitute;
 using NUnit.Framework;
 using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
-using AirTrafficMonitor.Unit.Test.TestData;
+using AirTrafficMonitor.Test.Unit.Calculators.TestData;
 
 
 namespace AirTrafficMonitor.Unit.Test.Event

@@ -9,6 +9,6 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightVelocityCalculator
     {
-        double CalculateCurrentVelocity(Vector2 previous_position, DateTime? previous_timestamp, Vector2 current_position, DateTime current_timestamp);
+        float CalculateCurrentVelocity(Vector2 previous_position, DateTime? previous_timestamp, Vector2 current_position, DateTime current_timestamp);
     }
 }

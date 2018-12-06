@@ -10,7 +10,7 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightTrackerSingle
     {
-        event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
+        //Flightevent EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
         string GetTag();
         double GetCurrentAltitude();
         double GetCurrentVelocity();

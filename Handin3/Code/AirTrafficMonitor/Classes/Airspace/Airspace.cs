@@ -32,7 +32,8 @@ namespace AirTrafficMonitor
 
             foreach (var f in allUpdatedFlights)
             {
-                if (AirspaceArea.IsInside(f.GetNewestDataPoint()))
+                var pos = f.GetCurrentPosition();
+                if (AirspaceArea.IsInside((int)pos.X, (int)pos.Y, (int)f.GetCurrentAltitude()))
                 {
                     Content.Add(f);
                 }

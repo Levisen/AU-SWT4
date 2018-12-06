@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Numerics;
 using TransponderReceiver;
 using System.Collections;
-using AirTrafficMonitor.Unit.Test.TestData;
+using AirTrafficMonitor.Test.Unit.Calculators.TestData;
 
-namespace AirTrafficMonitor.Unit.Test.Class
+namespace AirTrafficMonitor.Test.Unit.Calculators
 {
     [TestFixture]
     public class FlightCourseCalculatorTest
@@ -29,9 +29,9 @@ namespace AirTrafficMonitor.Unit.Test.Class
         {
             var vector1 = new Vector2(Vector1x, Vector1y);
             var vector2 = new Vector2(Vector2x, Vector2y);
-            return _uut.CalculateCurrentCourse(vector1, vector2);
+            
+            return Math.Round(_uut.CalculateCurrentCourse(vector1, vector2), 3);
         }
-
     }
 
 

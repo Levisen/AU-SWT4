@@ -7,9 +7,9 @@ using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 
 
-namespace AirTrafficMonitor.Unit.Test.Class
+namespace AirTrafficMonitor.Test.Unit
 {
-    class ITransponderStringConverterTest
+    class StringConverterTest
     {
         private ITransponderDataConverter _uut;
 

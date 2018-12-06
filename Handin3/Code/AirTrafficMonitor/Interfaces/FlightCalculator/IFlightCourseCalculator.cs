@@ -9,6 +9,6 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IFlightCourseCalculator
     {
-        double CalculateCurrentCourse(Vector2 previous, Vector2 current);
+        float CalculateCurrentCourse(Vector2 previous, Vector2 current);
     }
 }

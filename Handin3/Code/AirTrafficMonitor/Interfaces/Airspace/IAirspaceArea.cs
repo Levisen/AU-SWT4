@@ -9,7 +9,7 @@ namespace AirTrafficMonitor.Interfaces
 {
     public interface IAirspaceArea
     {
-        bool IsInside(FTDataPoint datapoint);
+        bool IsInside(int x, int y, int alt);
         float Width();
         float Heigth();
 
