@@ -10,34 +10,34 @@ namespace AirTrafficMonitor
 {
     public class AirspaceArea : IAirspaceArea
     {
-        private int SouthWestCornerX;
-        private int SouthWestCornerY;
-        private int NorthEastCornerX;
-        private int NorthEastCornerY;
-        private int AltitudeBoundaryLower;
-        private int AltitudeBoundaryUpper;
+        private int _southWestCornerX;
+        private int _southWestCornerY;
+        private int _northEastCornerX;
+        private int _northEastCornerY;
+        private int _altitudeBoundaryLower;
+        private int _altitudeBoundaryUpper;
 
-        private Vector2 SouthWestCorner;
-        private Vector2 NorthEastCorner;
+        private Vector2 _southWestCorner;
+        private Vector2 _northEastCorner;
 
         public AirspaceArea(int southWestCornerX, int southWestCornerY, int northEastCornerX, int northEastCornerY, int altitudeBoundaryLower, int altitudeBoundaryUpper)
         {
-            SouthWestCornerX = southWestCornerX;
-            SouthWestCornerY = southWestCornerY;
-            NorthEastCornerX = northEastCornerX;
-            NorthEastCornerY = northEastCornerY;
-            AltitudeBoundaryLower = altitudeBoundaryLower;
-            AltitudeBoundaryUpper = altitudeBoundaryUpper;
+            _southWestCornerX = southWestCornerX;
+            _southWestCornerY = southWestCornerY;
+            _northEastCornerX = northEastCornerX;
+            _northEastCornerY = northEastCornerY;
+            _altitudeBoundaryLower = altitudeBoundaryLower;
+            _altitudeBoundaryUpper = altitudeBoundaryUpper;
 
-            SouthWestCorner = new Vector2(southWestCornerX, southWestCornerY);
-            NorthEastCorner = new Vector2(northEastCornerX, northEastCornerY);
+            _southWestCorner = new Vector2(southWestCornerX, southWestCornerY);
+            _northEastCorner = new Vector2(northEastCornerX, northEastCornerY);
         }
         
         public bool IsInside(int x, int y, int alt)
         {
-            if (alt > AltitudeBoundaryLower && alt < AltitudeBoundaryUpper
-                && x > SouthWestCornerX && x < NorthEastCornerX
-                && y > SouthWestCornerY && y < NorthEastCornerY)
+            if (alt > _altitudeBoundaryLower && alt < _altitudeBoundaryUpper
+                && x > _southWestCornerX && x < _northEastCornerX
+                && y > _southWestCornerY && y < _northEastCornerY)
             {
                 return true;
             }
@@ -48,22 +48,22 @@ namespace AirTrafficMonitor
         }
         public float Heigth()
         {
-            return NorthEastCornerY - SouthWestCornerY;
+            return _northEastCornerY - _southWestCornerY;
         }
 
         public float Width()
         {
-            return NorthEastCornerX - SouthWestCornerX;
+            return _northEastCornerX - _southWestCornerX;
         }
 
         public Vector2 GetSouthWestCorner()
         {
-            return SouthWestCorner;
+            return _southWestCorner;
         }
 
         public Vector2 GetNorthEastCorner()
         {
-            return NorthEastCorner;
+            return _northEastCorner;
         }
     }
 }

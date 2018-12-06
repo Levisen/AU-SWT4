@@ -38,7 +38,7 @@ namespace AirTrafficMonitor
             Console.WriteLine("[-FLIGHTS-IN-AIRSPACE-]");
             RenderSection("AirspaceFlightList");
             Console.WriteLine("[-ENTER/EXIT-AIRSPACE-EVENTS-]");
-            RenderSection("AirspaceEventList");
+            RenderSection("EnterExitEventList");
             Console.WriteLine("[-SEPERATION-EVENTS-]");
             RenderSection("SeperationEventList");
         }

@@ -24,9 +24,9 @@ namespace AirTrafficMonitor.Test.Unit.Calculators.TestData
                 argsData.Add(point);
 
                 //compare data setup
-                List<IFlightTrackerSingle> trackersingle;
-                var data = new Flight(point);
-                trackersingle = NSubstitute.Substitute.For<List<IFlightTrackerSingle>>();
+                List<IFlightTrack> trackersingle;
+                var data = new AirTrafficMonitor.Flight(point);
+                trackersingle = NSubstitute.Substitute.For<List<IFlightTrack>>();
                 trackersingle.Add(data);
                 var CompareReturnData = new FlightTracksUpdatedEventArgs(trackersingle);
                 

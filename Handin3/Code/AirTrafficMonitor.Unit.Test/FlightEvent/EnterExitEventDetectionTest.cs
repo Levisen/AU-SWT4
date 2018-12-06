@@ -11,32 +11,32 @@ using System.Threading.Tasks;
 namespace AirTrafficMonitor.Test.Unit.Event
 {
     [TestFixture]
-    class AirspaceEventDetectionTest
+    class EnterExitEventDetectionTest
     {
-        private IAirspaceEventDetector _uut;
-        private IAirspace _airspace;
+        private IEnterExitEventDetector _uut;
+        private IFlightTrackManager _airspace;
 
-        private List<AirspaceEvent> _airspaceEventsDetected;
+        private List<EnterExitEvent> _enterExitEventsDetected;
         
-        private IFlightTrackerSingle flight1, flight2, flight3;
+        private IFlightTrack _flight1, _flight2, _flight3;
 
         private int _eventCounterAirspaceUpdated;
-        private int _eventCounterAirspaceEventDetected;
+        private int _eventCounterEnterExitEventDetected;
 
         [SetUp]
         public void SetUp()
         {
             _eventCounterAirspaceUpdated = 0;
-            _eventCounterAirspaceEventDetected = 0;
+            _eventCounterEnterExitEventDetected = 0;
 
-            _airspace = Substitute.For<IAirspace>();
+            _airspace = Substitute.For<IFlightTrackManager>();
 
-            _uut = new AirspaceEventDetector(_airspace);
-            _airspaceEventsDetected = new List<AirspaceEvent>();
+            _uut = new EnterExitEventDetector(_airspace);
+            _enterExitEventsDetected = new List<EnterExitEvent>();
 
-            _airspace.AirspaceContentUpdated += (sender, args) => _eventCounterAirspaceUpdated++;
+            _airspace.FlightTracksUpdated += (sender, args) => _eventCounterAirspaceUpdated++;
 
-            _uut.AirspaceEventDetected += (sender, args) => _eventCounterAirspaceEventDetected++;
+            _uut.EnterExitEventDetected += (sender, args) => _eventCounterEnterExitEventDetected++;
 
 
 
@@ -48,21 +48,21 @@ namespace AirTrafficMonitor.Test.Unit.Event
         }
 
         [Test]
-        public void OnAirspaceEventDetected_FlightStayOutside_NoEvents()
+        public void OnEnterExitEventDetected_FlightStayOutside_NoEvents()
         {
-            //flight1 = Substitute.For<IFlightTrackerSingle>();
-            flight1 = new Flight(new FTDataPoint("TAG123", 9999, 9999, 5000, DateTime.Now));
+            //flight1 = Substitute.For<IFlightTrack>();
+            _flight1 = new AirTrafficMonitor.Flight(new FTDataPoint("TAG123", 9999, 9999, 5000, DateTime.Now));
             //flight1.GetTag().Returns("TAG123");
 
-            List<IFlightTrackerSingle> flightList1 = new List<IFlightTrackerSingle> { flight1 };
+            List<IFlightTrack> flightList1 = new List<IFlightTrack> { _flight1 };
 
 
             
             //flightOutside1.GetCurrentPosition().Returns(new System.Numerics.Vector2(9999, 9999));
             //flightList1.Add(flightOutside1);
             //var argFirst = new AirspaceContentEventArgs(flightList1);
-            //var argSecond = new AirspaceContentEventArgs(new List<IFlightTrackerSingle> { flightOutside2 });
-            //_uut.AirspaceEventDetected += (sender, args) => _eventCounter++;
+            //var argSecond = new AirspaceContentEventArgs(new List<IFlightTrack> { flightOutside2 });
+            //_uut.EnterExitEventDetected += (sender, args) => _eventCounter++;
             //_airspace.AirspaceContentUpdated += Raise.EventWith(argFirst);
             //_airspace.AirspaceContentUpdated += Raise.EventWith(argSecond);
 
@@ -74,19 +74,19 @@ namespace AirTrafficMonitor.Test.Unit.Event
         }
 
         [Test]
-        public void OnAirspaceEventDetected_FlightMoveInside_OneEvent()
+        public void OnEnterExitEventDetected_FlightMoveInside_OneEvent()
         {
 
         }
 
         [Test]
-        public void OnAirspaceEventDetected_FlightMoveOutside_OneEvent()
+        public void OnEnterExitEventDetected_FlightMoveOutside_OneEvent()
         {
 
         }
 
         [Test]
-        public void OnAirspaceEventDetected_FlightStayInside_NoEvents()
+        public void OnEnterExitEventDetected_FlightStayInside_NoEvents()
         {
 
         }

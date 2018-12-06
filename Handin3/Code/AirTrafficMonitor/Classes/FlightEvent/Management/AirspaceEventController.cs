@@ -10,24 +10,24 @@ using System.Timers;
 
 namespace AirTrafficMonitor
 {
-    public class AirspaceEventController : IAirspaceEventController
+    public class EnterExitEventController : IEnterExitEventController
     {
-        IAirspaceEventDetector _detector;
-        List<AirspaceEvent> ActiveEvents;
-        List<AirspaceEvent> InctiveEvents;
+        IEnterExitEventDetector _detector;
+        List<EnterExitEvent> ActiveEvents;
+        List<EnterExitEvent> InctiveEvents;
 
-        public event EventHandler<AirspaceEventsUpdatedEventArgs> AirspaceEventsUpdated;
+        public event EventHandler<EnterExitEventsUpdatedEventArgs> EnterExitEventsUpdated;
 
-        public AirspaceEventController(IAirspaceEventDetector detector)
+        public EnterExitEventController(IEnterExitEventDetector detector)
         {
             _detector = detector;
-            _detector.AirspaceEventDetected += OnAirspaceEventDetected;
-            ActiveEvents = new List<AirspaceEvent>();
-            InctiveEvents = new List<AirspaceEvent>();
+            _detector.EnterExitEventDetected += OnEnterExitEventDetected;
+            ActiveEvents = new List<EnterExitEvent>();
+            InctiveEvents = new List<EnterExitEvent>();
             //SetDeavtivationCheckTimer();
         }
 
-        private void OnAirspaceEventDetected(object sender, AirspaceEventDetectedArgs e)
+        private void OnEnterExitEventDetected(object sender, EnterExitEventDetectedArgs e)
         {
             var detected_event = e.Event;
             ActiveEvents.Add(detected_event);
@@ -36,12 +36,12 @@ namespace AirTrafficMonitor
             timer.Enabled = true;
             timer.Elapsed += (o, args) => Deactivate(o, args, detected_event);
             
-            AirspaceEventsUpdated?.Invoke(this, new AirspaceEventsUpdatedEventArgs(ActiveEvents));
+            EnterExitEventsUpdated?.Invoke(this, new EnterExitEventsUpdatedEventArgs(ActiveEvents));
         }
-        private void Deactivate(object o, ElapsedEventArgs args, AirspaceEvent ae)
+        private void Deactivate(object o, ElapsedEventArgs args, EnterExitEvent ae)
         {
             ActiveEvents.Remove(ae);
-            AirspaceEventsUpdated?.Invoke(this, new AirspaceEventsUpdatedEventArgs(ActiveEvents));
+            EnterExitEventsUpdated?.Invoke(this, new EnterExitEventsUpdatedEventArgs(ActiveEvents));
         }
 
         //private void SetDeavtivationCheckTimer()
@@ -63,7 +63,7 @@ namespace AirTrafficMonitor
         //            anythingchanged = true;
         //        }
         //    }
-        //    if (anythingchanged) AirspaceEventsUpdated?.Invoke(this, new AirspaceEventsUpdatedEventArgs(ActiveEvents));
+        //    if (anythingchanged) EnterExitEventsUpdated?.Invoke(this, new EnterExitEventsUpdatedEventArgs(ActiveEvents));
         //}
     }
 }

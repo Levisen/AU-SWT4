@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface IAirspaceEventController
+    public interface IEnterExitEventController
     {
-        event EventHandler<AirspaceEventsUpdatedEventArgs> AirspaceEventsUpdated;
+        event EventHandler<EnterExitEventsUpdatedEventArgs> EnterExitEventsUpdated;
     }
 }

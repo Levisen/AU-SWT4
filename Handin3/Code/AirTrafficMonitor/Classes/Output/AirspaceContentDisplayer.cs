@@ -29,7 +29,7 @@ namespace AirTrafficMonitor
 
         private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
         {
-            List<IFlightTrackerSingle> flights = e.AirspaceContent;
+            List<IFlightTrack> flights = e.AirspaceContent;
 
             var gridstring = GenerateAirspaceGrid(flights);
             var flightliststring = GenerateAirspaceFlightList(flights);
@@ -39,7 +39,7 @@ namespace AirTrafficMonitor
 
         }
 
-        public string GenerateAirspaceFlightList(List<IFlightTrackerSingle> flights)
+        public string GenerateAirspaceFlightList(List<IFlightTrack> flights)
         {
             string airspaceflightlist = "TAG\tPOSX\tPOSY\tALT\tTIME\tVEL\tCOURSE\n";
 
@@ -58,7 +58,7 @@ namespace AirTrafficMonitor
             return airspaceflightlist;
         }
 
-        public string GenerateAirspaceGrid(List<IFlightTrackerSingle> flights)
+        public string GenerateAirspaceGrid(List<IFlightTrack> flights)
         {
             string airspacegrid = "";
 
