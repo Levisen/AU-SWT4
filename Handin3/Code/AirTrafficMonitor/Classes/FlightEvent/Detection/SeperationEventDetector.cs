@@ -13,11 +13,11 @@ namespace AirTrafficMonitor
     {
         public event EventHandler<SeperationDetectedEventArgs> SeperationEventDetected;
 
-        IFlightTrackerMultiple _datasource;
-        IAirspace _airspace;
+        IFlightTrackManager _datasource;
+
         int _altitude;
         int _distance;
-        public SeperationEventDetector(IFlightTrackerMultiple flighttracker, int altitude = 300, int distance = 5000)
+        public SeperationEventDetector(IFlightTrackManager flighttracker, int altitude = 300, int distance = 5000)
         {
             _datasource = flighttracker;
             _datasource.FlightTracksUpdated += OnFlightTracksUpdated;
@@ -25,34 +25,27 @@ namespace AirTrafficMonitor
             _distance = distance;
         }
 
-        public SeperationEventDetector(IAirspace airspace, int altitude = 300, int distance = 5000)
-        {
-            _airspace = airspace;
-            _airspace.AirspaceContentUpdated += OnAirspaceContentUpdated;
-            _altitude = altitude;
-            _distance = distance;
-        }
 
         private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
         {
-            List<IFlightTrackerSingle> airspaceflights = e.AirspaceContent;
+            List<IFlightTrack> airspaceflights = e.AirspaceContent;
             CheckForSeperationEvents(airspaceflights);
         }
 
         private void OnFlightTracksUpdated(object sender, FlightTracksUpdatedEventArgs e)
         {
-            List<IFlightTrackerSingle> allUpdatedFlights = e.UpdatedFlights;
+            List<IFlightTrack> allUpdatedFlights = e.UpdatedFlights;
             CheckForSeperationEvents(allUpdatedFlights);
         }
 
-        private void CheckForSeperationEvents(List<IFlightTrackerSingle> flights)
+        private void CheckForSeperationEvents(List<IFlightTrack> flights)
         {
             for (int i = 0; i < flights.Count; i++)
             {
                 for (int j = i + 1; j < flights.Count; j++)
                 {
-                    IFlightTrackerSingle f1 = flights[i];
-                    IFlightTrackerSingle f2 = flights[j];
+                    IFlightTrack f1 = flights[i];
+                    IFlightTrack f2 = flights[j];
                     if (TracksConflicting(f1, f2))
                     {
                         SeperationEvent detectedSeperation = new SeperationEvent(f1, f2);
@@ -62,7 +55,7 @@ namespace AirTrafficMonitor
             }
         }
 
-        public bool TracksConflicting(IFlightTrackerSingle f1, IFlightTrackerSingle f2)
+        public bool TracksConflicting(IFlightTrack f1, IFlightTrack f2)
         {
             double f1alt = f1.GetCurrentAltitude();
             double f2alt = f2.GetCurrentAltitude();

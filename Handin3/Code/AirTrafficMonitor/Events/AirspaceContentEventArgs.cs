@@ -9,8 +9,8 @@ namespace AirTrafficMonitor.Events
 {
     public class AirspaceContentEventArgs : EventArgs
     {
-        public List<IFlightTrackerSingle> AirspaceContent { get; set; }
-        public AirspaceContentEventArgs(List<IFlightTrackerSingle> flights)
+        public List<IFlightTrack> AirspaceContent { get; set; }
+        public AirspaceContentEventArgs(List<IFlightTrack> flights)
         {
             AirspaceContent = flights;
         }

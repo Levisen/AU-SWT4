@@ -10,19 +10,20 @@ using AirTrafficMonitor.Interfaces;
 
 namespace AirTrafficMonitor
 {
-    public class Flight : IFlightTrackerSingle
+    public class Flight : IFlightTrack 
+
     {
-        string _tag;
-        Vector2 _currentPosition;
-        double _currentAltitude;
-        double _currentVelocity;
-        double _currentCourse;
-        DateTime _lastUpdated;
+        private string _tag;
+        private Vector2 _currentPosition;
+        private double _currentAltitude;
+        private double _currentVelocity;
+        private double _currentCourse;
+        private DateTime _lastUpdated;
 
-        LinkedList<FTDataPoint> TrackDataLog;
+        private LinkedList<FTDataPoint> _trackDataLog;
 
-        public IFlightVelocityCalculator VelocityCalculator;
-        public IFlightCourseCalculator CourseCalculator;
+        private IFlightVelocityCalculator _velocityCalculator;
+        private IFlightCourseCalculator _courseCalculator;
 
         //public event EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
 
@@ -33,9 +34,9 @@ namespace AirTrafficMonitor
             _currentAltitude = first.Altitude;
             _lastUpdated = first.TimeStamp;
 
-            TrackDataLog = new LinkedList<FTDataPoint>();
-            VelocityCalculator = new FlightVelocityCalculator();
-            CourseCalculator = new FlightCourseCalculator();
+            _trackDataLog = new LinkedList<FTDataPoint>();
+            _velocityCalculator = new FlightVelocityCalculator();
+            _courseCalculator = new FlightCourseCalculator();
         }
         
 
@@ -47,28 +48,28 @@ namespace AirTrafficMonitor
             _currentAltitude = new_dp.Altitude;
             _lastUpdated = new_dp.TimeStamp;
 
-            FTDataPoint previous_dp = TrackDataLog.Count != 0 ? TrackDataLog.First() : null;
-            TrackDataLog.AddFirst(new_dp);
+            FTDataPoint previous_dp = _trackDataLog.Count != 0 ? _trackDataLog.First() : null;
+            _trackDataLog.AddFirst(new_dp);
 
             Vector2 previous_position = (previous_dp != null) ? new Vector2(previous_dp.X, previous_dp.Y) : Vector2.Zero;
             Vector2 current_position = new Vector2(new_dp.X, new_dp.Y);
 
-            _currentVelocity = VelocityCalculator.CalculateCurrentVelocity(
+            _currentVelocity = _velocityCalculator.CalculateCurrentVelocity(
                 previous_position, 
                 previous_dp?.TimeStamp, 
                 current_position, 
                 new_dp.TimeStamp
              );
-            _currentCourse = CourseCalculator.CalculateCurrentCourse(previous_position, current_position);
+            _currentCourse = _courseCalculator.CalculateCurrentCourse(previous_position, current_position);
         }
         public ICollection<FTDataPoint> GetFullDataLog()
         {
-            return TrackDataLog;
+            return _trackDataLog;
         }
 
         public FTDataPoint GetNewestDataPoint()
         {
-            return (TrackDataLog.Count != 0) ? TrackDataLog.First() : null;
+            return (_trackDataLog.Count != 0) ? _trackDataLog.First() : null;
         }
 
         public string GetTag() { return _tag; }

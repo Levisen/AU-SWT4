@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace AirTrafficMonitor
 {
-    public class AirspaceEventDetector : IAirspaceEventDetector
+    public class EnterExitEventDetector : IEnterExitEventDetector
     {
-        public event EventHandler<AirspaceEventDetectedArgs> AirspaceEventDetected;
+        public event EventHandler<EnterExitEventDetectedArgs> EnterExitEventDetected;
         
-        private IAirspace _datasource;
-        private List<IFlightTrackerSingle> previous;
+        private IFlightTrackManager _datasource;
+        private List<IFlightTrack> previous;
 
-        public AirspaceEventDetector(IAirspace airspace)
+        public EnterExitEventDetector(IFlightTrackManager airspace)
         {
-            previous = new List<IFlightTrackerSingle>();
+            previous = new List<IFlightTrack>();
             _datasource = airspace;
-            _datasource.AirspaceContentUpdated += OnAirspaceContentUpdated;
+            _datasource.FlightTracksUpdated += OnAirspaceContentUpdated;
         }
 
-        private void OnAirspaceContentUpdated(object sender, AirspaceContentEventArgs e)
+        private void OnAirspaceContentUpdated(object sender, FlightTracksUpdatedEventArgs e)
         {
-            var newflights = e.AirspaceContent;
+            var newflights = e.UpdatedFlights;
             
             if (newflights.Count > 0 || previous.Count > 0)
             {
@@ -33,8 +33,8 @@ namespace AirTrafficMonitor
                 {
                     if (!previous.Any(x => x.GetTag() == newf.GetTag()))
                     {
-                        AirspaceEvent newevent = new AirspaceEvent(newf, true);
-                        AirspaceEventDetected?.Invoke(this, new AirspaceEventDetectedArgs(newevent));
+                        EnterExitEvent newevent = new EnterExitEvent(newf, true);
+                        EnterExitEventDetected?.Invoke(this, new EnterExitEventDetectedArgs(newevent));
                     }
                 }
                 //Check for exit events
@@ -42,8 +42,8 @@ namespace AirTrafficMonitor
                 {
                     if (!newflights.Any(x => x.GetTag() == oldf.GetTag()))
                     {
-                        AirspaceEvent newevent = new AirspaceEvent(oldf, false);
-                        AirspaceEventDetected?.Invoke(this, new AirspaceEventDetectedArgs(newevent));
+                        EnterExitEvent newevent = new EnterExitEvent(oldf, false);
+                        EnterExitEventDetected?.Invoke(this, new EnterExitEventDetectedArgs(newevent));
                     }
                 }
             }

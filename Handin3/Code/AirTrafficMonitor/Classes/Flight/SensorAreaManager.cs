@@ -7,35 +7,35 @@ using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 namespace AirTrafficMonitor
 {
-    public class FlightManager : IFlightTrackerMultiple
+    public class SensorAreaManager : IFlightTrackManager
     {
-        List<IFlightTrackerSingle> Flights;
-        IFlightTrackDataSource DataSource;
+        private List<IFlightTrack> _flights;
+        private IFlightTrackDataSource _dataSource;
 
         public event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
-        public FlightManager(IFlightTrackDataSource datasource)
+        public SensorAreaManager(IFlightTrackDataSource datasource)
         {
-            DataSource = datasource;
-            DataSource.FlightTrackDataReady += OnFlightTrackDataReady;
-            Flights = new List<IFlightTrackerSingle>();
+            _dataSource = datasource;
+            _dataSource.FlightTrackDataReady += OnFlightTrackDataReady;
+            _flights = new List<IFlightTrack>();
         }
 
         private void OnFlightTrackDataReady(object o, FlightTrackDataEventArgs args)
         {
             Debug.Log("FlightManager: Handling FlightTrackDataReady event, recieved " + args.FTDataPoints.Count + " Datapoints");
             List<FTDataPoint> recievedDataPoints = args.FTDataPoints;
-            List<IFlightTrackerSingle> updatedflights = new List<IFlightTrackerSingle>();
+            List<IFlightTrack> updatedflights = new List<IFlightTrack>();
 
             foreach (var dp in args.FTDataPoints)
             {
-                if (!Flights.Exists(x => x.GetTag() == dp.Tag))
+                if (!_flights.Exists(x => x.GetTag() == dp.Tag))
                 {
                     Debug.Log("New flight entered sensor range with tag '" + dp.Tag + "'");
-                    Flights.Add(new Flight(dp));
+                    _flights.Add(new Flight(dp));
                 }
 
                 //Debug.Log("FlightManager: Adding datapoint to flight with tag '" + dp.Tag + "'");
-                IFlightTrackerSingle f = Flights.Find(x => x.GetTag() == dp.Tag);
+                IFlightTrack f = _flights.Find(x => x.GetTag() == dp.Tag);
                 f.AddDataPoint(dp);
 
                 updatedflights.Add(f);
@@ -47,12 +47,12 @@ namespace AirTrafficMonitor
 
         public IFlightTrackDataSource GetDataSource()
         {
-            return DataSource;
+            return _dataSource;
         }
 
-        public ICollection<FTDataPoint> GetAllFlights()
+        public List<IFlightTrack> GetFlights()
         {
-            throw new NotImplementedException();
+            return _flights;
         }
     }
 }

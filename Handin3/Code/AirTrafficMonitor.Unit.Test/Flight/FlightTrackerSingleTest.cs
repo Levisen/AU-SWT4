@@ -8,11 +8,11 @@ using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 using System.Numerics;
 
-namespace AirTrafficMonitor.Test.Unit.FlightTracking
+namespace AirTrafficMonitor.Test.Unit.Flight
 {
-    class FlightTrackerSingleTest
+    class FlightTrackTest
     {
-        private IFlightTrackerSingle _uut;
+        private IFlightTrack _uut;
 
         private FTDataPoint _firstDataPoint;
         private FTDataPoint _secondDataPoint;
@@ -26,7 +26,7 @@ namespace AirTrafficMonitor.Test.Unit.FlightTracking
             _firstDataPoint = new FTDataPoint("ASH000", 2000, 2000, 22000, _testTime);
             _secondDataPoint = new FTDataPoint("ASH000", 1850, 2000, 22000, _testTime.AddSeconds(1.00));
 
-            _uut = new Flight(_firstDataPoint);
+            _uut = new AirTrafficMonitor.Flight(_firstDataPoint);
 
             //_uut.AddDataPoint(_firstDataPoint); //needed for check if velocity and course is correct set
             //_uut.AddDataPoint(_secondDataPoint);

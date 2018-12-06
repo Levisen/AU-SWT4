@@ -8,7 +8,7 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface IFlightTrackerSingle
+    public interface IFlightTrack
     {
         //Flightevent EventHandler<FlightTrackUpdatedEventArgs> FlightTrackUpdated;
         string GetTag();
