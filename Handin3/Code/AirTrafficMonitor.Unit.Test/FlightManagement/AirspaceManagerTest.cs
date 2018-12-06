@@ -12,8 +12,10 @@ namespace AirTrafficMonitor.Test.Unit.FlightManagement
 {
     class AirspaceManagerTest
     {
+        //Unit under test
         private IAirspaceManager _uut;
 
+        //Dependecies
         private IFlightTrackManager _datasource;
         private IAirspaceArea _area;
 
@@ -42,12 +44,8 @@ namespace AirTrafficMonitor.Test.Unit.FlightManagement
                 _airspaceUpdatedEventContent = args.AirspaceContent;
             };
 
-            _flight1 = Substitute.For<IFlightTrack>(); //new Flight(new FTDataPoint("TAG123", 9999, 9999, 5000, DateTime.Now));
+            _flight1 = Substitute.For<IFlightTrack>();
             _flight2 = Substitute.For<IFlightTrack>();
-
-            //flightOutside2 = new Flight(new FTDataPoint("", 9500, 9500, 5000, DateTime.Now.AddSeconds(1)));
-            //flightInside1 = new Flight(new FTDataPoint("", 10500, 10500, 5000, DateTime.Now));
-            //flightInside2 = new Flight(new FTDataPoint("", 11000, 11000, 5000, DateTime.Now.AddSeconds(1)));
         }
 
         [Test]

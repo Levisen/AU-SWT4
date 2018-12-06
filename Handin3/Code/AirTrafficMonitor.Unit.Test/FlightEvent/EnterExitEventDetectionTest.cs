@@ -14,81 +14,150 @@ namespace AirTrafficMonitor.Test.Unit.FlightEvents
     class EnterExitEventDetectionTest
     {
         private IEnterExitEventDetector _uut;
-        private IFlightTrackManager _airspace;
 
-        private List<EnterExitEvent> _enterExitEventsDetected;
+        private IFlightTrackManager _datasource;
+
         
         private IFlightTrack _flight1, _flight2, _flight3;
 
-        private int _eventCounterAirspaceUpdated;
-        private int _eventCounterEnterExitEventDetected;
+        private int _flightTracksUpdatedCounter;
+        private int _enterExitEventDetectedCounter;
+        private int _entederCounter;
+        private int _exitedCounter;
+        private List<EnterExitEvent> _enterExitEventsDetected;
+        private EnterExitEvent _lastEnterExitEventDetected;
 
         [SetUp]
         public void SetUp()
         {
-            _eventCounterAirspaceUpdated = 0;
-            _eventCounterEnterExitEventDetected = 0;
-
-            _airspace = Substitute.For<IFlightTrackManager>();
-
-            _uut = new EnterExitEventDetector(_airspace);
+            _flightTracksUpdatedCounter = 0;
+            _enterExitEventDetectedCounter = 0;
+            _entederCounter = 0;
+            _exitedCounter = 0;
             _enterExitEventsDetected = new List<EnterExitEvent>();
 
-            _airspace.FlightTracksUpdated += (sender, args) => _eventCounterAirspaceUpdated++;
+            _datasource = Substitute.For<IFlightTrackManager>();
+            _datasource.FlightTracksUpdated += (sender, args) => _flightTracksUpdatedCounter++;
 
-            _uut.EnterExitEventDetected += (sender, args) => _eventCounterEnterExitEventDetected++;
+            _uut = new EnterExitEventDetector(_datasource);
+            _uut.EnterExitEventDetected += (sender, args) => {
+                _enterExitEventsDetected.Add(args.Event);
+                _lastEnterExitEventDetected = args.Event;
+                _enterExitEventDetectedCounter++;
+                if (args.Event.Entered) _entederCounter++;
+                else _exitedCounter++;
+            };
 
-
-
-
-            //flightOutside1 = new Flight(new FTDataPoint("", 9999, 9999, 5000, DateTime.Now));
-            //flightOutside2 = new Flight(new FTDataPoint("", 9500, 9500, 5000, DateTime.Now.AddSeconds(1)));
-            //flightInside1 = new Flight(new FTDataPoint("", 10500, 10500, 5000, DateTime.Now));
-            //flightInside2 = new Flight(new FTDataPoint("", 11000, 11000, 5000, DateTime.Now.AddSeconds(1)));
-        }
-
-        [Test]
-        public void OnEnterExitEventDetected_FlightStayOutside_NoEvents()
-        {
-            //flight1 = Substitute.For<IFlightTrack>();
-            _flight1 = new AirTrafficMonitor.Flight(new FTDataPoint("TAG123", 9999, 9999, 5000, DateTime.Now));
-            //flight1.GetTag().Returns("TAG123");
-
-            List<IFlightTrack> flightList1 = new List<IFlightTrack> { _flight1 };
-
-
-            
-            //flightOutside1.GetCurrentPosition().Returns(new System.Numerics.Vector2(9999, 9999));
-            //flightList1.Add(flightOutside1);
-            //var argFirst = new AirspaceContentEventArgs(flightList1);
-            //var argSecond = new AirspaceContentEventArgs(new List<IFlightTrack> { flightOutside2 });
-            //_uut.EnterExitEventDetected += (sender, args) => _eventCounter++;
-            //_airspace.AirspaceContentUpdated += Raise.EventWith(argFirst);
-            //_airspace.AirspaceContentUpdated += Raise.EventWith(argSecond);
-
-
-            //_airspace.AirspaceContentUpdated += Raise.EventWith(new AirspaceContentEventArgs(flightList1));
-
-
-            //Assert.That(_eventCounter, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void OnEnterExitEventDetected_FlightMoveInside_OneEvent()
-        {
+            _flight1 = Substitute.For<IFlightTrack>();
+            _flight2 = Substitute.For<IFlightTrack>();
+            _flight1.GetTag().Returns("TAG123");
+            _flight1.GetLastUpdatedAt().Returns(DateTime.Now);
+            _flight2.GetTag().Returns("TAG456");
+            _flight2.GetLastUpdatedAt().Returns(DateTime.Now);
 
         }
 
         [Test]
-        public void OnEnterExitEventDetected_FlightMoveOutside_OneEvent()
+        public void OnDataSourceFlightTracksUpdated_FlightEnter_OneEnterEvent()
         {
+            //Arrange
+            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
 
+            //Act
+            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
+
+            //Assert
+            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(3));
+            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(1));
+            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(1));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(true));
+            Assert.That(_entederCounter, Is.EqualTo(1));
+            Assert.That(_exitedCounter, Is.EqualTo(0));
         }
 
         [Test]
-        public void OnEnterExitEventDetected_FlightStayInside_NoEvents()
+        public void OnDataSourceFlightTracksUpdated_FlightEnterThenOtherFlightEnter_TwoEnterEvents()
         {
+            //Arrange
+            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args4 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
+            var args5 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
 
+            //Act
+            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args4);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args5);
+
+            //Assert
+            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(5));
+            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(2));
+            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(2));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(true));
+            Assert.That(_entederCounter, Is.EqualTo(2));
+            Assert.That(_exitedCounter, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void OnDataSourceFlightTracksUpdated_FlightEnterThenExit_OneEnterEventOneExitEvent()
+        {
+            //Arrange
+            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args4 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args5 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+
+            //Act
+            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args4);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args5);
+
+            //Assert
+            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(5));
+            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(2));
+            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(2));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(false));
+            Assert.That(_entederCounter, Is.EqualTo(1));
+            Assert.That(_exitedCounter, Is.EqualTo(1));
+        }
+
+        public void OnDataSourceFlightTracksUpdated_FlightEnterThenOtherFlightEnterThenFirstFlightExit_TwoEnterEventsOneExitEvent()
+        {
+            //Arrange
+            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args4 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
+            var args5 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
+            var args6 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight2 });
+            var args7 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight2 });
+
+            //Act
+            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args4);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args5);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args6);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args7);
+
+            //Assert
+            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(7));
+            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(3));
+            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(3));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(false));
+            Assert.That(_entederCounter, Is.EqualTo(2));
+            Assert.That(_exitedCounter, Is.EqualTo(1));
         }
 
     }
