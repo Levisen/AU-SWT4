@@ -1,12 +1,25 @@
 % !TeX root = ../Handin3.tex
 
 \section{Reflektioner og Diskussion}
-Vi er som udgangpunkt tilfredse med vores tilgang til at lave et testbart design, men det har nok taget for meget af vores fokus, da vi undervurderede opgavens omfang. 
-Det har været lærerigt at udvikle et system med en test-fokuseret
+Vi er som udgangpunkt tilfredse med vores tilgang til at lave et testbart design, men det har nok taget for meget af vores fokus, 
+da vi undervurderede opgavens omfang i første omgang. 
+Det har været lærerigt at udvikle et system med en test-fokuseret løsning, 
+hvilket virkelig har vist sine fordele, for hvilke ting man kan undgå af fejl.
 
-Vi har stadig gjort brug af mere familære testmetoder som konsoludskrifter mv for at teste diverse aspekter af applikationen undervejs. 
-Dette er oftest gået hurtigere end at implementere unit tests, men kan på ingen måde hamle op med unit tests ift skalérbarhed
+Vi har stadig gjort brug af mere familære testmetoder som konsoludskrifter m.m., for at teste diverse aspekter af applikationen undervejs. 
+Dette er oftest gået hurtigere end at implementere unit tests, 
+men kan på ingen måde hamle op med unit tests ift skalérbarhed.
 
-Dertil kommer kommunikationen mellem de funktioner hvert interface definerer, som i vores design i høj grad foregår via events.
+Dertil kommer kommunikationen mellem de funktioner hvert interface definerer, 
+som i vores design foregår via events.
 
-Lave diagrammerne først så vi havde en overblik over opgaven samt en vejledning til hvordan vi løst og samlede opgaven. 
+Fremadrettet bør vi udnytte interfaces mere mellem klasserne, 
+der skal snakke sammen. På den måde kan vi sikre os Unit tests til vores interfaces, 
+og realisere via fakes, hvordan vi gerne vil have det til at blive, uden reelt at have implementeret noget i forvejen.
+
+Derudover har vi efter den sidste del af ATM, fået erfaring med at implementere integrationstestene, 
+samt at udnytte et vigtigt værktøj, som dotCover, med flere, der virkelig kan give projektet et belæg for at lave Unit Tests og udnytte test metoder, fra starten..
+
+Erfaringen er, at på et tispunkt, vil et projekt blive fort stort. 
+Dermed er det vigtigt at udnytte værktøjerne og gøre betænkningstiden og designovervejelsesperoiden mere overskuelige, 
+ved allerede at tænke i tests og dele projektet op fra begyndelsen.
