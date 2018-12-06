@@ -1,3 +1,17 @@
 % !TeX root = ../../Handin3.tex
 
 \subsection{Integrations Test}
+
+Der er blevet anvendt og ekperimenteret med forskellige strategier for integrationstest, alt afhængigt af hvilken del af systemet der er tale om.
+Den overordnede strategi har været en bottom-up tilgang, hvor datakonverteringsmodulerne i bunden af dependenct-træet er blevet testet i sammenhæng først. Den første integrationstest involverer modulerne fra transponder-driveren til og med IFlightTrackManagerInterfacet. 
+Formålet med dette er, at kunne teste resten af systemet via dette interface, da det er betydeligt nemmere at lave test-cases med denne som udgangpunkt.
+
+De implementerede integrationstest omfatter følgende:
+
+ IT-1a  Fra Transponderdriverens dataready event til og med IFlightTrackDataSource
+
+ IT-1b  Fra Transponderdriverens dataready event til og med IFlightTrackManager
+
+ IT-2a  Fra IFlightTrackManager til og med EnterExitEventController
+
+ IT-2b  Fra IFlightTrackManager til og med EnterExitEventController, med en IAirspaceManager mellem IFlightManager og event detector. IAirspaceArea indgår ikke, men emuleres gennem NSubtitute.
