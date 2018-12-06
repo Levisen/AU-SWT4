@@ -81,5 +81,10 @@ namespace AirTrafficMonitor
         public double GetCurrentVelocity() { return _currentVelocity; }
 
         public double GetCurrentCourse() { return _currentCourse; }
+
+        public DateTime GetLastUpdatedAt()
+        {
+            return _lastUpdated;
+        }
     }
 }

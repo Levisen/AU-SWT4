@@ -16,6 +16,7 @@ namespace AirTrafficMonitor.Interfaces
         double GetCurrentVelocity();
         double GetCurrentCourse();
         Vector2 GetCurrentPosition();
+        DateTime GetLastUpdatedAt();
         void AddDataPoint(FTDataPoint dp);
         FTDataPoint GetNewestDataPoint();
         ICollection<FTDataPoint> GetFullDataLog();
