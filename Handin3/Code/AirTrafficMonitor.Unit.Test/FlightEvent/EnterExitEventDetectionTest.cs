@@ -74,35 +74,10 @@ namespace AirTrafficMonitor.Test.Unit.FlightEvents
             Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(3));
             Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(1));
             Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(1));
-            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(true));
             Assert.That(_entederCounter, Is.EqualTo(1));
             Assert.That(_exitedCounter, Is.EqualTo(0));
-        }
-
-        [Test]
-        public void OnDataSourceFlightTracksUpdated_FlightEnterThenOtherFlightEnter_TwoEnterEvents()
-        {
-            //Arrange
-            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
-            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
-            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
-            var args4 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
-            var args5 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
-
-            //Act
-            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
-            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
-            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
-            _datasource.FlightTracksUpdated += Raise.EventWith(args4);
-            _datasource.FlightTracksUpdated += Raise.EventWith(args5);
-
-            //Assert
-            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(5));
-            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(2));
-            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(2));
             Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(true));
-            Assert.That(_entederCounter, Is.EqualTo(2));
-            Assert.That(_exitedCounter, Is.EqualTo(0));
+            Assert.That(_lastEnterExitEventDetected.Flight.GetTag(), Is.EqualTo(_flight1.GetTag()));
         }
 
         [Test]
@@ -126,10 +101,40 @@ namespace AirTrafficMonitor.Test.Unit.FlightEvents
             Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(5));
             Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(2));
             Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(2));
-            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(false));
             Assert.That(_entederCounter, Is.EqualTo(1));
             Assert.That(_exitedCounter, Is.EqualTo(1));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(false));
+            Assert.That(_lastEnterExitEventDetected.Flight.GetTag(), Is.EqualTo("TAG123"));
         }
+
+        [Test]
+        public void OnDataSourceFlightTracksUpdated_FlightEnterThenOtherFlightEnter_TwoEnterEvents()
+        {
+            //Arrange
+            var args1 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { });
+            var args2 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args3 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1 });
+            var args4 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
+            var args5 = new FlightTracksUpdatedEventArgs(new List<IFlightTrack> { _flight1, _flight2 });
+
+            //Act
+            _datasource.FlightTracksUpdated += Raise.EventWith(args1);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args2);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args3);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args4);
+            _datasource.FlightTracksUpdated += Raise.EventWith(args5);
+
+            //Assert
+            Assert.That(_flightTracksUpdatedCounter, Is.EqualTo(5));
+            Assert.That(_enterExitEventDetectedCounter, Is.EqualTo(2));
+            Assert.That(_enterExitEventsDetected.Count, Is.EqualTo(2));
+            Assert.That(_entederCounter, Is.EqualTo(2));
+            Assert.That(_exitedCounter, Is.EqualTo(0));
+            Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(true));
+            Assert.That(_lastEnterExitEventDetected.Flight.GetTag(), Is.EqualTo("TAG456"));
+        }
+
+        
 
         public void OnDataSourceFlightTracksUpdated_FlightEnterThenOtherFlightEnterThenFirstFlightExit_TwoEnterEventsOneExitEvent()
         {
@@ -158,6 +163,7 @@ namespace AirTrafficMonitor.Test.Unit.FlightEvents
             Assert.That(_lastEnterExitEventDetected.Entered, Is.EqualTo(false));
             Assert.That(_entederCounter, Is.EqualTo(2));
             Assert.That(_exitedCounter, Is.EqualTo(1));
+            Assert.That(_lastEnterExitEventDetected.Flight.GetTag(), Is.EqualTo("TAG123"));
         }
 
     }
