@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Class\IFlightTrackerSingleTest.cs" />
     <Compile Include="Class\ITransponderDataConverterTest.cs" />
+    <Compile Include="Class\ITransponderStringConverterTest.cs" />
     <Compile Include="Event\FlightTrackDataEvent.cs" />
     <Compile Include="Event\TransponderDataEvent.cs" />
     <Compile Include="TestData\FlightCalculatorTestCaseData.cs" />
