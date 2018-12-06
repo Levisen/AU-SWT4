@@ -6,7 +6,7 @@ using NSubstitute;
 using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
 
-namespace AirTrafficMonitor.Test.Unit
+namespace AirTrafficMonitor.Test.Unit.DataConversion
 {
     class DataConverterTest
     {
@@ -37,7 +37,6 @@ namespace AirTrafficMonitor.Test.Unit
             // Assert
             Assert.That(_testListFTDataPoint.First().Tag, Is.EqualTo(_testFTDataPoint.Tag));
         }
-
 
         [TestCase("ATR423;39045;12932;14000;20151006213456789", 
             "ATR423", 39045, 12932, 14000, 2015, 10, 06, 21, 34, 56, 789)]

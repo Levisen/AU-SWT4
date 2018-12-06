@@ -19,10 +19,10 @@ namespace AirTrafficMonitor.App
             IFlightTrackDataSource dataConverter = new DataConverter(transponderReceiver);
             IFlightTrackManager flightManager = new SensorAreaManager(dataConverter);
 
-            var airspace = new Airspace(flightManager, new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000));
+            var airspace = new AirspaceManager(flightManager, new AirspaceArea(10000, 10000, 90000, 90000, 500, 20000));
             
-            IEnterExitEventDetector EnterExitEventDetector = new EnterExitEventDetector(airspace);
-            IEnterExitEventController EnterExitEventCtrl = new EnterExitEventController(EnterExitEventDetector);
+            IEnterExitEventDetector airSpacenterExitEventDetector = new EnterExitEventDetector(airspace);
+            IEnterExitEventController airspaceEnterExitEventCtrl = new EnterExitEventController(airSpacenterExitEventDetector);
 
             ISeperationEventDetector seperationDetector = new SeperationEventDetector(airspace, 300, 5000);
             //ISeperationEventDetector seperationDetector = new SeperationEventDetector(flightManager, 5000, 10000);
@@ -30,7 +30,7 @@ namespace AirTrafficMonitor.App
 
             IMonitor monitor = new Monitor();
             var airspaceContentDisplayer = new AirspaceContentDisplayer(monitor, airspace, 40, 20);
-            var aispaceEventDisplayer = new EnterExitEventDisplayer(monitor, EnterExitEventCtrl);
+            var aispaceEventDisplayer = new EnterExitEventDisplayer(monitor, airspaceEnterExitEventCtrl);
             var seperationEventDisplayer = new SeperationEventDisplayer(monitor, seperationEventCtrl);
 
             while (true)

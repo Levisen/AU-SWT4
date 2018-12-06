@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Test.Unit.Airspace
+namespace AirTrafficMonitor.Test.Unit.FlightManagement
 {
-    class AirspaceContentTest
+    class AirspaceManagerTest
     {
-        private IAirspace _uut;
+        private IAirspaceManager _uut;
 
         private IFlightTrackManager _datasource;
         private IAirspaceArea _area;
@@ -36,7 +36,7 @@ namespace AirTrafficMonitor.Test.Unit.Airspace
             _datasource.FlightTracksUpdated += (sender, args) => _flightTracksUpdatedEventCount++;
             _area = Substitute.For<IAirspaceArea>();
             
-            _uut = new AirTrafficMonitor.Airspace(_datasource, _area);
+            _uut = new AirspaceManager(_datasource, _area);
             _uut.AirspaceContentUpdated += (sender, args) => {
                 _airspaceUpdatedEventCount++;
                 _airspaceUpdatedEventContent = args.AirspaceContent;

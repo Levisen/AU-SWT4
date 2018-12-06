@@ -8,7 +8,7 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor
 {
-    public class Airspace : IAirspace, IFlightTrackManager
+    public class AirspaceManager : IAirspaceManager, IFlightTrackManager
     {
         private IAirspaceArea _airspaceArea;
         private IFlightTrackManager _dataSource;
@@ -17,7 +17,7 @@ namespace AirTrafficMonitor
         public event EventHandler<AirspaceContentEventArgs> AirspaceContentUpdated;
         public event EventHandler<FlightTracksUpdatedEventArgs> FlightTracksUpdated;
 
-        public Airspace(IFlightTrackManager datasource, IAirspaceArea airspaceArea)
+        public AirspaceManager(IFlightTrackManager datasource, IAirspaceArea airspaceArea)
         {
             _airspaceArea = airspaceArea;
             _content = new List<IFlightTrack>();

@@ -11,13 +11,13 @@ namespace AirTrafficMonitor
 {
     public class AirspaceContentDisplayer
     {
-        private IAirspace _airspace;
+        private IAirspaceManager _airspace;
         private IMonitor _monitor;
 
         private int grid_width;
         private int grid_heigth;
 
-        public AirspaceContentDisplayer(IMonitor monitor, IAirspace airspace, int grid_width = 40, int grid_heigth = 20) 
+        public AirspaceContentDisplayer(IMonitor monitor, IAirspaceManager airspace, int grid_width = 40, int grid_heigth = 20) 
         {
             _airspace = airspace;
             _monitor = monitor;
