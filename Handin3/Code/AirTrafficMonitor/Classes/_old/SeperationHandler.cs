@@ -20,7 +20,7 @@ namespace AirTrafficMonitor
         //    Detector = detector;
         //    Detector.SeperationIdentified += OnSeperationIdentified;
         //    Tracker = tracker;
-            
+            //
         //    //SeperationResolvedSignal = new ManualResetEvent(false);
         //}
         
