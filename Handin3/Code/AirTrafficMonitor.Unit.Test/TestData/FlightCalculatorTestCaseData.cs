@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Test.Unit.Calculators.TestData
+namespace AirTrafficMonitor.Test.Unit.TestData
 {
     public class FlightCalculatorsTestCaseData
     {

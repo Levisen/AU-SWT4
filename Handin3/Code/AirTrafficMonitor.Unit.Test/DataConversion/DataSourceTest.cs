@@ -10,14 +10,15 @@ using TransponderReceiver;
 using AirTrafficMonitor.Events;
 using AirTrafficMonitor;
 
-namespace AirTrafficMonitor.Unit.Test.Event
+namespace AirTrafficMonitor.Unit.Test.DataConversion
 {
     [TestFixture]
-    class TransponderDataEvent
+    class DataConversionTest
     {
         private IFlightTrackDataSource _uut;
-        private int _eventCounter;
         private ITransponderReceiver _testTransponderReceiver;
+
+        private int _eventCounter;
 
         [SetUp]
         public void SetUp()
@@ -25,6 +26,7 @@ namespace AirTrafficMonitor.Unit.Test.Event
             _testTransponderReceiver = Substitute.For<ITransponderReceiver>();
             _uut = new DataConverter(_testTransponderReceiver);
         }
+
         [Test]
         public void OnTransponderDataReady_TransponderdataToTrackDataSource_NoneEvent()
         {

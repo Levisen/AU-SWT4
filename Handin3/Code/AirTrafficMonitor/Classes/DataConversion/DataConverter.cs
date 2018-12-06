@@ -74,9 +74,9 @@ namespace AirTrafficMonitor
             return dp;
         }
 
-        public ITransponderReceiver GetTransponderReceiver()
-        {
-            return _transponderReceiver;
-        }
+        //public ITransponderReceiver GetTransponderReceiver()
+        //{
+        //    return _transponderReceiver;
+        //}
     }
 }

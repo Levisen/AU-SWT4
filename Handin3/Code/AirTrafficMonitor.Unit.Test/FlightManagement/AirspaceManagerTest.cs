@@ -8,12 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Test.Unit.Airspace
+namespace AirTrafficMonitor.Test.Unit.FlightManagement
 {
-    class AirspaceContentTest
+    class AirspaceManagerTest
     {
-        private IAirspace _uut;
+        //Unit under test
+        private IAirspaceManager _uut;
 
+        //Dependecies
         private IFlightTrackManager _datasource;
         private IAirspaceArea _area;
 
@@ -36,18 +38,14 @@ namespace AirTrafficMonitor.Test.Unit.Airspace
             _datasource.FlightTracksUpdated += (sender, args) => _flightTracksUpdatedEventCount++;
             _area = Substitute.For<IAirspaceArea>();
             
-            _uut = new AirTrafficMonitor.Airspace(_datasource, _area);
+            _uut = new AirspaceManager(_datasource, _area);
             _uut.AirspaceContentUpdated += (sender, args) => {
                 _airspaceUpdatedEventCount++;
                 _airspaceUpdatedEventContent = args.AirspaceContent;
             };
 
-            _flight1 = Substitute.For<IFlightTrack>(); //new Flight(new FTDataPoint("TAG123", 9999, 9999, 5000, DateTime.Now));
+            _flight1 = Substitute.For<IFlightTrack>();
             _flight2 = Substitute.For<IFlightTrack>();
-
-            //flightOutside2 = new Flight(new FTDataPoint("", 9500, 9500, 5000, DateTime.Now.AddSeconds(1)));
-            //flightInside1 = new Flight(new FTDataPoint("", 10500, 10500, 5000, DateTime.Now));
-            //flightInside2 = new Flight(new FTDataPoint("", 11000, 11000, 5000, DateTime.Now.AddSeconds(1)));
         }
 
         [Test]

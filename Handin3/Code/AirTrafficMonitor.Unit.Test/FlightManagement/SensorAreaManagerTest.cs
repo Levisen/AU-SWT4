@@ -7,23 +7,28 @@ using NSubstitute;
 using NUnit.Framework;
 using AirTrafficMonitor.Interfaces;
 using AirTrafficMonitor.Events;
-using AirTrafficMonitor.Test.Unit.Calculators.TestData;
+using AirTrafficMonitor.Test.Unit.TestData;
 
 
-namespace AirTrafficMonitor.Unit.Test.Event
+namespace AirTrafficMonitor.Unit.Test.FlightManagement
 {
     [TestFixture]
-    class FlightTrackDataEvent
+    class SensorAreaManagerTest
     {
         int _eventCounter = 0;
+
         private IFlightTrackManager _uut;
+
         private IFlightTrackDataSource _testFlightTrackDataSource;
+
         [SetUp]
         public void SetUp()
         {
             _testFlightTrackDataSource = Substitute.For<IFlightTrackDataSource>();
             _uut = new SensorAreaManager(_testFlightTrackDataSource);
         }
+
+
         [Test]
         public void OnFlightTrackDataReady_FlightTrackDataToFlightTrackMultiple_NoneEvent()
         {
@@ -40,8 +45,9 @@ namespace AirTrafficMonitor.Unit.Test.Event
             // Assert
             Assert.That(_eventCounter, Is.EqualTo(0));
         }
+
         [Test, TestCaseSource(typeof(FlightTrackDataEventTestData), "OnTransponderDataReadyCases")]
-        public void OnFlightTrackDataReady_FlightTrackDataSourceToFlightTrackMultiple_OneEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrack> tracker)
+        public void OnFlightTrackDataReady_FlightTrackDataSourceToSensorAreaManager_OneEventOneEntry(List<FTDataPoint> argsData, FlightTracksUpdatedEventArgs multipleData, List<IFlightTrack> tracker)
         {
             _eventCounter = 0;
             // Arrange

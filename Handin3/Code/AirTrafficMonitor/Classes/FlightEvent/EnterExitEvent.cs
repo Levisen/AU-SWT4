@@ -12,7 +12,7 @@ namespace AirTrafficMonitor
         public IFlightTrack Flight { get; set; }
         public bool Entered { get; set; }
         public EnterExitEvent(IFlightTrack flight, bool entered) 
-            : base("Airspace", "Flight " + flight.GetTag() + " has " + ((entered) ? "entered" : "left") + " airspace at " + flight.GetNewestDataPoint().TimeStamp.ToLongTimeString())
+            : base("Airspace", "Flight " + flight.GetTag() + " has " + ((entered) ? "entered" : "left") + " airspace at " + flight.GetLastUpdatedAt().ToLongTimeString())
         {
             Flight = flight;
             Entered = entered;

@@ -8,7 +8,7 @@ using AirTrafficMonitor.Events;
 using AirTrafficMonitor.Interfaces;
 using NUnit.Framework;
 
-namespace AirTrafficMonitor.Test.Unit.Calculators.TestData
+namespace AirTrafficMonitor.Test.Unit.TestData
 {
     public class FlightTrackDataEventTestData
     {

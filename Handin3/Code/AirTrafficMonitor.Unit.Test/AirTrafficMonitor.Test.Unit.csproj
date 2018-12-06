@@ -70,18 +70,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataConversion\StringConverterTest.cs" />
-    <Compile Include="Airspace\AirspaceTest.cs" />
+    <Compile Include="AirspaceAreaTest.cs" />
+    <Compile Include="FlightEvent\SeperationEventDetectorTest.cs" />
+    <Compile Include="FlightManagement\AirspaceManagerTest.cs" />
     <Compile Include="FlightEvent\EnterExitEventDetectionTest.cs" />
-    <Compile Include="Flight\FlightTrackerSingleTest.cs" />
+    <Compile Include="FlightTrack\FlightTrackTest.cs" />
     <Compile Include="DataConversion\DataConverterTest.cs" />
-    <Compile Include="Event\FlightTrackDataEvent.cs" />
-    <Compile Include="Event\TransponderDataEvent.cs" />
-    <Compile Include="Calculators\TestData\FlightCalculatorTestCaseData.cs" />
-    <Compile Include="Calculators\CourseCalculatorTest.cs" />
-    <Compile Include="Calculators\VelocityCalculatorTest.cs" />
+    <Compile Include="FlightManagement\SensorAreaManagerTest.cs" />
+    <Compile Include="DataConversion\DataSourceTest.cs" />
+    <Compile Include="TestData\AirspaceAreaTestData.cs" />
+    <Compile Include="TestData\FlightCalculatorTestCaseData.cs" />
+    <Compile Include="FlightTrack\Calculation\CourseCalculatorTest.cs" />
+    <Compile Include="FlightTrack\Calculation\VelocityCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Calculators\TestData\FlightTrackDataEventTestData.cs" />
+    <Compile Include="TestData\FlightTrackDataEventTestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
