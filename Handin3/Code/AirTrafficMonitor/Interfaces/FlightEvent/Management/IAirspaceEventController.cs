@@ -10,5 +10,6 @@ namespace AirTrafficMonitor.Interfaces
     public interface IEnterExitEventController
     {
         event EventHandler<EnterExitEventsUpdatedEventArgs> EnterExitEventsUpdated;
+        int ScheduledDeactivationsCount { get; set; }
     }
 }

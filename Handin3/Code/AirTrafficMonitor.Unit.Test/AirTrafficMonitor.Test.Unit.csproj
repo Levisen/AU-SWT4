@@ -77,8 +77,8 @@
     <Compile Include="FlightTrack\FlightTrackTest.cs" />
     <Compile Include="DataConversion\DataConverterTest.cs" />
     <Compile Include="FlightManagement\SensorAreaManagerTest.cs" />
-    <Compile Include="DataConversion\DataSourceTest.cs" />
     <Compile Include="TestData\AirspaceAreaTestData.cs" />
+    <Compile Include="DataConversion\DataConverterAsDataSourceTest.cs" />
     <Compile Include="TestData\FlightCalculatorTestCaseData.cs" />
     <Compile Include="FlightTrack\Calculation\CourseCalculatorTest.cs" />
     <Compile Include="FlightTrack\Calculation\VelocityCalculatorTest.cs" />

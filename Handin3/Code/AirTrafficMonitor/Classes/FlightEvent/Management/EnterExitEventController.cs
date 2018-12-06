@@ -16,6 +16,9 @@ namespace AirTrafficMonitor
         List<EnterExitEvent> ActiveEvents;
         List<EnterExitEvent> InctiveEvents;
 
+        public int ScheduledDeactivationsCount { get; set; }
+
+
         public event EventHandler<EnterExitEventsUpdatedEventArgs> EnterExitEventsUpdated;
 
         public EnterExitEventController(IEnterExitEventDetector detector)
@@ -24,22 +27,30 @@ namespace AirTrafficMonitor
             _detector.EnterExitEventDetected += OnEnterExitEventDetected;
             ActiveEvents = new List<EnterExitEvent>();
             InctiveEvents = new List<EnterExitEvent>();
-            //SetDeavtivationCheckTimer();
+
+            ScheduledDeactivationsCount = 0;
         }
 
         private void OnEnterExitEventDetected(object sender, EnterExitEventDetectedArgs e)
         {
-            var detected_event = e.Event;
-            ActiveEvents.Add(detected_event);
-            var timer = new System.Timers.Timer(5000);
-            timer.AutoReset = false;
-            timer.Enabled = true;
-            timer.Elapsed += (o, args) => Deactivate(o, args, detected_event);
-            
+            var detectedEvent = e.Event;
+            ActiveEvents.Add(detectedEvent);
+            var timer = new Timer(5000)
+            {
+                AutoReset = false,
+                Enabled = true
+            };
+            timer.Elapsed += (o, args) =>
+            {
+                Deactivate(o, args, detectedEvent);
+            };
+            ScheduledDeactivationsCount++;
+
             EnterExitEventsUpdated?.Invoke(this, new EnterExitEventsUpdatedEventArgs(ActiveEvents));
         }
-        private void Deactivate(object o, ElapsedEventArgs args, EnterExitEvent ae)
+        public void Deactivate(object o, ElapsedEventArgs args, EnterExitEvent ae)
         {
+            ScheduledDeactivationsCount--;
             ActiveEvents.Remove(ae);
             EnterExitEventsUpdated?.Invoke(this, new EnterExitEventsUpdatedEventArgs(ActiveEvents));
         }
