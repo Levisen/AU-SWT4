@@ -45,10 +45,10 @@ namespace AirTrafficMonitor
             FlightTracksUpdated?.Invoke(this, new FlightTracksUpdatedEventArgs(updatedflights));
         }
 
-        public IFlightTrackDataSource GetDataSource()
-        {
-            return _dataSource;
-        }
+        //public IFlightTrackDataSource GetDataSource()
+        //{
+        //    return _dataSource;
+        //}
 
         public List<IFlightTrack> GetFlights()
         {

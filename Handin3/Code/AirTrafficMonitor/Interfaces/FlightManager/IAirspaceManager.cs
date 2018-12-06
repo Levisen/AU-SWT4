@@ -7,7 +7,7 @@ using AirTrafficMonitor.Events;
 
 namespace AirTrafficMonitor.Interfaces
 {
-    public interface IAirspace
+    public interface IAirspaceManager
     {
         List<IFlightTrack> GetAirspaceContent();
         IAirspaceArea GetAirspaceArea();

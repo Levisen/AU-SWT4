@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AirTrafficMonitor.Test.Unit.Event
+namespace AirTrafficMonitor.Test.Unit.FlightEvents
 {
     [TestFixture]
     class EnterExitEventDetectionTest
